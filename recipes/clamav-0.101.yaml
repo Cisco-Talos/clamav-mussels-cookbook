@@ -51,7 +51,7 @@ platforms:
         - libxml2
         - openssl
         - pcre2
-        - bzip2-1.0.7
+        - bzip2<1.1.0
       install_paths:
         etc:
           - etc/clamd.conf.sample

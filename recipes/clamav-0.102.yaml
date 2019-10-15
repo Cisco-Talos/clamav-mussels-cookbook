@@ -52,7 +52,7 @@ platforms:
         - libxml2
         - openssl
         - pcre2
-        - bzip2-1.0.7
+        - bzip2<1.1.0
       install_paths:
         etc:
           - etc/clamd.conf.sample
@@ -87,7 +87,7 @@ platforms:
         - libxml2
         - openssl
         - pcre2
-        - bzip2-1.0.8
+        - bzip2<1.1.0
       install_paths:
         bin:
           - win32/x64/Release/clambc.exe
@@ -141,7 +141,7 @@ platforms:
         - libxml2
         - openssl
         - pcre2
-        - bzip2-1.0.8
+        - bzip2<1.1.0
       install_paths:
         bin:
           - win32/Win32/Release/clambc.exe
