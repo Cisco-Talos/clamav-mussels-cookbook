@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: nghttp2
-version: 1.39.2
+version: "1.39.2"
 url: https://github.com/nghttp2/nghttp2/archive/v1.39.2.zip
 archive_name_change:
   - v

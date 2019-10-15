@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: clamav
-version: 0.102.0
+version: "0.102.0"
 url: https://www.clamav.net/downloads/production/clamav-0.102.0.tar.gz
 mussels_version: "0.1"
 type: recipe

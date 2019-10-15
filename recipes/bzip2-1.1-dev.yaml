@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: bzip2
-version: 1.1.0
+version: "1.1.0"
 url: https://gitlab.com/federicomenaquintero/bzip2/-/archive/master/bzip2-master.tar.gz
 mussels_version: "0.1"
 type: recipe
