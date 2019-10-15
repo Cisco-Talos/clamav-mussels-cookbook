@@ -36,7 +36,7 @@ platforms:
           - COPYING*
       patches: pthreads-2.9.1-patches
       required_tools:
-        - visualstudio==2017
+        - visualstudio>=2017
     x86:
       build_script:
         make: |
@@ -54,4 +54,4 @@ platforms:
           - COPYING*
       patches: pthreads-2.9.1-patches
       required_tools:
-        - visualstudio==2017
+        - visualstudio>=2017

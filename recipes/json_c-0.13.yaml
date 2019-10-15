@@ -38,7 +38,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017 Win64" -T v141
+          CALL cmake.exe -G "Visual Studio 15 2017 Win64"
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []
@@ -70,7 +70,7 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -T v141
+          CALL cmake.exe -G "Visual Studio 15 2017"
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []

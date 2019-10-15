@@ -53,7 +53,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017 Win64" -T v141 \
+          CALL cmake.exe -G "Visual Studio 15 2017 Win64" \
             -DCRYPTO_BACKEND=OpenSSL\
             -DBUILD_SHARED_LIBS=ON \
             -DOPENSSL_INCLUDE_DIR="{includes}" \
@@ -86,7 +86,7 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -T v141 \
+          CALL cmake.exe -G "Visual Studio 15 2017" \
             -DCRYPTO_BACKEND=OpenSSL\
             -DBUILD_SHARED_LIBS=ON \
             -DOPENSSL_INCLUDE_DIR="{includes}" \
