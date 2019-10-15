@@ -19,17 +19,24 @@ type: tool
 platforms:
   Windows:
     file_checks:
-      local:
-        - expected/install/path
-      system:
+      professional:
+        - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Auxiliary/Build/vcvarsall.bat
+      enterprise:
+        - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat
+      community:
         - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvarsall.bat
     path_mods:
-      local:
+      professional:
         x64:
-          - expected/install/path
+          - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Auxiliary/Build
         x86:
-          - expected/install/path
-      system:
+          - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Auxiliary/Build
+      enterprise:
+        x64:
+          - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build
+        x86:
+          - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build
+      community:
         x64:
           - C:\/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build
         x86:
