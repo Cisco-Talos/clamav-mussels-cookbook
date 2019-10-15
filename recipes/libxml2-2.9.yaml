@@ -49,7 +49,7 @@ platforms:
           CALL vcvarsall.bat amd64 -vcvars_ver=14.1
           CD win32
           CALL nmake /f Makefile.msvc
-        dependencies: []
+      dependencies: []
       install_paths:
         include:
           - libxml.h
@@ -71,7 +71,7 @@ platforms:
           CALL vcvarsall.bat x86 -vcvars_ver=14.1
           CD win32
           CALL nmake /f Makefile.msvc
-        dependencies: []
+      dependencies: []
       install_paths:
         include:
           - libxml.h
