@@ -31,16 +31,9 @@ platforms:
         host: []
   Windows:
     file_checks:
-      local:
-        - expected/install/path
       system:
         - C:\/Program Files/CMake/bin/cmake.exe
     path_mods:
-      local:
-        x64:
-          - expected/install/path
-        x86:
-          - expected/install/path
       system:
         x64:
           - C:\/Program Files/CMake/bin
