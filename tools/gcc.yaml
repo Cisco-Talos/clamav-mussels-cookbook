@@ -12,16 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: make
+name: gcc
 version: ""
 mussels_version: "0.1"
 type: tool
 platforms:
   Posix:
     path_checks:
-      - make
+      - gcc
+    command_checks:
+      - command: "gcc --version"
+        output_has: "gcc"
     file_checks:
       local:
-        - /usr/local/bin/make
+        - /usr/local/bin/clang
       usr:
-        - /usr/bin/make
+        - /usr/bin/clang

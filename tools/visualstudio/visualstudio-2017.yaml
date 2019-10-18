@@ -25,19 +25,3 @@ platforms:
         - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Auxiliary/Build/vcvarsall.bat
       community:
         - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvarsall.bat
-    path_mods:
-      professional:
-        x64:
-          - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Professional/VC/Auxiliary/Build
-        x86:
-          - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Professional/VC/Auxiliary/Build
-      enterprise:
-        x64:
-          - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Auxiliary/Build
-        x86:
-          - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Auxiliary/Build
-      community:
-        x64:
-          - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build
-        x86:
-          - C:\/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build

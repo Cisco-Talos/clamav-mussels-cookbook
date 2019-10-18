@@ -18,14 +18,10 @@ mussels_version: "0.1"
 type: tool
 platforms:
   Posix:
+    path_checks:
+      - meson
     file_checks:
       local:
         - /usr/local/bin/meson
       usr:
         - /usr/bin/meson
-    path_mods:
-      local:
-        host:
-          - /usr/local/bin
-      system:
-        host: []

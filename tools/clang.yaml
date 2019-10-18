@@ -18,14 +18,13 @@ mussels_version: "0.1"
 type: tool
 platforms:
   Posix:
+    path_checks:
+      - clang
+    command_checks:
+      - command: "clang --version"
+        output_has: "InstalledDir"
     file_checks:
       local:
         - /usr/local/bin/clang
       usr:
         - /usr/bin/clang
-    path_mods:
-      local:
-        host:
-          - /usr/local/bin
-      usr:
-        host: []

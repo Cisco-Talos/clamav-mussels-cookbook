@@ -21,9 +21,3 @@ platforms:
     file_checks:
       system:
         - C:\/Program Files/NASM/nasm.exe
-    path_mods:
-      system:
-        x64:
-          - C:\/Program Files/NASM
-        x86:
-          - C:\/Program Files/NASM

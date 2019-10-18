@@ -18,24 +18,14 @@ mussels_version: "0.1"
 type: tool
 platforms:
   Posix:
+    path_checks:
+      - cmake
     file_checks:
       local:
         - /usr/local/bin/cmake
       usr:
         - /usr/bin/cmake
-    path_mods:
-      local:
-        host:
-          - /usr/local/bin
-      usr:
-        host: []
   Windows:
     file_checks:
       system:
         - C:\/Program Files/CMake/bin/cmake.exe
-    path_mods:
-      system:
-        x64:
-          - C:\/Program Files/CMake/bin
-        x86:
-          - C:\/Program Files/CMake/bin

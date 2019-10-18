@@ -17,13 +17,15 @@ version: ""
 mussels_version: "0.1"
 type: tool
 platforms:
+  Posix:
+    path_checks:
+      - perl
+    file_checks:
+      local:
+        - /usr/local/bin/perl
+      usr:
+        - /usr/bin/perl
   Windows:
     file_checks:
       system:
         - C:\/Perl64/bin/perl.exe
-    path_mods:
-      system:
-        x64:
-          - C:\/Perl64/bin
-        x86:
-          - C:\/Perl64/bin
