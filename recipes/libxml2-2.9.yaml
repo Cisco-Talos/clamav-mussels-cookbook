@@ -31,13 +31,36 @@ platforms:
         install: |
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libxml2.2.dylib"
-      dependencies: []
+      dependencies:
+        - zlib
       install_paths:
         license/libxml2:
           - COPYING
       required_tools:
         - make
         - clang
+  Linux:
+    host:
+      build_script:
+        configure: |
+          ./configure \
+            --with-zlib={install}/{target} \
+            --with-iconv=no \
+            --prefix="{install}/{target}"
+        make: |
+          make
+        install: |
+          make install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libxml2.so"
+      dependencies: 
+        - zlib
+      install_paths:
+        license/libxml2:
+          - COPYING
+      required_tools:
+        - make
+        - gcc
+        - patchelf
   Windows:
     x64:
       build_script:

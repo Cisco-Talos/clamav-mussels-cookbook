@@ -57,12 +57,12 @@ platforms:
     host:
       build_script:
         configure: |
-        install: |
-          make install
           cmake . \
             -DCMAKE_INSTALL_PREFIX="{install}/{target}"
         make: |
           cmake --build . --config Release
+        install: |
+          make install
       dependencies: []
       install_paths:
         license/bzip2:

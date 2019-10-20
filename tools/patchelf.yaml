@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: gcc
+name: patchelf
 version: ""
 mussels_version: "0.1"
 type: tool
 platforms:
   Posix:
     path_checks:
-      - gcc
+      - patchelf
     command_checks:
-      - command: "gcc --version"
-        output_has: "gcc"
+      - command: "patchelf --version"
+        output_has: "patchelf"
     file_checks:
       local:
-        - /usr/local/bin/gcc
+        - /usr/local/bin/patchelf
       usr:
-        - /usr/bin/gcc
+        - /usr/bin/patchelf

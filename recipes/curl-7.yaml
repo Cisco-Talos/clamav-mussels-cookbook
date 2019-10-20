@@ -54,6 +54,43 @@ platforms:
       required_tools:
         - cmake
         - clang
+  Linux:
+    host:
+      build_script:
+        configure: |
+          cmake . \
+            -DCMAKE_CONFIGURATION_TYPES=Release \
+            -DBUILD_SHARED_LIBS=ON \
+            -DCMAKE_USE_OPENSSL=ON \
+            -DOPENSSL_INCLUDE_DIR="{includes}" \
+            -DOPENSSL_LIBRARIES="{libs}" \
+            -DOPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -DOPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
+            -DZLIB_INCLUDE_DIR="{includes}" \
+            -DZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
+            -DLIBSSH2_INCLUDE_DIR="{includes}" \
+            -DLIBSSH2_LIBRARY="{libs}/libssh2.so" \
+            -DUSE_NGHTTP2=ON \
+            -DNGHTTP2_INCLUDE_DIR="{includes}" \
+            -DNGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
+            -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+        make: |
+          cmake --build . --config Release
+        install: |
+          make install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libcurl.so"
+      dependencies:
+        - openssl
+        - nghttp2>=1.0.0
+        - libssh2
+        - zlib
+      install_paths:
+        license/curl:
+          - COPYING
+      required_tools:
+        - cmake
+        - gcc
+        - patchelf
   Windows:
     x64:
       build_script:

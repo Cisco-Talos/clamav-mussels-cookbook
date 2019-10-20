@@ -41,6 +41,9 @@ platforms:
           make
         install: |
           make install
+          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libclamunrar_iface.so"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libfreshclam.so"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libclamav.so
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/bin/clambc"
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/bin/clamconf"
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/bin/clamdscan"
@@ -68,6 +71,57 @@ platforms:
       required_tools:
         - make
         - clang
+  Linux:
+    host:
+      build_script:
+        configure: |
+          chmod +x ./configure ./config/install-sh
+          ./configure \
+              --with-libcurl={install}/{target} \
+              --with-libjson={install}/{target} \
+              --with-xml={install}/{target} \
+              --with-openssl={install}/{target} \
+              --with-pcre={install}/{target} \
+              --with-zlib={install}/{target} \
+              --with-libbz2-prefix={install}/{target} \
+              --enable-llvm --with-system-llvm=no \
+              --prefix="{install}/{target}" \
+              --with-systemdsystemunitdir=no
+        make: |
+          make
+        install: |
+          make install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libclamunrar_iface.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libfreshclam.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libclamav.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/clambc"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/clamconf"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/clamdscan"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/clamscan"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/clamsubmit"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/freshclam"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/sigtool"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/sbin/clamd"
+      dependencies:
+        - curl
+        - json_c
+        - libxml2
+        - openssl
+        - pcre2
+        - bzip2<1.1.0
+      install_paths:
+        etc:
+          - etc/clamd.conf.sample
+          - etc/freshclam.conf.sample
+        license/clamav:
+          - COPYING*
+        share/clamav:
+          - database/main.cvd
+          - database/daily.cvd
+      required_tools:
+        - make
+        - gcc
+        - patchelf
   Windows:
     x64:
       build_script:

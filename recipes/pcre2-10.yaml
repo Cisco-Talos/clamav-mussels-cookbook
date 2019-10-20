@@ -14,7 +14,7 @@
 
 name: pcre2
 version: "10.33"
-url: https://ftp.pcre.org/pub/pcre/pcre2-10.33.zip
+url: https://ftp.pcre.org/pub/pcre/pcre2-10.33.tar.gz
 mussels_version: "0.1"
 type: recipe
 platforms:
@@ -22,7 +22,6 @@ platforms:
     host:
       build_script:
         configure: |
-          chmod +x ./configure ./install-sh
           ./configure --prefix="{install}/{target}" --disable-dependency-tracking
         make: |
           make
@@ -38,6 +37,26 @@ platforms:
       required_tools:
         - make
         - clang
+  Linux:
+    host:
+      build_script:
+        configure: |
+          ./configure --prefix="{install}/{target}" --disable-dependency-tracking
+        make: |
+          make
+        install: |
+          make install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libpcre2-8.so"
+      dependencies:
+        - bzip2
+        - zlib
+      install_paths:
+        license/pcre2:
+          - COPYING
+      required_tools:
+        - make
+        - gcc
+        - patchelf
   Windows:
     x64:
       build_script:

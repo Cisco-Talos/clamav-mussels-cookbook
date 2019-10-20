@@ -34,6 +34,22 @@ platforms:
       required_tools:
         - make
         - clang
+  Linux:
+    host:
+      build_script:
+        configure: |
+          ./configure --prefix="{install}/{target}"
+        make: |
+          make
+        install: |
+          make install
+      dependencies: []
+      install_paths:
+        license/json-c:
+          - COPYING
+      required_tools:
+        - make
+        - gcc
   Windows:
     x64:
       build_script:

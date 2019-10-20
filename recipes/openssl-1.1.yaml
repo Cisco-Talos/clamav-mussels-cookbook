@@ -40,6 +40,29 @@ platforms:
       required_tools:
         - make
         - clang
+  Linux:
+    host:
+      build_script:
+        configure: |
+          ./config zlib \
+              --with-zlib-include="{includes}" \
+              --with-zlib-lib="{libs}" \
+              --prefix="{install}/{target}"
+        make: |
+          make
+        install: |
+          make install_sw
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libcrypto.so.1.1"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libssl.so.1.1"
+      dependencies:
+        - zlib
+      install_paths:
+        license/openssl:
+          - LICENSE
+      required_tools:
+        - make
+        - gcc
+        - patchelf
   Windows:
     x64:
       build_script:
