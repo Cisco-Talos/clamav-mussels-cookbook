@@ -21,7 +21,5 @@ platforms:
     path_checks:
       - make
     file_checks:
-      local:
-        - /usr/local/bin/make
-      usr:
-        - /usr/bin/make
+      - /usr/local/bin/make
+      - /usr/bin/make

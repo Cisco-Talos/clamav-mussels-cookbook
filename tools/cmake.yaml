@@ -21,11 +21,8 @@ platforms:
     path_checks:
       - cmake
     file_checks:
-      local:
-        - /usr/local/bin/cmake
-      usr:
-        - /usr/bin/cmake
+      - /usr/local/bin/cmake
+      - /usr/bin/cmake
   Windows:
     file_checks:
-      system:
-        - C:\/Program Files/CMake/bin/cmake.exe
+      - C:\/Program Files/CMake/bin/cmake.exe

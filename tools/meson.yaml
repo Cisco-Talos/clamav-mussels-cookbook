@@ -21,7 +21,5 @@ platforms:
     path_checks:
       - meson
     file_checks:
-      local:
-        - /usr/local/bin/meson
-      usr:
-        - /usr/bin/meson
+      - /usr/local/bin/meson
+      - /usr/bin/meson

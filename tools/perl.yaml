@@ -21,11 +21,8 @@ platforms:
     path_checks:
       - perl
     file_checks:
-      local:
-        - /usr/local/bin/perl
-      usr:
-        - /usr/bin/perl
+      - /usr/local/bin/perl
+      - /usr/bin/perl
   Windows:
     file_checks:
-      system:
-        - C:\/Perl64/bin/perl.exe
+      - C:\/Perl64/bin/perl.exe

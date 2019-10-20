@@ -24,7 +24,5 @@ platforms:
       - command: "gcc --version"
         output_has: "gcc"
     file_checks:
-      local:
-        - /usr/local/bin/gcc
-      usr:
-        - /usr/bin/gcc
+      - /usr/local/bin/gcc
+      - /usr/bin/gcc

@@ -24,7 +24,5 @@ platforms:
       - command: "clang --version"
         output_has: "InstalledDir"
     file_checks:
-      local:
-        - /usr/local/bin/clang
-      usr:
-        - /usr/bin/clang
+      - /usr/local/bin/clang
+      - /usr/bin/clang

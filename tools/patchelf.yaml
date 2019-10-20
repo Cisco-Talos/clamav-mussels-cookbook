@@ -17,7 +17,7 @@ version: ""
 mussels_version: "0.1"
 type: tool
 platforms:
-  Posix:
+  Linux:
     path_checks:
       - patchelf
     command_checks:

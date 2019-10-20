@@ -19,5 +19,4 @@ type: tool
 platforms:
   Windows:
     file_checks:
-      system:
-        - C:\/Program Files/NASM/nasm.exe
+      - C:\/Program Files/NASM/nasm.exe
