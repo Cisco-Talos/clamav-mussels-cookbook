@@ -68,11 +68,11 @@ platforms:
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
-          CALL vcvarsall.bat amd64 -vcvars_ver=14.1
+          CALL vcvarsall.bat amd64
           CALL perl Configure VC-WIN64A zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibstatic.lib"
         make: |
           CALL set PATH={libs};%PATH%
-          CALL vcvarsall.bat amd64 -vcvars_ver=14.1
+          CALL vcvarsall.bat amd64
           CALL nmake
       dependencies:
         - zlib
@@ -94,11 +94,11 @@ platforms:
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
-          CALL vcvarsall.bat x86 -vcvars_ver=14.1
+          CALL vcvarsall.bat x86
           CALL perl Configure VC-WIN32 zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibstatic.lib"
         make: |
           CALL set PATH={libs};%PATH%
-          CALL vcvarsall.bat x86 -vcvars_ver=14.1
+          CALL vcvarsall.bat x86
           CALL nmake
       dependencies:
         - zlib

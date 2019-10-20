@@ -127,16 +127,23 @@ platforms:
       build_script:
         configure: |
           robocopy "{install}" "%CD%\\clamdeps" /MIR
-          call vcvarsall.bat x64 -vcvars_ver=14.1
+          call vcvarsall.bat x64
           setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           cd win32
           call configure.bat
         make: |
-          call vcvarsall.bat x64 -vcvars_ver=14.1
+          call vcvarsall.bat x64
           setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           cd win32
           call devenv ClamAV.sln /Clean "Release|x64" /useenv /ProjectConfig "Release|x64"
           set CL=/DWINDOWS_IGNORE_PACKING_MISMATCH && call devenv ClamAV.sln /Rebuild "Release|x64" /useenv /ProjectConfig "Release|x64"
+        install: |
+          if not exist "{install}/{target}/clamav" (
+            mkdir "{install}/{target}/clamav" 2>nul
+            if not errorlevel 1 (
+              copy "{install}/{target}/lib/*" "{install}/{target}/clamav/." /s /v /e
+            )
+          )
       dependencies:
         - curl
         - json_c
@@ -146,7 +153,10 @@ platforms:
         - pcre2
         - bzip2<1.1.0
       install_paths:
-        bin:
+        clamav:
+          - libclamav/clamav.h
+          - win32/clamav-types.h
+          - win32/clamav-version.h
           - win32/x64/Release/clambc.exe
           - win32/x64/Release/clamconf.exe
           - win32/x64/Release/clamd.exe
@@ -155,13 +165,6 @@ platforms:
           - win32/x64/Release/clamsubmit.exe
           - win32/x64/Release/freshclam.exe
           - win32/x64/Release/sigtool.exe
-        etc:
-          - win32/conf_examples/clamd.conf.sample
-          - win32/conf_examples/freshclam.conf.sample
-        include:
-          - libclamav/clamav.h
-          - win32/clamav-types.h
-        lib:
           - win32/x64/Release/libclamav.dll
           - win32/x64/Release/libclamav.lib
           - win32/x64/Release/libfreshclam.dll
@@ -172,7 +175,13 @@ platforms:
           - win32/x64/Release/libclamunrar_iface.lib
           - win32/x64/Release/mspack.dll
           - win32/x64/Release/mspack.lib
-        license/clamav:
+        clamav/conf_examples:
+          - win32/conf_examples/clamd.conf.sample
+          - win32/conf_examples/freshclam.conf.sample
+        clamav/database:
+          - database/main.cvd
+          - database/daily.cvd
+        clamav/license:
           - COPYING*
       required_tools:
         - visualstudio>=2017
@@ -181,16 +190,23 @@ platforms:
         configure: |
           robocopy "{install}" "%CD%\\clamdeps" /MIR
           rename "%CD%\\clamdeps\\x86" "Win32"
-          call vcvarsall.bat x86 -vcvars_ver=14.1
+          call vcvarsall.bat x86
           setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           cd win32
           call configure.bat
         make: |
-          call vcvarsall.bat x86 -vcvars_ver=14.1
+          call vcvarsall.bat x86
           setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           cd win32
           call devenv ClamAV.sln /Clean "Release|Win32" /useenv /ProjectConfig "Release|Win32"
           set CL=/DWINDOWS_IGNORE_PACKING_MISMATCH && call devenv ClamAV.sln /Rebuild "Release|Win32" /useenv /ProjectConfig "Release|Win32"
+        install: |
+          if not exist "{install}/{target}/clamav" (
+            mkdir "{install}/{target}/clamav" 2>nul
+            if not errorlevel 1 (
+              copy "{install}/{target}/lib/*" "{install}/{target}/clamav/." /s /v /e
+            )
+          )
       dependencies:
         - curl
         - json_c
@@ -200,7 +216,10 @@ platforms:
         - pcre2
         - bzip2<1.1.0
       install_paths:
-        bin:
+        clamav:
+          - libclamav/clamav.h
+          - win32/clamav-types.h
+          - win32/clamav-version.h
           - win32/Win32/Release/clambc.exe
           - win32/Win32/Release/clamconf.exe
           - win32/Win32/Release/clamd.exe
@@ -209,13 +228,6 @@ platforms:
           - win32/Win32/Release/clamsubmit.exe
           - win32/Win32/Release/freshclam.exe
           - win32/Win32/Release/sigtool.exe
-        etc:
-          - win32/conf_examples/clamd.conf.sample
-          - win32/conf_examples/freshclam.conf.sample
-        include:
-          - libclamav/clamav.h
-          - win32/clamav-types.h
-        lib:
           - win32/Win32/Release/libclamav.dll
           - win32/Win32/Release/libclamav.lib
           - win32/Win32/Release/libfreshclam.dll
@@ -226,7 +238,13 @@ platforms:
           - win32/Win32/Release/libclamunrar_iface.lib
           - win32/Win32/Release/mspack.dll
           - win32/Win32/Release/mspack.lib
-        license/clamav:
+        clamav/conf_examples:
+          - win32/conf_examples/clamd.conf.sample
+          - win32/conf_examples/freshclam.conf.sample
+        clamav/database:
+          - database/main.cvd
+          - database/daily.cvd
+        clamav/license:
           - COPYING*
       required_tools:
         - visualstudio>=2017

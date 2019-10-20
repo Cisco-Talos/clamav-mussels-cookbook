@@ -64,7 +64,7 @@ platforms:
     x64:
       build_script:
         make: |
-          CALL vcvarsall.bat amd64 -vcvars_ver=14.1
+          CALL vcvarsall.bat amd64
           CALL nmake -f makefile.msc all
       dependencies: []
       install_paths:
@@ -81,7 +81,7 @@ platforms:
     x86:
       build_script:
         make: |
-          CALL vcvarsall.bat x86 -vcvars_ver=14.1
+          CALL vcvarsall.bat x86
           CALL nmake -f makefile.msc all
       dependencies: []
       install_paths:

@@ -65,11 +65,11 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL vcvarsall.bat amd64 -vcvars_ver=14.1
+          CALL vcvarsall.bat amd64
           CD win32
           CALL cscript configure.js zlib=no incdir="{includes}" libdir="{libs}" sodir="{libs}" iconv=no static=no
         make: |
-          CALL vcvarsall.bat amd64 -vcvars_ver=14.1
+          CALL vcvarsall.bat amd64
           CD win32
           CALL nmake /f Makefile.msvc
       dependencies: []
@@ -87,11 +87,11 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL vcvarsall.bat x86 -vcvars_ver=14.1
+          CALL vcvarsall.bat x86
           CD win32
           CALL cscript configure.js zlib=no incdir="{includes}" libdir="{libs}" sodir="{libs}" iconv=no static=no
         make: |
-          CALL vcvarsall.bat x86 -vcvars_ver=14.1
+          CALL vcvarsall.bat x86
           CD win32
           CALL nmake /f Makefile.msvc
       dependencies: []
