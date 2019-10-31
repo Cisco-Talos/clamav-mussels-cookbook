@@ -40,8 +40,8 @@ platforms:
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libssh2.dylib"
       dependencies:
-        - openssl>=1.1.0
-        - zlib
+        - libopenssl>=1.1.0
+        - libz
       install_paths:
         license/libssh2:
           - COPYING
@@ -71,8 +71,8 @@ platforms:
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libssh2.so"
       dependencies:
-        - openssl>=1.1.0
-        - zlib
+        - libopenssl>=1.1.0
+        - libz
       install_paths:
         license/libssh2:
           - COPYING
@@ -100,8 +100,8 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - openssl>=1.1.0
-        - zlib
+        - libopenssl>=1.1.0
+        - libz
       install_paths:
         include:
           - include/libssh2.h
@@ -133,8 +133,8 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - openssl>=1.1.0
-        - zlib
+        - libopenssl>=1.1.0
+        - libz
       install_paths:
         include:
           - include/libssh2.h

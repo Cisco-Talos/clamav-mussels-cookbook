@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: openssl
+name: libopenssl
 version: "1.1.1d"
 url: https://www.openssl.org/source/openssl-1.1.1d.tar.gz
 mussels_version: "0.1"
@@ -33,9 +33,9 @@ platforms:
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libcrypto.1.1.dylib"
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libssl.1.1.dylib"
       dependencies:
-        - zlib
+        - libz
       install_paths:
-        license/openssl:
+        license/libopenssl:
           - LICENSE
       required_tools:
         - make
@@ -55,9 +55,9 @@ platforms:
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libcrypto.so.1.1"
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libssl.so.1.1"
       dependencies:
-        - zlib
+        - libz
       install_paths:
-        license/openssl:
+        license/libopenssl:
           - LICENSE
       required_tools:
         - make
@@ -75,7 +75,7 @@ platforms:
           CALL vcvarsall.bat amd64
           CALL nmake
       dependencies:
-        - zlib
+        - libz
       install_paths:
         include:
           - include/openssl
@@ -84,7 +84,7 @@ platforms:
           - libssl.lib
           - libcrypto-1_1-x64.dll
           - libcrypto.lib
-        license/openssl:
+        license/libopenssl:
           - LICENSE
       required_tools:
         - nasm
@@ -101,7 +101,7 @@ platforms:
           CALL vcvarsall.bat x86
           CALL nmake
       dependencies:
-        - zlib
+        - libz
       install_paths:
         include:
           - include/openssl
@@ -110,7 +110,7 @@ platforms:
           - libssl.lib
           - libcrypto-1_1.dll
           - libcrypto.lib
-        license/openssl:
+        license/libopenssl:
           - LICENSE
       required_tools:
         - nasm

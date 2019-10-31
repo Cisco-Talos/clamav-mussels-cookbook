@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: pthreads
+name: pthreads_win32
 version: "2.9.1"
 url: ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
 mussels_version: "0.1"
@@ -32,7 +32,7 @@ platforms:
         lib:
           - pthreadVC2.dll
           - pthreadVC2.lib
-        license/pthreads-win32:
+        license/pthreads_win32:
           - COPYING*
       patches: pthreads-2.9.1-patches
       required_tools:
@@ -50,7 +50,7 @@ platforms:
         lib:
           - pthreadVC2.dll
           - pthreadVC2.lib
-        license/pthreads-win32:
+        license/pthreads_win32:
           - COPYING*
       patches: pthreads-2.9.1-patches
       required_tools:

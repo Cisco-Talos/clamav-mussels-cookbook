@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: curl
+name: libcurl
 version: "7.66.0"
 url: https://curl.haxx.se/download/curl-7.66.0.zip
 mussels_version: "0.1"
@@ -44,12 +44,12 @@ platforms:
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libcurl.dylib"
       dependencies:
-        - openssl
-        - nghttp2>=1.0.0
+        - libopenssl
+        - libnghttp2>=1.0.0
         - libssh2
-        - zlib
+        - libz
       install_paths:
-        license/curl:
+        license/libcurl:
           - COPYING
       required_tools:
         - cmake
@@ -80,12 +80,12 @@ platforms:
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libcurl.so"
       dependencies:
-        - openssl
-        - nghttp2>=1.0.0
+        - libopenssl
+        - libnghttp2>=1.0.0
         - libssh2
-        - zlib
+        - libz
       install_paths:
-        license/curl:
+        license/libcurl:
           - COPYING
       required_tools:
         - cmake
@@ -112,17 +112,17 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - openssl
-        - nghttp2>=1.0.0
+        - libopenssl
+        - libnghttp2>=1.0.0
         - libssh2
-        - zlib
+        - libz
       install_paths:
         include:
           - include/curl
         lib:
           - lib/Release/libcurl.dll
           - lib/Release/libcurl_imp.lib
-        license/curl:
+        license/libcurl:
           - COPYING
       required_tools:
         - cmake
@@ -147,17 +147,17 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - openssl
-        - nghttp2>=1.0.0
+        - libopenssl
+        - libnghttp2>=1.0.0
         - libssh2
-        - zlib
+        - libz
       install_paths:
         include:
           - include/curl
         lib:
           - lib/Release/libcurl.dll
           - lib/Release/libcurl_imp.lib
-        license/curl:
+        license/libcurl:
           - COPYING
       required_tools:
         - cmake

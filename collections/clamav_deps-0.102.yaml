@@ -20,28 +20,31 @@ platforms:
   Posix:
     host:
       dependencies:
-        - curl
-        - json_c
+        - libz
+        - libcurl
+        - libjson_c
         - libxml2
-        - openssl
-        - pcre2
-        - bzip2<1.1.0
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
   Windows:
     x64:
       dependencies:
-        - curl
-        - json_c
-        - pthreads
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
         - libxml2
-        - openssl
-        - pcre2
-        - bzip2<1.1.0
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
     x86:
       dependencies:
-        - curl
-        - json_c
-        - pthreads
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
         - libxml2
-        - openssl
-        - pcre2
-        - bzip2<1.1.0
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0

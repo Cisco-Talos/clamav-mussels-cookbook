@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: json_c
+name: libjson_c
 version: "0.13.1"
 url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.1.tar.gz
 mussels_version: "0.1"
@@ -29,7 +29,7 @@ platforms:
           make install
       dependencies: []
       install_paths:
-        license/json-c:
+        license/libjson_c:
           - COPYING
       required_tools:
         - make
@@ -45,7 +45,7 @@ platforms:
           make install
       dependencies: []
       install_paths:
-        license/json-c:
+        license/libjson_c:
           - COPYING
       required_tools:
         - make
@@ -59,7 +59,7 @@ platforms:
           CALL cmake.exe --build . --config Release
       dependencies: []
       install_paths:
-        include/json-c:
+        include/libjson_c:
           - arraylist.h
           - bits.h
           - debug.h
@@ -78,7 +78,7 @@ platforms:
         lib:
           - Release/json-c.dll
           - Release/json-c.lib
-        license/json-c:
+        license/libjson_c:
           - COPYING
       required_tools:
         - cmake
@@ -91,7 +91,7 @@ platforms:
           CALL cmake.exe --build . --config Release
       dependencies: []
       install_paths:
-        include/json-c:
+        include/libjson_c:
           - arraylist.h
           - bits.h
           - debug.h
@@ -110,7 +110,7 @@ platforms:
         lib:
           - Release/json-c.dll
           - Release/json-c.lib
-        license/json-c:
+        license/libjson_c:
           - COPYING
       required_tools:
         - cmake

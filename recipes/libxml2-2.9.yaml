@@ -32,7 +32,7 @@ platforms:
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libxml2.2.dylib"
       dependencies:
-        - zlib
+        - libz
       install_paths:
         license/libxml2:
           - COPYING
@@ -52,8 +52,8 @@ platforms:
         install: |
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libxml2.so"
-      dependencies: 
-        - zlib
+      dependencies:
+        - libz
       install_paths:
         license/libxml2:
           - COPYING
