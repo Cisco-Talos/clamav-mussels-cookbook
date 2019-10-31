@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: bzip2
+name: libbz2
 version: "1.1.0"
 url: https://gitlab.com/federicomenaquintero/bzip2/-/archive/master/bzip2-master.tar.gz
 mussels_version: "0.1"
@@ -30,7 +30,7 @@ platforms:
           make install
       dependencies: []
       install_paths:
-        license/bzip2:
+        license/libbz2:
           - COPYING
       required_tools:
         - cmake
@@ -47,7 +47,7 @@ platforms:
           make install
       dependencies: []
       install_paths:
-        license/bzip2:
+        license/libbz2:
           - COPYING
       required_tools:
         - cmake
@@ -65,7 +65,7 @@ platforms:
           make install
       dependencies: []
       install_paths:
-        license/bzip2:
+        license/libbz2:
           - COPYING
       required_tools:
         - cmake
@@ -85,7 +85,7 @@ platforms:
         lib:
           - libbz2.dll
           - libbz2.lib
-        license/bzip2:
+        license/libbz2:
           - COPYING
       patches: patches_windows
       required_tools:
@@ -104,7 +104,7 @@ platforms:
         lib:
           - libbz2.dll
           - libbz2.lib
-        license/bzip2:
+        license/libbz2:
           - COPYING
       patches: patches_windows
       required_tools:

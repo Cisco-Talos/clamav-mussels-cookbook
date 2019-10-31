@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: nghttp2
+name: libnghttp2
 version: "1.39.2"
 url: https://github.com/nghttp2/nghttp2/archive/v1.39.2.zip
 archive_name_change:
@@ -44,11 +44,11 @@ platforms:
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libnghttp2.dylib"
       dependencies:
-        - openssl>=1.0.1
-        - zlib>=1.2.3
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
-        license/nghttp2:
+        license/libnghttp2:
           - COPYING
       required_tools:
         - cmake
@@ -77,11 +77,11 @@ platforms:
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libnghttp2.so"
       dependencies:
-        - openssl>=1.0.1
-        - zlib>=1.2.3
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
-        license/nghttp2:
+        license/libnghttp2:
           - COPYING
       required_tools:
         - cmake
@@ -104,15 +104,15 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - openssl>=1.0.1
-        - zlib>=1.2.3
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
       install_paths:
         include:
           - lib/includes/nghttp2
         lib:
           - lib/Release/nghttp2.dll
           - lib/Release/nghttp2.lib
-        license/nghttp2:
+        license/libnghttp2:
           - COPYING
       required_tools:
         - cmake
@@ -132,15 +132,15 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - openssl>=1.0.1
-        - zlib>=1.2.3
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
       install_paths:
         include:
           - lib/includes/nghttp2
         lib:
           - lib/Release/nghttp2.dll
           - lib/Release/nghttp2.lib
-        license/nghttp2:
+        license/libnghttp2:
           - COPYING
       required_tools:
         - cmake

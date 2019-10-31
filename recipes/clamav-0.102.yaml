@@ -50,12 +50,13 @@ platforms:
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/bin/sigtool"
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/sbin/clamd"
       dependencies:
-        - curl
-        - json_c
+        - libz
+        - libcurl
+        - libjson_c
         - libxml2
-        - openssl
-        - pcre2
-        - bzip2<1.1.0
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
       install_paths:
         etc:
           - etc/clamd.conf.sample
@@ -100,12 +101,13 @@ platforms:
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/bin/sigtool"
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/sbin/clamd"
       dependencies:
-        - curl
-        - json_c
+        - libz
+        - libcurl
+        - libjson_c
         - libxml2
-        - openssl
-        - pcre2
-        - bzip2<1.1.0
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
       install_paths:
         etc:
           - etc/clamd.conf.sample
@@ -142,13 +144,14 @@ platforms:
             )
           )
       dependencies:
-        - curl
-        - json_c
-        - pthreads
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
         - libxml2
-        - openssl
-        - pcre2
-        - bzip2<1.1.0
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
       install_paths:
         clamav:
           - libclamav/clamav.h
@@ -205,13 +208,14 @@ platforms:
             )
           )
       dependencies:
-        - curl
-        - json_c
-        - pthreads
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
         - libxml2
-        - openssl
-        - pcre2
-        - bzip2<1.1.0
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
       install_paths:
         clamav:
           - libclamav/clamav.h

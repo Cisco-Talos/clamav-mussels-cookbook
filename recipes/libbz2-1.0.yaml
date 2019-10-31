@@ -12,86 +12,86 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: zlib
-version: "1.2.11"
-url: https://www.zlib.net/zlib-1.2.11.tar.gz
-mussels_version: "0.1"
+name: libbz2
+version: "1.0.8"
+url: https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
 type: recipe
+mussels_version: "0.1"
 platforms:
   Darwin:
     host:
       build_script:
-        configure: |
-          cmake . \
-              -DCMAKE_INSTALL_PREFIX="{install}/{target}"
         make: |
-          cmake --build . --config Release
+          make
         install: |
-          make install
+          make install PREFIX={install}/{target}
       dependencies: []
       install_paths:
-        license/zlib:
-          - README
+        license/libbz2:
+          - LICENSE
       required_tools:
-        - cmake
         - make
         - clang
+  FreeBSD:
+    host:
+      build_script:
+        make: |
+          gmake
+        install: |
+          gmake install PREFIX={install}/{target}
+      dependencies: []
+      install_paths:
+        license/libbz2:
+          - LICENSE
+      required_tools:
+        - gmake
+        - gcc
   Linux:
     host:
       build_script:
-        configure: |
-          cmake . \
-              -DCMAKE_INSTALL_PREFIX="{install}/{target}"
         make: |
-          cmake --build . --config Release
+          make
         install: |
-          make install
+          make install PREFIX={install}/{target}
       dependencies: []
       install_paths:
-        license/zlib:
-          - README
+        license/libbz2:
+          - LICENSE
       required_tools:
-        - cmake
         - make
         - gcc
   Windows:
     x64:
       build_script:
-        configure: |
-          CALL vcvarsall.bat amd64
-          CALL cmake.exe -G "Visual Studio 15 2017 Win64"
         make: |
           CALL vcvarsall.bat amd64
-          CALL cmake.exe --build . --config Release
+          CALL nmake -f makefile.msc all
       dependencies: []
       install_paths:
         include:
-          - zlib.h
-          - zconf.h
+          - bzlib.h
         lib:
-          - Release/zlibstatic.lib
-        license/zlib:
-          - README
+          - libbz2.dll
+          - libbz2.lib
+        license/libbz2:
+          - LICENSE
+      patches: libbz2-1.0-patches
       required_tools:
-        - cmake
         - visualstudio>=2017
     x86:
       build_script:
-        configure: |
-          CALL vcvarsall.bat x86
-          CALL cmake.exe -G "Visual Studio 15 2017"
         make: |
           CALL vcvarsall.bat x86
-          CALL cmake.exe --build . --config Release
+          CALL nmake -f makefile.msc all
       dependencies: []
       install_paths:
         include:
-          - zlib.h
-          - zconf.h
+          - bzlib.h
         lib:
-          - Release/zlibstatic.lib
-        license/zlib:
-          - README
+          - libbz2.dll
+          - libbz2.lib
+        license/libbz2:
+          - LICENSE
+      patches: patches_windows
       required_tools:
-        - cmake
         - visualstudio>=2017

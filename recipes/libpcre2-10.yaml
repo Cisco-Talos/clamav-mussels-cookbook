@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: pcre2
+name: libpcre2
 version: "10.33"
 url: https://ftp.pcre.org/pub/pcre/pcre2-10.33.tar.gz
 mussels_version: "0.1"
@@ -29,10 +29,10 @@ platforms:
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libpcre2-8.dylib"
       dependencies:
-        - bzip2
-        - zlib
+        - libbz2<1.1.0
+        - libz
       install_paths:
-        license/pcre2:
+        license/libpcre2:
           - COPYING
       required_tools:
         - make
@@ -48,10 +48,10 @@ platforms:
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libpcre2-8.so"
       dependencies:
-        - bzip2
-        - zlib
+        - libbz2<1.1.0
+        - libz
       install_paths:
-        license/pcre2:
+        license/libpcre2:
           - COPYING
       required_tools:
         - make
@@ -70,17 +70,17 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - bzip2<1.1.0
-        - zlib
+        - libbz2<1.1.0
+        - libz
       install_paths:
         include:
           - pcre2.h
         lib:
           - Release/pcre2-8.dll
           - Release/pcre2-8.lib
-        license/openssl:
+        license/libpcre2:
           - COPYING
-      patches: pcre2-10.33-patches
+      patches: libpcre2-10.33-patches
       required_tools:
         - cmake
         - visualstudio>=2017
@@ -96,17 +96,17 @@ platforms:
         make: |
           CALL cmake.exe --build . --config Release
       dependencies:
-        - bzip2<1.1.0
-        - zlib
+        - libbz2<1.1.0
+        - libz
       install_paths:
         include:
           - pcre2.h
         lib:
           - Release/pcre2-8.dll
           - Release/pcre2-8.lib
-        license/openssl:
+        license/libpcre2:
           - COPYING
-      patches: pcre2-10.33-patches
+      patches: libpcre2-10.33-patches
       required_tools:
         - cmake
         - visualstudio>=2017
