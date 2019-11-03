@@ -14,7 +14,7 @@
 
 name: libz
 version: "1.2.11"
-url: https://www.libz.net/zlib-1.2.11.tar.gz
+url: https://www.zlib.net/zlib-1.2.11.tar.gz
 mussels_version: "0.1"
 type: recipe
 platforms:
