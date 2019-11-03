@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         make: |
-          make
+          make CFLAGS="-fPIC"
         install: |
           make install PREFIX={install}/{target}
       dependencies: []
@@ -36,7 +36,7 @@ platforms:
     host:
       build_script:
         make: |
-          gmake
+          gmake CFLAGS="-fPIC"
         install: |
           gmake install PREFIX={install}/{target}
       dependencies: []
@@ -50,7 +50,7 @@ platforms:
     host:
       build_script:
         make: |
-          make
+          make CFLAGS="-fPIC"
         install: |
           make install PREFIX={install}/{target}
       dependencies: []
