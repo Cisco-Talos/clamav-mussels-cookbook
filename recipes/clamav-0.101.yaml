@@ -124,18 +124,25 @@ platforms:
     x64:
       build_script:
         configure: |
-          robocopy "{install}" "%CD%\\clamdeps" /MIR
-          ren "%CD%\\clamdeps\\x86" "%CD%\\clamdeps\\Win32"
-          call vcvarsall.bat x64
-          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           cd win32
+          if not exist "%CD%\\clamdeps" (
+            mkdir "%CD%\\clamdeps" 2>nul
+          )
+          robocopy "{install}/{target}" "%CD%\\clamdeps\\x64" /MIR
+          setlocal
+          CLAM_DEPENDENCIES="%CD%\\clamdeps"
           call configure.bat
-        make: |
           call vcvarsall.bat x64
-          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
-          cd win32
           call devenv ClamAV.sln /Clean "Release|x64" /useenv /ProjectConfig "Release|x64"
+          endlocal
+        make: |
+          setlocal
+          CLAM_DEPENDENCIES="%CD%\\clamdeps"
+          CL=/DWINDOWS_IGNORE_PACKING_MISMATCH
+          cd win32
+          call vcvarsall.bat x64
           call devenv ClamAV.sln /Rebuild "Release|x64" /useenv /ProjectConfig "Release|x64"
+          endlocal
         install: |
           if not exist "{install}/{target}/clamav" (
             mkdir "{install}/{target}/clamav" 2>nul
@@ -177,18 +184,25 @@ platforms:
     x86:
       build_script:
         configure: |
-          robocopy "{install}" "%CD%\\clamdeps" /MIR
-          ren "%CD%\\clamdeps\\x86" "%CD%\\clamdeps\\Win32"
-          call vcvarsall.bat x86
-          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           cd win32
+          if not exist "%CD%\\clamdeps" (
+            mkdir "%CD%\\clamdeps" 2>nul
+          )
+          robocopy "{install}/{target}" "%CD%\\clamdeps\\Win32" /MIR
+          setlocal
+          CLAM_DEPENDENCIES="%CD%\\clamdeps"
           call configure.bat
-        make: |
           call vcvarsall.bat x86
-          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
-          cd win32
           call devenv ClamAV.sln /Clean "Release|Win32" /useenv /ProjectConfig "Release|Win32"
+          endlocal
+        make: |
+          setlocal
+          CLAM_DEPENDENCIES="%CD%\\clamdeps"
+          CL=/DWINDOWS_IGNORE_PACKING_MISMATCH
+          cd win32
+          call vcvarsall.bat x86
           call devenv ClamAV.sln /Rebuild "Release|Win32" /useenv /ProjectConfig "Release|Win32"
+          endlocal
         install: |
           if not exist "{install}/{target}/clamav" (
             mkdir "{install}/{target}/clamav" 2>nul
