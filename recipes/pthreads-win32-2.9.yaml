@@ -14,7 +14,7 @@
 
 name: pthreads_win32
 version: "2.9.1"
-url: ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
+url: https://mirrors.kernel.org/sourceware/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
