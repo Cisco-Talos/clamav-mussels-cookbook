@@ -15,14 +15,14 @@
 name: libjson_c
 version: "0.13.1"
 url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.1.tar.gz
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}/{target}" --enable-shared
+          ./configure --prefix="{install}" --enable-shared
         make: |
           make
         install: |
@@ -38,7 +38,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}/{target}" --enable-shared
+          ./configure --prefix="{install}" --enable-shared
         make: |
           make
         install: |

@@ -15,7 +15,7 @@
 name: libopenssl
 version: "1.1.1d"
 url: https://www.openssl.org/source/openssl-1.1.1d.tar.gz
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
@@ -25,13 +25,13 @@ platforms:
           ./config zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
-              --prefix="{install}/{target}"
+              --prefix="{install}"
         make: |
           make
         install: |
           make install_sw
-          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libcrypto.1.1.dylib"
-          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libssl.1.1.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcrypto.1.1.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libssl.1.1.dylib"
       dependencies:
         - libz
       install_paths:
@@ -47,13 +47,13 @@ platforms:
           ./config zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
-              --prefix="{install}/{target}"
+              --prefix="{install}"
         make: |
           make
         install: |
           make install_sw
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libcrypto.so.1.1"
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libssl.so.1.1"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.1.1"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.1.1"
       dependencies:
         - libz
       install_paths:

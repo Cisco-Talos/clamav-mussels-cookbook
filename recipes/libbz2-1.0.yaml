@@ -16,7 +16,7 @@ name: libbz2
 version: "1.0.8"
 url: https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
 type: recipe
-mussels_version: "0.1"
+mussels_version: "0.2"
 platforms:
   Darwin:
     host:
@@ -24,7 +24,7 @@ platforms:
         make: |
           make CFLAGS="-fPIC"
         install: |
-          make install PREFIX={install}/{target}
+          make install PREFIX={install}
       dependencies: []
       install_paths:
         license/libbz2:
@@ -38,7 +38,7 @@ platforms:
         make: |
           gmake CFLAGS="-fPIC"
         install: |
-          gmake install PREFIX={install}/{target}
+          gmake install PREFIX={install}
       dependencies: []
       install_paths:
         license/libbz2:
@@ -52,7 +52,7 @@ platforms:
         make: |
           make CFLAGS="-fPIC"
         install: |
-          make install PREFIX={install}/{target}
+          make install PREFIX={install}
       dependencies: []
       install_paths:
         license/libbz2:

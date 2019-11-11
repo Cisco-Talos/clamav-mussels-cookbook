@@ -15,7 +15,7 @@
 name: libbz2
 version: "1.1.0"
 url: https://gitlab.com/federicomenaquintero/bzip2/-/archive/master/bzip2-master.tar.gz
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
@@ -23,7 +23,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
-            -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+            -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
           cmake --build . --config Release
         install: |
@@ -40,7 +40,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
-            -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+            -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
           cmake --build . --config Release
         install: |
@@ -58,7 +58,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
-            -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+            -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
           cmake --build . --config Release
         install: |

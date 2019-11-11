@@ -15,7 +15,7 @@
 name: libxml2
 version: "2.9.9"
 url: ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
@@ -23,14 +23,14 @@ platforms:
       build_script:
         configure: |
           ./configure \
-            --with-zlib={install}/{target} \
+            --with-zlib={install} \
             --with-iconv=no \
-            --prefix="{install}/{target}"
+            --prefix="{install}"
         make: |
           make
         install: |
           make install
-          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libxml2.2.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libxml2.2.dylib"
       dependencies:
         - libz
       install_paths:
@@ -44,14 +44,14 @@ platforms:
       build_script:
         configure: |
           ./configure \
-            --with-zlib={install}/{target} \
+            --with-zlib={install} \
             --with-iconv=no \
-            --prefix="{install}/{target}"
+            --prefix="{install}"
         make: |
           make
         install: |
           make install
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libxml2.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libxml2.so"
       dependencies:
         - libz
       install_paths:

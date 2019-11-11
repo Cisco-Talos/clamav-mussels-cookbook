@@ -15,7 +15,7 @@
 name: libcurl
 version: "7.66.0"
 url: https://curl.haxx.se/download/curl-7.66.0.zip
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
@@ -37,12 +37,12 @@ platforms:
             -DUSE_NGHTTP2=ON \
             -DNGHTTP2_INCLUDE_DIR="{includes}" \
             -DNGHTTP2_LIBRARY="{libs}/libnghttp2.dylib" \
-            -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+            -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
           cmake --build . --config Release
         install: |
           make install
-          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libcurl.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcurl.dylib"
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -73,12 +73,12 @@ platforms:
             -DUSE_NGHTTP2=ON \
             -DNGHTTP2_INCLUDE_DIR="{includes}" \
             -DNGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
-            -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+            -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
           cmake --build . --config Release
         install: |
           make install
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libcurl.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcurl.so"
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0

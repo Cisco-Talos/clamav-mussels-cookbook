@@ -18,7 +18,7 @@ url: https://github.com/nghttp2/nghttp2/archive/v1.39.2.zip
 archive_name_change:
   - v
   - nghttp2-
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
@@ -37,12 +37,12 @@ platforms:
               -DLIBXML2_LIBRARY="{libs}/libxml2.dylib" \
               -DZLIB_ROOT="{includes}" \
               -DZLIB_LIBRARY="{libs}/libz.a" \
-              -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+              -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
           cmake --build . --config Release
         install: |
           make install
-          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libnghttp2.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libnghttp2.dylib"
       dependencies:
         - libopenssl>=1.0.1
         - libz>=1.2.3
@@ -70,12 +70,12 @@ platforms:
               -DLIBXML2_LIBRARY="{libs}/libxml2.so" \
               -DZLIB_ROOT="{includes}" \
               -DZLIB_LIBRARY="{libs}/libz.a" \
-              -DCMAKE_INSTALL_PREFIX="{install}/{target}"
+              -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
           cmake --build . --config Release
         install: |
           make install
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libnghttp2.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libnghttp2.so"
       dependencies:
         - libopenssl>=1.0.1
         - libz>=1.2.3

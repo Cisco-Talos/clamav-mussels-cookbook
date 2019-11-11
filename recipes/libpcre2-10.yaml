@@ -15,19 +15,19 @@
 name: libpcre2
 version: "10.33"
 url: https://ftp.pcre.org/pub/pcre/pcre2-10.33.tar.gz
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}/{target}" --disable-dependency-tracking
+          ./configure --prefix="{install}" --disable-dependency-tracking
         make: |
           make
         install: |
           make install
-          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libpcre2-8.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libpcre2-8.dylib"
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -41,12 +41,12 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}/{target}" --disable-dependency-tracking
+          ./configure --prefix="{install}" --disable-dependency-tracking
         make: |
           make
         install: |
           make install
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libpcre2-8.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libpcre2-8.so"
       dependencies:
         - libbz2<1.1.0
         - libz

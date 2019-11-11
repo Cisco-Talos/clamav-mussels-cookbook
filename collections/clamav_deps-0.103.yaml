@@ -14,7 +14,7 @@
 
 name: clamav_deps
 version: "0.103"
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: collection
 platforms:
   Posix:

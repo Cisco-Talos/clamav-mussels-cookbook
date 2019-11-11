@@ -15,7 +15,7 @@
 name: libssh2
 version: "1.9.0"
 url: https://www.libssh2.org/download/libssh2-1.9.0.tar.gz
-mussels_version: "0.1"
+mussels_version: "0.2"
 type: recipe
 platforms:
   Darwin:
@@ -32,13 +32,13 @@ platforms:
             -DENABLE_ZLIB_COMPRESSION=ON \
             -DZLIB_INCLUDE_DIR="{includes}" \
             -DZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
-            -DCMAKE_INSTALL_PREFIX="{install}/{target}" \
+            -DCMAKE_INSTALL_PREFIX="{install}" \
             -DBUILD_TESTING=OFF
         make: |
           cmake --build . --config Release
         install: |
           make install
-          install_name_tool -add_rpath @executable_path/../lib "{install}/{target}/lib/libssh2.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libssh2.dylib"
       dependencies:
         - libopenssl>=1.1.0
         - libz
@@ -63,13 +63,13 @@ platforms:
             -DENABLE_ZLIB_COMPRESSION=ON \
             -DZLIB_INCLUDE_DIR="{includes}" \
             -DZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
-            -DCMAKE_INSTALL_PREFIX="{install}/{target}" \
+            -DCMAKE_INSTALL_PREFIX="{install}" \
             -DBUILD_TESTING=OFF
         make: |
           cmake --build . --config Release
         install: |
           make install
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/{target}/lib/libssh2.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssh2.so"
       dependencies:
         - libopenssl>=1.1.0
         - libz
