@@ -85,6 +85,7 @@ platforms:
     x64:
       build_script:
         configure: |
+          CALL vcvarsall.bat amd64
           CALL cmake.exe -G "Visual Studio 15 2017 Win64" \
             -DCRYPTO_BACKEND=OpenSSL\
             -DBUILD_SHARED_LIBS=ON \
@@ -98,6 +99,7 @@ platforms:
             -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
             -DBUILD_TESTING=OFF
         make: |
+          CALL vcvarsall.bat amd64
           CALL cmake.exe --build . --config Release
       dependencies:
         - libopenssl>=1.1.0
@@ -114,10 +116,11 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio>=2017
+        - visualstudio=2017
     x86:
       build_script:
         configure: |
+          CALL vcvarsall.bat x86
           CALL cmake.exe -G "Visual Studio 15 2017" \
             -DCRYPTO_BACKEND=OpenSSL\
             -DBUILD_SHARED_LIBS=ON \
@@ -131,6 +134,7 @@ platforms:
             -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
             -DBUILD_TESTING=OFF
         make: |
+          CALL vcvarsall.bat x86
           CALL cmake.exe --build . --config Release
       dependencies:
         - libopenssl>=1.1.0
@@ -147,4 +151,4 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio>=2017
+        - visualstudio=2017

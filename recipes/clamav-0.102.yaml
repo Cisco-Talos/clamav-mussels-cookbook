@@ -129,27 +129,18 @@ platforms:
             mkdir "%CD%\\clamdeps" 2>nul
           )
           robocopy "{install}" "%CD%\\clamdeps\\x64" /MIR
-          setlocal
-          CLAM_DEPENDENCIES="%CD%\\clamdeps"
+          call vcvarsall.bat x64
           call configure.bat
-          call vcvarsall.bat x64
           call devenv ClamAV.sln /Clean "Release|x64" /useenv /ProjectConfig "Release|x64"
-          endlocal
         make: |
-          setlocal
-          CLAM_DEPENDENCIES="%CD%\\clamdeps"
-          CL=/DWINDOWS_IGNORE_PACKING_MISMATCH
           cd win32
+          set CLAM_DEPENDENCIES_BAK=%CLAM_DEPENDENCIES%
+          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           call vcvarsall.bat x64
-          call devenv ClamAV.sln /Rebuild "Release|x64" /useenv /ProjectConfig "Release|x64"
-          endlocal
+          set CL=/DWINDOWS_IGNORE_PACKING_MISMATCH && call devenv ClamAV.sln /Build "Release|x64" /useenv /ProjectConfig "Release|x64"
+          setx CLAM_DEPENDENCIES "%CLAM_DEPENDENCIES_BAK%"
         install: |
-          if not exist "{install}/clamav" (
-            mkdir "{install}/clamav" 2>nul
-            if not errorlevel 1 (
-              copy "{install}/lib/*" "{install}/clamav/." /s /v /e
-            )
-          )
+          (robocopy "{install}/lib" "{install}/clamav" /MIR) ^& IF %ERRORLEVEL% LEQ 1 exit 0
       dependencies:
         - libz
         - libcurl
@@ -200,27 +191,18 @@ platforms:
             mkdir "%CD%\\clamdeps" 2>nul
           )
           robocopy "{install}" "%CD%\\clamdeps\\Win32" /MIR
-          setlocal
-          CLAM_DEPENDENCIES="%CD%\\clamdeps"
+          call vcvarsall.bat x86
           call configure.bat
-          call vcvarsall.bat x86
           call devenv ClamAV.sln /Clean "Release|Win32" /useenv /ProjectConfig "Release|Win32"
-          endlocal
         make: |
-          setlocal
-          CLAM_DEPENDENCIES="%CD%\\clamdeps"
-          CL=/DWINDOWS_IGNORE_PACKING_MISMATCH
           cd win32
+          set CLAM_DEPENDENCIES_BAK=%CLAM_DEPENDENCIES%
+          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
           call vcvarsall.bat x86
-          call devenv ClamAV.sln /Rebuild "Release|Win32" /useenv /ProjectConfig "Release|Win32"
-          endlocal
+          set CL=/DWINDOWS_IGNORE_PACKING_MISMATCH && call devenv ClamAV.sln /Build "Release|Win32" /useenv /ProjectConfig "Release|Win32"
+          setx CLAM_DEPENDENCIES "%CLAM_DEPENDENCIES_BAK%"
         install: |
-          if not exist "{install}/clamav" (
-            mkdir "{install}/clamav" 2>nul
-            if not errorlevel 1 (
-              copy "{install}/lib/*" "{install}/clamav/." /s /v /e
-            )
-          )
+          (robocopy "{install}/lib" "{install}/clamav" /MIR) ^& IF %ERRORLEVEL% LEQ 1 exit 0
       dependencies:
         - libz
         - libcurl

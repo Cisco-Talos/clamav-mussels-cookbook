@@ -95,6 +95,7 @@ platforms:
     x64:
       build_script:
         configure: |
+          CALL vcvarsall.bat amd64
           CALL cmake.exe -G "Visual Studio 15 2017 Win64" \
             -DCMAKE_CONFIGURATION_TYPES=Release \
             -DBUILD_SHARED_LIBS=ON \
@@ -110,6 +111,7 @@ platforms:
             -DNGHTTP2_INCLUDE_DIR="{includes}" \
             -DNGHTTP2_LIBRARY="{libs}/nghttp2.lib"
         make: |
+          CALL vcvarsall.bat amd64
           CALL cmake.exe --build . --config Release
       dependencies:
         - libopenssl
@@ -126,10 +128,11 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio>=2017
+        - visualstudio=2017
     x86:
       build_script:
         configure: |
+          CALL vcvarsall.bat x86
           CALL cmake.exe -G "Visual Studio 15 2017" \
             -DCMAKE_CONFIGURATION_TYPES=Release \
             -DBUILD_SHARED_LIBS=ON \
@@ -145,6 +148,7 @@ platforms:
             -DNGHTTP2_INCLUDE_DIR="{includes}" \
             -DNGHTTP2_LIBRARY="{libs}/nghttp2.lib"
         make: |
+          CALL vcvarsall.bat x86
           CALL cmake.exe --build . --config Release
       dependencies:
         - libopenssl
@@ -161,4 +165,4 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio>=2017
+        - visualstudio=2017
