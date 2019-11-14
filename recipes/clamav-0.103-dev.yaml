@@ -153,6 +153,7 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
       install_paths:
         clamav:
           - libclamav/clamav.h
@@ -215,6 +216,7 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
       install_paths:
         clamav:
           - libclamav/clamav.h

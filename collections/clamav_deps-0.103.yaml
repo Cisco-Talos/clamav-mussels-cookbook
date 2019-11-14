@@ -38,6 +38,7 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
     x86:
       dependencies:
         - libz
@@ -48,3 +49,4 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
