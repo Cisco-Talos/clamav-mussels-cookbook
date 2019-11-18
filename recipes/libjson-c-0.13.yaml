@@ -61,7 +61,7 @@ platforms:
           CALL cmake.exe --build . --config Release
       dependencies: []
       install_paths:
-        include/libjson_c:
+        include/json-c:
           - arraylist.h
           - bits.h
           - debug.h
@@ -95,7 +95,7 @@ platforms:
           CALL cmake.exe --build . --config Release
       dependencies: []
       install_paths:
-        include/libjson_c:
+        include/json-c:
           - arraylist.h
           - bits.h
           - debug.h
