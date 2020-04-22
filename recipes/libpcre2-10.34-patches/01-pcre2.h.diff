@@ -6,5 +6,5 @@
  
 +
  #define PCRE2_MAJOR           10
- #define PCRE2_MINOR           33
+ #define PCRE2_MINOR           34
  #define PCRE2_PRERELEASE      

@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libjson_c
-version: "0.13.1"
-url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.1.tar.gz
+version: "0.14.0"
+url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.14.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -22,9 +22,11 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}" --enable-shared
+          cmake . \
+              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          make
+          cmake --build . --config Release
         install: |
           make install
       dependencies: []
@@ -38,9 +40,11 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}" --enable-shared
+          cmake . \
+              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          make
+          cmake --build . --config Release
         install: |
           make install
       dependencies: []
