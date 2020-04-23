@@ -67,7 +67,6 @@ platforms:
       install_paths:
         include/json-c:
           - arraylist.h
-          - bits.h
           - debug.h
           - json.h
           - json_c_version.h
@@ -80,7 +79,7 @@ platforms:
           - json_visit.h
           - linkhash.h
           - printbuf.h
-          - include/json_config.h
+          - json_config.h
         lib:
           - Release/json-c.dll
           - Release/json-c.lib
@@ -101,7 +100,6 @@ platforms:
       install_paths:
         include/json-c:
           - arraylist.h
-          - bits.h
           - debug.h
           - json.h
           - json_c_version.h
@@ -114,7 +112,7 @@ platforms:
           - json_visit.h
           - linkhash.h
           - printbuf.h
-          - include/json_config.h
+          - json_config.h
         lib:
           - Release/json-c.dll
           - Release/json-c.lib
