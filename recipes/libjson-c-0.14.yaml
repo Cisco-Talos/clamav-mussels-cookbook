@@ -77,6 +77,7 @@ platforms:
           - json_tokener.h
           - json_util.h
           - json_visit.h
+          - json_types.h
           - linkhash.h
           - printbuf.h
           - json_config.h
@@ -110,6 +111,7 @@ platforms:
           - json_tokener.h
           - json_util.h
           - json_visit.h
+          - json_types.h
           - linkhash.h
           - printbuf.h
           - json_config.h
