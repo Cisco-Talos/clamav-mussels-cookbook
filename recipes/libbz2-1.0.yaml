@@ -92,6 +92,6 @@ platforms:
           - libbz2.lib
         license/libbz2:
           - LICENSE
-      patches: patches_windows
+      patches: libbz2-1.0-patches
       required_tools:
         - visualstudio>=2017
