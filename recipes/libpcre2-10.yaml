@@ -82,7 +82,7 @@ platforms:
           - Release/pcre2-8.lib
         license/libpcre2:
           - COPYING
-      patches: libpcre2-10.34-patches
+      patches: libpcre2-10.35-patches
       required_tools:
         - cmake
         - visualstudio=2017
