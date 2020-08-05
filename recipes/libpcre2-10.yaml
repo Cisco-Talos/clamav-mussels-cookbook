@@ -61,15 +61,13 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL vcvarsall.bat amd64
-          CALL cmake.exe -G "Visual Studio 15 2017 Win64" \
+          CALL cmake.exe -G "Visual Studio 15 2017" -A x64 \
               -DBUILD_SHARED_LIBS=ON \
               -DZLIB_INCLUDE_DIR="{includes}" \
               -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
               -DBZIP2_INCLUDE_DIR="{includes}" \
               -DBZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
-          CALL vcvarsall.bat amd64
           CALL cmake.exe --build . --config Release
       dependencies:
         - libbz2<1.1.0
@@ -89,15 +87,13 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL vcvarsall.bat x86
-          CALL cmake.exe -G "Visual Studio 15 2017" \
+          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32 \
               -DBUILD_SHARED_LIBS=ON \
               -DZLIB_INCLUDE_DIR="{includes}" \
               -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
               -DBZIP2_INCLUDE_DIR="{includes}" \
               -DBZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
-          CALL vcvarsall.bat x86
           CALL cmake.exe --build . --config Release
       dependencies:
         - libbz2<1.1.0
