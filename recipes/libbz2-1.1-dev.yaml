@@ -75,10 +75,8 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL vcvarsall.bat amd64
-          CALL cmake.exe -G "Visual Studio 15 2017 Win64"
+          CALL cmake.exe -G "Visual Studio 15 2017" -A x64
         make: |
-          CALL vcvarsall.bat amd64
           CALL cmake.exe --build . --config Release
       dependencies: []
       install_paths:
@@ -96,10 +94,8 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL vcvarsall.bat x86
-          CALL cmake.exe -G "Visual Studio 15 2017"
+          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32
         make: |
-          CALL vcvarsall.bat x86
           CALL cmake.exe --build . --config Release
       dependencies: []
       install_paths:
