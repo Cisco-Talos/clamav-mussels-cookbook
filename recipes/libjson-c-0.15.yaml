@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libjson_c
-version: "0.14.0"
-url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.14.tar.gz
+version: "0.15.0"
+url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
