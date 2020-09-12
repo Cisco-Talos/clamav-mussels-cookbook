@@ -45,6 +45,7 @@ platforms:
       install_paths:
         license/libssh2:
           - COPYING
+      patches: libssh2-1.9-patches
       required_tools:
         - cmake
         - make
@@ -76,6 +77,7 @@ platforms:
       install_paths:
         license/libssh2:
           - COPYING
+      patches: libssh2-1.9-patches
       required_tools:
         - cmake
         - make
@@ -112,6 +114,7 @@ platforms:
           - src/Release/libssh2.lib
         license/libssh2:
           - COPYING
+      patches: libssh2-1.9-patches
       required_tools:
         - cmake
         - visualstudio=2017
@@ -145,6 +148,7 @@ platforms:
           - src/Release/libssh2.lib
         license/libssh2:
           - COPYING
+      patches: libssh2-1.9-patches
       required_tools:
         - cmake
         - visualstudio=2017
