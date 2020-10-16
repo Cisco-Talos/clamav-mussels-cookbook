@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,7 @@
 
 name: clamav
 version: "0.103.0"
-url: https://github.com/Cisco-Talos/clamav-devel/archive/dev/0.103.zip
-archive_name_change:
-  - "0.103"
-  - clamav-devel-dev-0.103
+url: https://www.clamav.net/downloads/production/clamav-0.103.0.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:

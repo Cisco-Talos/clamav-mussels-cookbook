@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# TODO: Rewrite this to use the new CMake build system, when unit test support is complete.
 name: clamav
-version: "0.102.4"
-url: https://www.clamav.net/downloads/production/clamav-0.102.4.tar.gz
+version: "0.104.0"
+url: https://github.com/Cisco-Talos/clamav-devel/archive/dev/0.104.zip
+archive_name_change:
+  - "0.104"
+  - clamav-devel-dev-0.104
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -22,6 +26,8 @@ platforms:
     host:
       build_script:
         configure: |
+          chmod +x ./autogen.sh
+          ./autogen.sh
           chmod +x ./configure ./config/install-sh
           ./configure \
               --with-libcurl={install} \
@@ -56,6 +62,7 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - libcheck
       install_paths:
         etc:
           - etc/clamd.conf.sample
@@ -68,10 +75,17 @@ platforms:
       required_tools:
         - make
         - clang
+        - pkgconfig
+        - automake
+        - autoconf
+        - m4
+        - libtool
   Linux:
     host:
       build_script:
         configure: |
+          chmod +x ./autogen.sh
+          ./autogen.sh
           chmod +x ./configure ./config/install-sh
           ./configure \
               --with-libcurl={install} \
@@ -107,6 +121,7 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - libcheck
       install_paths:
         etc:
           - etc/clamd.conf.sample
@@ -120,6 +135,11 @@ platforms:
         - make
         - gcc
         - patchelf
+        - pkgconfig
+        - automake
+        - autoconf
+        - m4
+        - libtool
   Windows:
     x64:
       build_script:
@@ -150,6 +170,8 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
+        - libcheck
       install_paths:
         clamav:
           - libclamav/clamav.h
@@ -212,6 +234,8 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
+        - libcheck
       install_paths:
         clamav:
           - libclamav/clamav.h
