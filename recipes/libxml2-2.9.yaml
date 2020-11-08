@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -63,6 +63,31 @@ platforms:
         - make
         - gcc
         - patchelf
+    host-static:
+      build_script:
+        configure: |
+          ./configure \
+            --with-zlib={install} \
+            --with-iconv=no \
+            --prefix="{install}" \
+            --enable-static \
+            --disable-shared
+        make: |
+          make
+        install: |
+          make install
+      dependencies:
+        - libz
+      install_paths:
+        include:
+          - libxml.h
+          - include/libxml
+        license/libxml2:
+          - COPYING
+      patches: libxml2-2.9.10-patches
+      required_tools:
+        - make
+        - gcc
   Windows:
     x64:
       build_script:

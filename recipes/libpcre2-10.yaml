@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}" --disable-dependency-tracking
+          ./configure --prefix="{install}" --disable-dependency-tracking --disable-static
         make: |
           make
         install: |
@@ -41,7 +41,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}" --disable-dependency-tracking
+          ./configure --prefix="{install}" --disable-dependency-tracking --disable-static
         make: |
           make
         install: |
@@ -57,6 +57,23 @@ platforms:
         - make
         - gcc
         - patchelf
+    host-static:
+      build_script:
+        configure: |
+          ./configure --prefix="{install}" --disable-dependency-tracking --disable-shared
+        make: |
+          make
+        install: |
+          make install
+      dependencies:
+        - libbz2
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - make
+        - gcc
   Windows:
     x64:
       build_script:

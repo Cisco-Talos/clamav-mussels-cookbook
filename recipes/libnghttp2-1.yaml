@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -88,6 +88,39 @@ platforms:
         - make
         - gcc
         - patchelf
+    host-static:
+      build_script:
+        configure: |
+          cmake . \
+              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DOPENSSL_ROOT_DIR="{install}" \
+              -DOPENSSL_INCLUDE_DIRS="{includes}" \
+              -DOPENSSL_LIBRARIES="{libs}" \
+              -DOPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
+              -DOPENSSL_SSL_LIBRARY="{libs}/libssl.a" \
+              -DLIBXML2_INCLUDE_DIRS="{includes}" \
+              -DLIBXML2_LIBRARY="{libs}/libxml2.a" \
+              -DZLIB_ROOT="{includes}" \
+              -DZLIB_LIBRARY="{libs}/libz.a" \
+              -DCMAKE_INSTALL_PREFIX="{install}" \
+              -DENABLE_LIB_ONLY=ON \
+              -DENABLE_STATIC_LIB=ON \
+              -DENABLE_SHARED_LIB=OFF
+        make: |
+          cmake --build . --config Release
+        install: |
+          make install
+      dependencies:
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
+        - libxml2>=2.9.9
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - make
+        - gcc
   Windows:
     x64:
       build_script:
