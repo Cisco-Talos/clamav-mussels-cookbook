@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -91,6 +91,40 @@ platforms:
         - cmake
         - gcc
         - patchelf
+    host-static:
+      build_script:
+        configure: |
+          cmake . \
+            -DCMAKE_CONFIGURATION_TYPES=Release \
+            -DCMAKE_USE_OPENSSL=ON \
+            -DOPENSSL_INCLUDE_DIR="{includes}" \
+            -DOPENSSL_LIBRARIES="{libs}" \
+            -DOPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
+            -DOPENSSL_SSL_LIBRARY="{libs}/libssl.a" \
+            -DZLIB_INCLUDE_DIR="{includes}" \
+            -DZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -DLIBSSH2_INCLUDE_DIR="{includes}" \
+            -DLIBSSH2_LIBRARY="{libs}/libssh2.a" \
+            -DUSE_NGHTTP2=ON \
+            -DNGHTTP2_INCLUDE_DIR="{includes}" \
+            -DNGHTTP2_LIBRARY="{libs}/libnghttp2.a" \
+            -DCMAKE_INSTALL_PREFIX="{install}" \
+            -DBUILD_SHARED_LIBS=OFF
+        make: |
+          cmake --build . --config Release
+        install: |
+          make install
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - gcc
   Windows:
     x64:
       build_script:

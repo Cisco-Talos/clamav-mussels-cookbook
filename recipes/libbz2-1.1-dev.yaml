@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,6 +59,25 @@ platforms:
         configure: |
           cmake . \
             -DCMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cmake --build . --config Release
+        install: |
+          make install
+      dependencies: []
+      install_paths:
+        license/libbz2:
+          - COPYING
+      required_tools:
+        - cmake
+        - make
+        - gcc
+    host-static:
+      build_script:
+        configure: |
+          cmake . \
+            -DCMAKE_INSTALL_PREFIX="{install}" \
+            -DENABLE_STATIC_LIB=ON \
+            -DENABLE_SHARED_LIB=OFF
         make: |
           cmake --build . --config Release
         install: |

@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,6 +83,36 @@ platforms:
         - make
         - gcc
         - patchelf
+    host-static:
+      build_script:
+        configure: |
+          cmake . \
+            -DCRYPTO_BACKEND=OpenSSL \
+            -DBUILD_SHARED_LIBS=OFF \
+            -DOPENSSL_INCLUDE_DIR="{includes}" \
+            -DOPENSSL_LIBRARIES="{libs}" \
+            -DOPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
+            -DOPENSSL_SSL_LIBRARY="{libs}/libssl.a" \
+            -DENABLE_ZLIB_COMPRESSION=ON \
+            -DZLIB_INCLUDE_DIR="{includes}" \
+            -DZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -DCMAKE_INSTALL_PREFIX="{install}" \
+            -DBUILD_TESTING=OFF
+        make: |
+          cmake --build . --config Release
+        install: |
+          make install
+      dependencies:
+        - libopenssl>=1.1.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      patches: libssh2-1.9-patches
+      required_tools:
+        - cmake
+        - make
+        - gcc
   Windows:
     x64:
       build_script:
