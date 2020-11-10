@@ -57,6 +57,7 @@ platforms:
         - libpcre2
         - libbz2<1.1.0
         - pdcurses
+        - libcheck
     x86:
       dependencies:
         - libz
@@ -68,3 +69,4 @@ platforms:
         - libpcre2
         - libbz2<1.1.0
         - pdcurses
+        - libcheck
