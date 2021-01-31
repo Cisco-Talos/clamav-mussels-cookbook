@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libpcre2
-version: "10.35"
-url: https://ftp.pcre.org/pub/pcre/pcre2-10.35.tar.gz
+version: "10.36"
+url: https://ftp.pcre.org/pub/pcre/pcre2-10.36.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -97,7 +97,6 @@ platforms:
           - Release/pcre2-8.lib
         license/libpcre2:
           - COPYING
-      patches: libpcre2-10.35-patches
       required_tools:
         - cmake
         - visualstudio=2017
@@ -123,7 +122,6 @@ platforms:
           - Release/pcre2-8.lib
         license/libpcre2:
           - COPYING
-      patches: libpcre2-10.33-patches
       required_tools:
         - cmake
         - visualstudio=2017

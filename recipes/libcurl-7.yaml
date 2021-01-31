@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libcurl
-version: "7.72.0"
-url: https://curl.haxx.se/download/curl-7.72.0.zip
+version: "7.74.0"
+url: https://curl.haxx.se/download/curl-7.74.0.zip
 mussels_version: "0.2"
 type: recipe
 platforms:

@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libopenssl
-version: "1.1.1g"
-url: https://www.openssl.org/source/openssl-1.1.1g.tar.gz
+version: "1.1.1i"
+url: https://www.openssl.org/source/openssl-1.1.1i.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
