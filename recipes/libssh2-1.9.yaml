@@ -15,7 +15,7 @@
 name: libssh2
 version: "1.9.0"
 url: https://www.libssh2.org/download/libssh2-1.9.0.tar.gz
-mussels_version: "0.2"
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
@@ -23,6 +23,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCRYPTO_BACKEND=OpenSSL \
             -DBUILD_SHARED_LIBS=ON \
             -DOPENSSL_INCLUDE_DIR="{includes}" \
@@ -35,7 +36,7 @@ platforms:
             -DCMAKE_INSTALL_PREFIX="{install}" \
             -DBUILD_TESTING=OFF
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libssh2.dylib"
@@ -55,6 +56,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCRYPTO_BACKEND=OpenSSL \
             -DBUILD_SHARED_LIBS=ON \
             -DOPENSSL_INCLUDE_DIR="{includes}" \
@@ -67,7 +69,7 @@ platforms:
             -DCMAKE_INSTALL_PREFIX="{install}" \
             -DBUILD_TESTING=OFF
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssh2.so"
@@ -87,6 +89,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCRYPTO_BACKEND=OpenSSL \
             -DBUILD_SHARED_LIBS=OFF \
             -DOPENSSL_INCLUDE_DIR="{includes}" \
@@ -99,7 +102,7 @@ platforms:
             -DCMAKE_INSTALL_PREFIX="{install}" \
             -DBUILD_TESTING=OFF
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies:
@@ -117,7 +120,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A x64 \
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64 \
             -DCRYPTO_BACKEND=OpenSSL\
             -DBUILD_SHARED_LIBS=ON \
             -DOPENSSL_INCLUDE_DIR="{includes}" \
@@ -147,11 +150,11 @@ platforms:
       patches: libssh2-1.9-patches
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32 \
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32 \
             -DCRYPTO_BACKEND=OpenSSL\
             -DBUILD_SHARED_LIBS=ON \
             -DOPENSSL_INCLUDE_DIR="{includes}" \
@@ -181,4 +184,4 @@ platforms:
       patches: libssh2-1.9-patches
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017

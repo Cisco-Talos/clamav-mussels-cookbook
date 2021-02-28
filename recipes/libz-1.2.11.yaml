@@ -15,7 +15,7 @@
 name: libz
 version: "1.2.11"
 url: https://www.zlib.net/zlib-1.2.11.tar.gz
-mussels_version: "0.2"
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
@@ -23,9 +23,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
+              -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -41,9 +42,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
+              -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -58,9 +60,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
+              -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -75,8 +78,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL vcvarsall.bat amd64
-          CALL cmake.exe -G "Visual Studio 15 2017 Win64"
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []
@@ -90,12 +92,11 @@ platforms:
           - README
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL vcvarsall.bat x86
-          CALL cmake.exe -G "Visual Studio 15 2017"
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []
@@ -109,4 +110,4 @@ platforms:
           - README
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017

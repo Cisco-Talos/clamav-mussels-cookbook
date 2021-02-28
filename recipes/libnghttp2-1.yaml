@@ -18,7 +18,7 @@ url: https://github.com/nghttp2/nghttp2/archive/v1.43.0.zip
 archive_name_change:
   - v
   - nghttp2-
-mussels_version: "0.2"
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
@@ -26,7 +26,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_BUILD_TYPE=Release \
               -DBUILD_SHARED_LIBS=ON \
               -DOPENSSL_ROOT_DIR="{install}" \
               -DOPENSSL_INCLUDE_DIRS="{includes}" \
@@ -39,7 +39,7 @@ platforms:
               -DZLIB_LIBRARY="{libs}/libz.a" \
               -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libnghttp2.dylib"
@@ -59,7 +59,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_BUILD_TYPE=Release \
               -DBUILD_SHARED_LIBS=ON \
               -DOPENSSL_ROOT_DIR="{install}" \
               -DOPENSSL_INCLUDE_DIRS="{includes}" \
@@ -72,7 +72,7 @@ platforms:
               -DZLIB_LIBRARY="{libs}/libz.a" \
               -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libnghttp2.so"
@@ -92,7 +92,7 @@ platforms:
       build_script:
         configure: |
           cmake . \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_BUILD_TYPE=Release \
               -DOPENSSL_ROOT_DIR="{install}" \
               -DOPENSSL_INCLUDE_DIRS="{includes}" \
               -DOPENSSL_LIBRARIES="{libs}" \
@@ -107,7 +107,7 @@ platforms:
               -DENABLE_STATIC_LIB=ON \
               -DENABLE_SHARED_LIB=OFF
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies:
@@ -125,8 +125,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A x64 \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64 \
               -DBUILD_SHARED_LIBS=ON \
               -DOPENSSL_ROOT_DIR="{install}" \
               -DOPENSSL_INCLUDE_DIRS="{includes}" \
@@ -149,12 +148,11 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32 \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32 \
               -DBUILD_SHARED_LIBS=ON \
               -DOPENSSL_ROOT_DIR="{install}" \
               -DOPENSSL_INCLUDE_DIR="{includes}" \
@@ -177,4 +175,4 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017

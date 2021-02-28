@@ -15,7 +15,7 @@
 name: libjson_c
 version: "0.15.0"
 url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz
-mussels_version: "0.2"
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
@@ -23,10 +23,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -41,10 +41,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -58,12 +58,12 @@ platforms:
       build_script:
         configure: |
           cmake . \
-              -DCMAKE_CONFIGURATION_TYPES=Release \
+              -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX="{install}" \
               -DBUILD_STATIC_LIBS=ON \
               -DBUILD_SHARED_LIBS=OFF
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -77,7 +77,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A x64
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []
@@ -105,11 +105,11 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []
@@ -137,4 +137,4 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017

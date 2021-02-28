@@ -15,14 +15,17 @@
 name: libpcre2
 version: "10.36"
 url: https://ftp.pcre.org/pub/pcre/pcre2-10.36.tar.gz
-mussels_version: "0.2"
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}" --disable-dependency-tracking --disable-static
+          ./configure \
+            --prefix="{install}" \
+            --disable-dependency-tracking \
+            --disable-static
         make: |
           make
         install: |
@@ -41,7 +44,9 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix="{install}" --disable-dependency-tracking --disable-static
+          ./configure --prefix="{install}" \
+            --disable-dependency-tracking \
+            --disable-static
         make: |
           make
         install: |
@@ -60,7 +65,9 @@ platforms:
     host-static:
       build_script:
         configure: |
-          ./configure --prefix="{install}" --disable-dependency-tracking --disable-shared
+          ./configure --prefix="{install}" \
+            --disable-dependency-tracking \
+            --disable-shared
         make: |
           make
         install: |
@@ -78,7 +85,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A x64 \
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64 \
               -DBUILD_SHARED_LIBS=ON \
               -DZLIB_INCLUDE_DIR="{includes}" \
               -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
@@ -99,11 +106,11 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32 \
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32 \
               -DBUILD_SHARED_LIBS=ON \
               -DZLIB_INCLUDE_DIR="{includes}" \
               -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
@@ -124,4 +131,4 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
