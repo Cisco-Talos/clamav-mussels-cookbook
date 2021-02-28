@@ -18,18 +18,20 @@ url: https://github.com/libcheck/check/archive/0.15.2.tar.gz
 archive_name_change:
   - 0.15.2
   - check-0.15.2
-mussels_version: "0.2"
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
     host:
       build_script:
         configure: |
-          cmake . -DCMAKE_INSTALL_PREFIX={install}
+          cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX={install}
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
-          cmake --build . --config Release --target install
+          cmake --build . --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcheck.dylib"
       install_paths:
         license/libcheck:
@@ -41,11 +43,13 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . -DCMAKE_INSTALL_PREFIX={install}
+          cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX={install}
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
-          cmake --build . --config Release --target install
+          cmake --build . --target install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcheck.so"
       install_paths:
         license/libcheck:
@@ -58,7 +62,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A x64
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64
         make: |
           CALL cmake.exe --build . --config Release
       install_paths:
@@ -72,11 +76,11 @@ platforms:
           - COPYING.LESSER
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32
         make: |
           CALL cmake.exe --build . --config Release
       install_paths:
@@ -90,4 +94,4 @@ platforms:
           - COPYING.LESSER
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017

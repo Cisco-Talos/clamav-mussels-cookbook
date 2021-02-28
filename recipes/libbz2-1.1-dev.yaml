@@ -15,7 +15,7 @@
 name: libbz2
 version: "1.1.0"
 url: https://gitlab.com/federicomenaquintero/bzip2/-/archive/master/bzip2-master.tar.gz
-mussels_version: "0.2"
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
@@ -23,9 +23,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -40,9 +41,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -58,9 +60,10 @@ platforms:
       build_script:
         configure: |
           cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -75,11 +78,12 @@ platforms:
       build_script:
         configure: |
           cmake . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX="{install}" \
             -DENABLE_STATIC_LIB=ON \
             -DENABLE_SHARED_LIB=OFF
         make: |
-          cmake --build . --config Release
+          cmake --build .
         install: |
           make install
       dependencies: []
@@ -94,7 +98,7 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A x64
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []
@@ -109,11 +113,11 @@ platforms:
       patches: patches_windows
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL cmake.exe -G "Visual Studio 15 2017" -A Win32
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32
         make: |
           CALL cmake.exe --build . --config Release
       dependencies: []
@@ -128,4 +132,4 @@ platforms:
       patches: patches_windows
       required_tools:
         - cmake
-        - visualstudio=2017
+        - visualstudio>=2017
