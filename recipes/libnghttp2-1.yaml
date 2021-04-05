@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libnghttp2
-version: "1.42.0"
-url: https://github.com/nghttp2/nghttp2/archive/v1.42.0.zip
+version: "1.43.0"
+url: https://github.com/nghttp2/nghttp2/archive/v1.43.0.zip
 archive_name_change:
   - v
   - nghttp2-
