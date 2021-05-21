@@ -13,43 +13,56 @@
 # limitations under the License.
 
 name: libxml2
-version: "2.9.10"
-url: http://xmlsoft.org/sources/libxml2-2.9.10.tar.gz
-mussels_version: "0.2"
+version: "2.9.12"
+url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.9.12/libxml2-v2.9.12.tar.gz
+#url: http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz
+# 2.9.12 build broken on Windows due to packaging issue, fixed by this commit:
+#   https://gitlab.gnome.org/GNOME/libxml2/-/commit/7d4060d252354a8d650a3c50256fe3679a40691d
+mussels_version: "0.3"
 type: recipe
 platforms:
   Darwin:
     host:
       build_script:
         configure: |
-          ./configure \
-            --with-zlib={install} \
-            --with-iconv=no \
-            --prefix="{install}"
+          cmake . \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
         make: |
-          make
+          cmake --build .
         install: |
           make install
-          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libxml2.2.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libxml2.dylib"
       dependencies:
         - libz
       install_paths:
         license/libxml2:
-          - COPYING
-      patches: libxml2-2.9.10-patches
+          - Copyright
       required_tools:
+        - cmake
         - make
         - clang
   Linux:
     host:
       build_script:
         configure: |
-          ./configure \
-            --with-zlib={install} \
-            --with-iconv=no \
-            --prefix="{install}"
+          cmake . \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
         make: |
-          make
+          cmake --build .
         install: |
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libxml2.so"
@@ -57,81 +70,87 @@ platforms:
         - libz
       install_paths:
         license/libxml2:
-          - COPYING
-      patches: libxml2-2.9.10-patches
+          - Copyright
       required_tools:
+        - cmake
         - make
         - gcc
         - patchelf
     host-static:
       build_script:
         configure: |
-          ./configure \
-            --with-zlib={install} \
-            --with-iconv=no \
-            --prefix="{install}" \
-            --enable-static \
-            --disable-shared
+          cmake . \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=OFF \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
         make: |
-          make
+          cmake --build .
         install: |
           make install
       dependencies:
         - libz
       install_paths:
-        include:
-          - libxml.h
-          - include/libxml
         license/libxml2:
-          - COPYING
-      patches: libxml2-2.9.10-patches
+          - Copyright
       required_tools:
+        - cmake
         - make
         - gcc
   Windows:
     x64:
       build_script:
         configure: |
-          CALL vcvarsall.bat amd64
-          CD win32
-          CALL cscript configure.js zlib=no incdir="{includes}" libdir="{libs}" sodir="{libs}" iconv=no static=no
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64 \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
         make: |
-          CALL vcvarsall.bat amd64
-          CD win32
-          CALL nmake /f Makefile.msvc
-      dependencies: []
+          CALL cmake.exe --build . --config Release
+      dependencies:
+        - libz
       install_paths:
         include:
           - libxml.h
           - include/libxml
         lib:
-          - win32/bin.msvc/libxml2.dll
-          - win32/bin.msvc/libxml2.lib
+          - Release/libxml2.dll
+          - Release/libxml2.lib
         license/libxml2:
-          - COPYING
-      patches: libxml2-2.9.10-patches
+          - Copyright
       required_tools:
+        - cmake
         - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL vcvarsall.bat x86
-          CD win32
-          CALL cscript configure.js zlib=no incdir="{includes}" libdir="{libs}" sodir="{libs}" iconv=no static=no
+          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
         make: |
-          CALL vcvarsall.bat x86
-          CD win32
-          CALL nmake /f Makefile.msvc
-      dependencies: []
+          CALL cmake.exe --build . --config Release
+      dependencies:
+        - libz
       install_paths:
         include:
           - libxml.h
           - include/libxml
         lib:
-          - win32/bin.msvc/libxml2.dll
-          - win32/bin.msvc/libxml2.lib
+          - Release/libxml2.dll
+          - Release/libxml2.lib
         license/libxml2:
-          - COPYING
-      patches: libxml2-2.9.10-patches
+          - Copyright
       required_tools:
+        - cmake
         - visualstudio>=2017
