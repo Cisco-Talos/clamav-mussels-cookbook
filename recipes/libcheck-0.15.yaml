@@ -25,12 +25,16 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX={install}
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX={install}
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           cmake --build . --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcheck.dylib"
       install_paths:
@@ -43,12 +47,16 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX={install}
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX={install}
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           cmake --build . --target install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcheck.so"
       install_paths:
@@ -62,16 +70,17 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       install_paths:
-        include:
-          - src/check.h
-          - check_stdint.h
-        lib:
-          - src/Release/checkDynamic.dll
-          - src/Release/checkDynamic.lib
         license/libcheck:
           - COPYING.LESSER
       required_tools:
@@ -80,16 +89,17 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       install_paths:
-        include:
-          - src/check.h
-          - check_stdint.h
-        lib:
-          - src/Release/checkDynamic.dll
-          - src/Release/checkDynamic.lib
         license/libcheck:
           - COPYING.LESSER
       required_tools:

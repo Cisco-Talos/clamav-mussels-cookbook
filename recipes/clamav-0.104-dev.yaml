@@ -18,7 +18,7 @@ version: "0.104.0"
 url: https://github.com/Cisco-Talos/clamav-devel/archive/dev/0.104.zip
 archive_name_change:
   - "0.104"
-  - clamav-devel-dev-0.104
+  - clamav-dev-0.104
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -144,23 +144,40 @@ platforms:
     x64:
       build_script:
         configure: |
-          cd win32
-          if not exist "%CD%\\clamdeps" (
-            mkdir "%CD%\\clamdeps" 2>nul
-          )
-          robocopy "{install}" "%CD%\\clamdeps\\x64" /MIR
-          call vcvarsall.bat x64
-          call configure.bat
-          call devenv ClamAV.sln /Clean "Release|x64" /useenv /ProjectConfig "Release|x64"
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"                     \
+            -D ENABLE_EXAMPLES=OFF                                  \
+            -D JSONC_INCLUDE_DIR="{install}\include\json-c"         \
+            -D JSONC_LIBRARY="{install}\lib\json-c.lib"             \
+            -D ENABLE_JSON_SHARED=OFF                               \
+            -D BZIP2_INCLUDE_DIR="{install}\include"                \
+            -D BZIP2_LIBRARY_RELEASE="{install}\lib\libbz2.lib"     \
+            -D CURL_INCLUDE_DIR="{install}\include"                 \
+            -D CURL_LIBRARY="{install}\lib\libcurl_imp.lib"         \
+            -D OPENSSL_ROOT_DIR="{install}"                         \
+            -D OPENSSL_INCLUDE_DIR="{install}\include"              \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib" \
+            -D ZLIB_LIBRARY="{install}\lib\libssl.lib"              \
+            -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"      \
+            -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"          \
+            -D PCRE2_INCLUDE_DIR="{install}\include"                \
+            -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"            \
+            -D CURSES_INCLUDE_DIR="{install}\include"               \
+            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"          \
+            -D PThreadW32_INCLUDE_DIR="{install}\include"           \
+            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC2.lib"    \
+            -D ZLIB_INCLUDE_DIR="{install}\include"                 \
+            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"          \
+            -D LIBCHECK_INCLUDE_DIR="{install}\include"             \
+            -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"
         make: |
-          cd win32
-          set CLAM_DEPENDENCIES_BAK=%CLAM_DEPENDENCIES%
-          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
-          call vcvarsall.bat x64
-          set CL=/DWINDOWS_IGNORE_PACKING_MISMATCH && call devenv ClamAV.sln /Build "Release|x64" /useenv /ProjectConfig "Release|x64"
-          setx CLAM_DEPENDENCIES "%CLAM_DEPENDENCIES_BAK%"
+          cd build
+          cmake --build . --config Release
         install: |
-          (robocopy "{install}/lib" "{install}/clamav" /MIR) ^& IF %ERRORLEVEL% LEQ 1 exit 0
+          cd build
+          cmake --build . --config Release --target install
       dependencies:
         - libz
         - libcurl
@@ -172,59 +189,46 @@ platforms:
         - libbz2<1.1.0
         - pdcurses
         - libcheck
-      install_paths:
-        clamav:
-          - libclamav/clamav.h
-          - win32/clamav-types.h
-          - win32/clamav-version.h
-          - win32/x64/Release/clambc.exe
-          - win32/x64/Release/clamconf.exe
-          - win32/x64/Release/clamd.exe
-          - win32/x64/Release/clamdscan.exe
-          - win32/x64/Release/clamscan.exe
-          - win32/x64/Release/clamsubmit.exe
-          - win32/x64/Release/freshclam.exe
-          - win32/x64/Release/sigtool.exe
-          - win32/x64/Release/libclamav.dll
-          - win32/x64/Release/libclamav.lib
-          - win32/x64/Release/libfreshclam.dll
-          - win32/x64/Release/libfreshclam.lib
-          - win32/x64/Release/libclamunrar.dll
-          - win32/x64/Release/libclamunrar.lib
-          - win32/x64/Release/libclamunrar_iface.dll
-          - win32/x64/Release/libclamunrar_iface.lib
-          - win32/x64/Release/mspack.dll
-          - win32/x64/Release/mspack.lib
-        clamav/conf_examples:
-          - win32/conf_examples/clamd.conf.sample
-          - win32/conf_examples/freshclam.conf.sample
-        clamav/database:
-          - database/main.cvd
-          - database/daily.cvd
-        clamav/license:
-          - COPYING*
       required_tools:
+        - cmake
         - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          cd win32
-          if not exist "%CD%\\clamdeps" (
-            mkdir "%CD%\\clamdeps" 2>nul
-          )
-          robocopy "{install}" "%CD%\\clamdeps\\Win32" /MIR
-          call vcvarsall.bat x86
-          call configure.bat
-          call devenv ClamAV.sln /Clean "Release|Win32" /useenv /ProjectConfig "Release|Win32"
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"                     \
+            -D ENABLE_EXAMPLES=OFF                                  \
+            -D JSONC_INCLUDE_DIR="{install}\include\json-c"         \
+            -D JSONC_LIBRARY="{install}\lib\json-c.lib"             \
+            -D ENABLE_JSON_SHARED=OFF                               \
+            -D BZIP2_INCLUDE_DIR="{install}\include"                \
+            -D BZIP2_LIBRARY_RELEASE="{install}\lib\libbz2.lib"     \
+            -D CURL_INCLUDE_DIR="{install}\include"                 \
+            -D CURL_LIBRARY="{install}\lib\libcurl_imp.lib"         \
+            -D OPENSSL_ROOT_DIR="{install}"                         \
+            -D OPENSSL_INCLUDE_DIR="{install}\include"              \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib" \
+            -D ZLIB_LIBRARY="{install}\lib\libssl.lib"              \
+            -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"      \
+            -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"          \
+            -D PCRE2_INCLUDE_DIR="{install}\include"                \
+            -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"            \
+            -D CURSES_INCLUDE_DIR="{install}\include"               \
+            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"          \
+            -D PThreadW32_INCLUDE_DIR="{install}\include"           \
+            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC2.lib"    \
+            -D ZLIB_INCLUDE_DIR="{install}\include"                 \
+            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"          \
+            -D LIBCHECK_INCLUDE_DIR="{install}\include"             \
+            -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"
         make: |
-          cd win32
-          set CLAM_DEPENDENCIES_BAK=%CLAM_DEPENDENCIES%
-          setx CLAM_DEPENDENCIES "%CD%\\clamdeps"
-          call vcvarsall.bat x86
-          set CL=/DWINDOWS_IGNORE_PACKING_MISMATCH && call devenv ClamAV.sln /Build "Release|Win32" /useenv /ProjectConfig "Release|Win32"
-          setx CLAM_DEPENDENCIES "%CLAM_DEPENDENCIES_BAK%"
+          cd build
+          cmake --build . --config Release
         install: |
-          (robocopy "{install}/lib" "{install}/clamav" /MIR) ^& IF %ERRORLEVEL% LEQ 1 exit 0
+          cd build
+          cmake --build . --config Release --target install
       dependencies:
         - libz
         - libcurl
@@ -236,36 +240,6 @@ platforms:
         - libbz2<1.1.0
         - pdcurses
         - libcheck
-      install_paths:
-        clamav:
-          - libclamav/clamav.h
-          - win32/clamav-types.h
-          - win32/clamav-version.h
-          - win32/Win32/Release/clambc.exe
-          - win32/Win32/Release/clamconf.exe
-          - win32/Win32/Release/clamd.exe
-          - win32/Win32/Release/clamdscan.exe
-          - win32/Win32/Release/clamscan.exe
-          - win32/Win32/Release/clamsubmit.exe
-          - win32/Win32/Release/freshclam.exe
-          - win32/Win32/Release/sigtool.exe
-          - win32/Win32/Release/libclamav.dll
-          - win32/Win32/Release/libclamav.lib
-          - win32/Win32/Release/libfreshclam.dll
-          - win32/Win32/Release/libfreshclam.lib
-          - win32/Win32/Release/libclamunrar.dll
-          - win32/Win32/Release/libclamunrar.lib
-          - win32/Win32/Release/libclamunrar_iface.dll
-          - win32/Win32/Release/libclamunrar_iface.lib
-          - win32/Win32/Release/mspack.dll
-          - win32/Win32/Release/mspack.lib
-        clamav/conf_examples:
-          - win32/conf_examples/clamd.conf.sample
-          - win32/conf_examples/freshclam.conf.sample
-        clamav/database:
-          - database/main.cvd
-          - database/daily.cvd
-        clamav/license:
-          - COPYING*
       required_tools:
+        - cmake
         - visualstudio>=2017

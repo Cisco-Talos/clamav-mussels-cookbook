@@ -22,12 +22,16 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX="{install}"
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies: []
       install_paths:
@@ -40,12 +44,16 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX="{install}"
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies: []
       install_paths:
@@ -59,12 +67,16 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
+          mkdir build
+          cd build
+          cmake .. \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies: []
       install_paths:
@@ -77,14 +89,18 @@ platforms:
     host-static:
       build_script:
         configure: |
-          cmake . \
+          mkdir build
+          cd build
+          cmake .. \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX="{install}" \
             -DENABLE_STATIC_LIB=ON \
             -DENABLE_SHARED_LIB=OFF
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies: []
       install_paths:
@@ -98,38 +114,40 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies: []
       install_paths:
-        include:
-          - bzlib.h
-        lib:
-          - libbz2.dll
-          - libbz2.lib
         license/libbz2:
           - COPYING
-      patches: patches_windows
       required_tools:
         - cmake
         - visualstudio>=2017
     x86:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies: []
       install_paths:
-        include:
-          - bzlib.h
-        lib:
-          - libbz2.dll
-          - libbz2.lib
         license/libbz2:
           - COPYING
-      patches: patches_windows
       required_tools:
         - cmake
         - visualstudio>=2017

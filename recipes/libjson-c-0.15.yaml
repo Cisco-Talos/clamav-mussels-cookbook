@@ -22,12 +22,16 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-              -DCMAKE_BUILD_TYPE=Release \
-              -DCMAKE_INSTALL_PREFIX="{install}"
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies: []
       install_paths:
@@ -40,12 +44,16 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-              -DCMAKE_BUILD_TYPE=Release \
-              -DCMAKE_INSTALL_PREFIX="{install}"
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies: []
       install_paths:
@@ -57,14 +65,18 @@ platforms:
     host-static:
       build_script:
         configure: |
-          cmake . \
-              -DCMAKE_BUILD_TYPE=Release \
-              -DCMAKE_INSTALL_PREFIX="{install}" \
-              -DBUILD_STATIC_LIBS=ON \
-              -DBUILD_SHARED_LIBS=OFF
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_STATIC_LIBS=ON \
+            -D BUILD_SHARED_LIBS=OFF
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies: []
       install_paths:
@@ -77,30 +89,18 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies: []
       install_paths:
-        include/json-c:
-          - arraylist.h
-          - debug.h
-          - json.h
-          - json_c_version.h
-          - json_inttypes.h
-          - json_object.h
-          - json_object_iterator.h
-          - json_pointer.h
-          - json_tokener.h
-          - json_util.h
-          - json_visit.h
-          - json_types.h
-          - linkhash.h
-          - printbuf.h
-          - json_config.h
-        lib:
-          - Release/json-c.dll
-          - Release/json-c.lib
         license/libjson_c:
           - COPYING
       required_tools:
@@ -109,30 +109,18 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies: []
       install_paths:
-        include/json-c:
-          - arraylist.h
-          - debug.h
-          - json.h
-          - json_c_version.h
-          - json_inttypes.h
-          - json_object.h
-          - json_object_iterator.h
-          - json_pointer.h
-          - json_tokener.h
-          - json_util.h
-          - json_visit.h
-          - json_types.h
-          - linkhash.h
-          - printbuf.h
-          - json_config.h
-        lib:
-          - Release/json-c.dll
-          - Release/json-c.lib
         license/libjson_c:
           - COPYING
       required_tools:

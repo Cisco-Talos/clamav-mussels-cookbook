@@ -85,23 +85,25 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64 \
-              -DBUILD_SHARED_LIBS=ON \
-              -DZLIB_INCLUDE_DIR="{includes}" \
-              -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
-              -DBZIP2_INCLUDE_DIR="{includes}" \
-              -DBZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies:
         - libbz2<1.1.0
         - libz
       install_paths:
-        include:
-          - pcre2.h
-        lib:
-          - Release/pcre2-8.dll
-          - Release/pcre2-8.lib
         license/libpcre2:
           - COPYING
       required_tools:
@@ -110,23 +112,25 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32 \
-              -DBUILD_SHARED_LIBS=ON \
-              -DZLIB_INCLUDE_DIR="{includes}" \
-              -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
-              -DBZIP2_INCLUDE_DIR="{includes}" \
-              -DBZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies:
         - libbz2<1.1.0
         - libz
       install_paths:
-        include:
-          - pcre2.h
-        lib:
-          - Release/pcre2-8.dll
-          - Release/pcre2-8.lib
         license/libpcre2:
           - COPYING
       required_tools:

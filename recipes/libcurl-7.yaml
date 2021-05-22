@@ -22,25 +22,29 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DBUILD_SHARED_LIBS=ON \
-            -DCMAKE_USE_OPENSSL=ON \
-            -DOPENSSL_INCLUDE_DIR="{includes}" \
-            -DOPENSSL_LIBRARIES="{libs}" \
-            -DOPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.1.1.dylib" \
-            -DOPENSSL_SSL_LIBRARY="{libs}/libssl.1.1.dylib" \
-            -DZLIB_INCLUDE_DIR="{includes}" \
-            -DZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
-            -DLIBSSH2_INCLUDE_DIR="{includes}" \
-            -DLIBSSH2_LIBRARY="{libs}/libssh2.dylib" \
-            -DUSE_NGHTTP2=ON \
-            -DNGHTTP2_INCLUDE_DIR="{includes}" \
-            -DNGHTTP2_LIBRARY="{libs}/libnghttp2.dylib" \
-            -DCMAKE_INSTALL_PREFIX="{install}"
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CMAKE_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D OPENSSL_LIBRARIES="{libs}" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.1.1.dylib" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.1.1.dylib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.dylib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/libnghttp2.dylib" \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcurl.dylib"
       dependencies:
@@ -58,25 +62,29 @@ platforms:
     host:
       build_script:
         configure: |
-          cmake . \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DBUILD_SHARED_LIBS=ON \
-            -DCMAKE_USE_OPENSSL=ON \
-            -DOPENSSL_INCLUDE_DIR="{includes}" \
-            -DOPENSSL_LIBRARIES="{libs}" \
-            -DOPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
-            -DOPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
-            -DZLIB_INCLUDE_DIR="{includes}" \
-            -DZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
-            -DLIBSSH2_INCLUDE_DIR="{includes}" \
-            -DLIBSSH2_LIBRARY="{libs}/libssh2.so" \
-            -DUSE_NGHTTP2=ON \
-            -DNGHTTP2_INCLUDE_DIR="{includes}" \
-            -DNGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
-            -DCMAKE_INSTALL_PREFIX="{install}"
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CMAKE_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D OPENSSL_LIBRARIES="{libs}" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.so" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcurl.so"
       dependencies:
@@ -94,25 +102,29 @@ platforms:
     host-static:
       build_script:
         configure: |
-          cmake . \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_USE_OPENSSL=ON \
-            -DOPENSSL_INCLUDE_DIR="{includes}" \
-            -DOPENSSL_LIBRARIES="{libs}" \
-            -DOPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
-            -DOPENSSL_SSL_LIBRARY="{libs}/libssl.a" \
-            -DZLIB_INCLUDE_DIR="{includes}" \
-            -DZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
-            -DLIBSSH2_INCLUDE_DIR="{includes}" \
-            -DLIBSSH2_LIBRARY="{libs}/libssh2.a" \
-            -DUSE_NGHTTP2=ON \
-            -DNGHTTP2_INCLUDE_DIR="{includes}" \
-            -DNGHTTP2_LIBRARY="{libs}/libnghttp2.a" \
-            -DCMAKE_INSTALL_PREFIX="{install}" \
-            -DBUILD_SHARED_LIBS=OFF
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D OPENSSL_LIBRARIES="{libs}" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.a" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.a" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/libnghttp2.a" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=OFF
         make: |
+          cd build
           cmake --build .
         install: |
+          cd build
           make install
       dependencies:
         - libopenssl
@@ -129,32 +141,34 @@ platforms:
     x64:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A x64 \
-            -DBUILD_SHARED_LIBS=ON \
-            -DCMAKE_USE_OPENSSL=ON \
-            -DOPENSSL_INCLUDE_DIR="{includes}" \
-            -DLIB_EAY_RELEASE="{libs}/libcrypto.lib" \
-            -DSSL_EAY_RELEASE="{libs}/libssl.lib" \
-            -DZLIB_INCLUDE_DIR="{includes}" \
-            -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
-            -DLIBSSH2_INCLUDE_DIR="{includes}" \
-            -DLIBSSH2_LIBRARY="{libs}/libssh2.lib" \
-            -DUSE_NGHTTP2=ON \
-            -DNGHTTP2_INCLUDE_DIR="{includes}" \
-            -DNGHTTP2_LIBRARY="{libs}/nghttp2.lib"
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CMAKE_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
         - libssh2
         - libz
       install_paths:
-        include:
-          - include/curl
-        lib:
-          - lib/Release/libcurl.dll
-          - lib/Release/libcurl_imp.lib
         license/libcurl:
           - COPYING
       required_tools:
@@ -163,32 +177,34 @@ platforms:
     x86:
       build_script:
         configure: |
-          CALL cmake.exe . -G "{visualstudio.cmake_generator}" -A Win32 \
-            -DBUILD_SHARED_LIBS=ON \
-            -DCMAKE_USE_OPENSSL=ON \
-            -DOPENSSL_INCLUDE_DIR="{includes}" \
-            -DLIB_EAY_RELEASE="{libs}/libcrypto.lib" \
-            -DSSL_EAY_RELEASE="{libs}/libssl.lib" \
-            -DZLIB_INCLUDE_DIR="{includes}" \
-            -DZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
-            -DLIBSSH2_INCLUDE_DIR="{includes}" \
-            -DLIBSSH2_LIBRARY="{libs}/libssh2.lib" \
-            -DUSE_NGHTTP2=ON \
-            -DNGHTTP2_INCLUDE_DIR="{includes}" \
-            -DNGHTTP2_LIBRARY="{libs}/nghttp2.lib"
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"2 \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CMAKE_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib"
         make: |
+          cd build
           CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
         - libssh2
         - libz
       install_paths:
-        include:
-          - include/curl
-        lib:
-          - lib/Release/libcurl.dll
-          - lib/Release/libcurl_imp.lib
         license/libcurl:
           - COPYING
       required_tools:
