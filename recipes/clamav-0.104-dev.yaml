@@ -26,23 +26,40 @@ platforms:
     host:
       build_script:
         configure: |
-          chmod +x ./autogen.sh
-          ./autogen.sh
-          chmod +x ./configure ./config/install-sh
-          ./configure \
-              --with-libcurl={install} \
-              --with-libjson={install} \
-              --with-xml={install} \
-              --with-openssl={install} \
-              --with-pcre={install} \
-              --with-zlib={install} \
-              --with-libbz2-prefix={install} \
-              --prefix="{install}" \
-              --with-systemdsystemunitdir=no
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_INSTALL_PREFIX="{install}"                       \
+            -D CMAKE_MODULE_PATH={install}/lib/cmake                  \
+            -D CMAKE_BUILD_TYPE=Release                               \
+            -D ENABLE_EXAMPLES=OFF                                    \
+            -D JSONC_INCLUDE_DIR="{install}/include/json-c"           \
+            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
+            -D ENABLE_JSON_SHARED=OFF                                 \
+            -D BZIP2_INCLUDE_DIR="{install}/include"                  \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"         \
+            -D CURL_INCLUDE_DIR="{install}/include"                   \
+            -D CURL_LIBRARY="{install}/lib/libcurl.dylib"             \
+            -D OPENSSL_ROOT_DIR="{install}"                           \
+            -D OPENSSL_INCLUDE_DIR="{install}/include"                \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.dylib" \
+            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.dylib"       \
+            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"        \
+            -D LIBXML2_LIBRARY="{install}/lib/libxml2.dylib"          \
+            -D PCRE2_INCLUDE_DIR="{install}/include"                  \
+            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.dylib"         \
+            -D CURSES_INCLUDE_DIR="{install}/include"                 \
+            -D CURSES_LIBRARY="{install}/lib/libncurses.a"            \
+            -D ZLIB_INCLUDE_DIR="{install}/include"                   \
+            -D ZLIB_LIBRARY="{install}/lib/libz.dylib"                \
+            -D LIBCHECK_INCLUDE_DIR="{install}/include"               \
+            -D LIBCHECK_LIBRARY="{install}/lib/libcheck.dylib"
         make: |
-          make
+          cd build
+          cmake --build .
         install: |
-          make install
+          cd build
+          cmake --build . --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libclamunrar_iface.so"
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libfreshclam.dylib"
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libclamav.dylib"
@@ -63,6 +80,7 @@ platforms:
         - libpcre2
         - libbz2<1.1.0
         - libcheck
+        - ncurses
       install_paths:
         etc:
           - etc/clamd.conf.sample
@@ -84,24 +102,41 @@ platforms:
     host:
       build_script:
         configure: |
-          chmod +x ./autogen.sh
-          ./autogen.sh
-          chmod +x ./configure ./config/install-sh
-          ./configure \
-              --with-libcurl={install} \
-              --with-libjson={install} \
-              --with-xml={install} \
-              --with-openssl={install} \
-              --with-pcre={install} \
-              --with-zlib={install} \
-              --with-libbz2-prefix={install} \
-              --enable-llvm --with-system-llvm=no \
-              --prefix="{install}" \
-              --with-systemdsystemunitdir=no
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_INSTALL_PREFIX="{install}"                    \
+            -D CMAKE_MODULE_PATH={install}/lib/cmake               \
+            -D CMAKE_BUILD_TYPE=Release                            \
+            -D ENABLE_EXAMPLES=OFF                                 \
+            -D ENABLE_SYSTEMD=OFF                                  \
+            -D JSONC_INCLUDE_DIR="{install}/include/json-c"        \
+            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"           \
+            -D ENABLE_JSON_SHARED=OFF                              \
+            -D BZIP2_INCLUDE_DIR="{install}/include"               \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"      \
+            -D CURL_INCLUDE_DIR="{install}/include"                \
+            -D CURL_LIBRARY="{install}/lib/libcurl.so"             \
+            -D OPENSSL_ROOT_DIR="{install}"                        \
+            -D OPENSSL_INCLUDE_DIR="{install}/include"             \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.so" \
+            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.so"       \
+            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"     \
+            -D LIBXML2_LIBRARY="{install}/lib/libxml2.so"          \
+            -D PCRE2_INCLUDE_DIR="{install}/include"               \
+            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.so"         \
+            -D CURSES_INCLUDE_DIR="{install}/include"              \
+            -D CURSES_LIBRARY="{install}/lib/libncurses.a"         \
+            -D ZLIB_INCLUDE_DIR="{install}/include"                \
+            -D ZLIB_LIBRARY="{install}/lib/libz.so"                \
+            -D LIBCHECK_INCLUDE_DIR="{install}/include"            \
+            -D LIBCHECK_LIBRARY="{install}/lib/libcheck.so"
         make: |
-          make
+          cd build
+          cmake --build .
         install: |
-          make install
+          cd build
+          cmake --build . --target install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libclamunrar_iface.so"
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libfreshclam.so"
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libclamav.so"
@@ -122,6 +157,7 @@ platforms:
         - libpcre2
         - libbz2<1.1.0
         - libcheck
+        - ncurses
       install_paths:
         etc:
           - etc/clamd.conf.sample
@@ -159,7 +195,7 @@ platforms:
             -D OPENSSL_ROOT_DIR="{install}"                         \
             -D OPENSSL_INCLUDE_DIR="{install}\include"              \
             -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib" \
-            -D ZLIB_LIBRARY="{install}\lib\libssl.lib"              \
+            -D OPENSSL_SSL_LIBRARY="{install}\lib\libssl.lib"       \
             -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"      \
             -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"          \
             -D PCRE2_INCLUDE_DIR="{install}\include"                \
@@ -210,7 +246,7 @@ platforms:
             -D OPENSSL_ROOT_DIR="{install}"                         \
             -D OPENSSL_INCLUDE_DIR="{install}\include"              \
             -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib" \
-            -D ZLIB_LIBRARY="{install}\lib\libssl.lib"              \
+            -D OPENSSL_SSL_LIBRARY="{install}\lib\libssl.lib"       \
             -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"      \
             -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"          \
             -D PCRE2_INCLUDE_DIR="{install}\include"                \
