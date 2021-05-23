@@ -82,14 +82,8 @@ platforms:
         - libcheck
         - ncurses
       install_paths:
-        etc:
-          - etc/clamd.conf.sample
-          - etc/freshclam.conf.sample
         license/clamav:
           - COPYING*
-        share/clamav:
-          - database/main.cvd
-          - database/daily.cvd
       required_tools:
         - make
         - clang
@@ -159,14 +153,8 @@ platforms:
         - libcheck
         - ncurses
       install_paths:
-        etc:
-          - etc/clamd.conf.sample
-          - etc/freshclam.conf.sample
         license/clamav:
           - COPYING*
-        share/clamav:
-          - database/main.cvd
-          - database/daily.cvd
       required_tools:
         - make
         - gcc
