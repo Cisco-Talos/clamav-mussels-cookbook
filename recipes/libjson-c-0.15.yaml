@@ -99,6 +99,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/json-c.dll {install}/lib/
       dependencies: []
       install_paths:
         license/libjson_c:
@@ -119,6 +120,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/json-c.dll {install}/lib/
       dependencies: []
       install_paths:
         license/libjson_c:

@@ -133,6 +133,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/libxml2.dll {install}/lib/
       dependencies:
         - libz
       install_paths:
@@ -160,6 +161,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/libxml2.dll {install}/lib/
       dependencies:
         - libz
       install_paths:
