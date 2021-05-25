@@ -181,7 +181,7 @@ platforms:
           mkdir build
           cd build
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
-            -D CMAKE_INSTALL_PREFIX="{install}"2 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D CMAKE_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
