@@ -20,3 +20,6 @@ platforms:
   Windows:
     file_checks:
       - C:\/Program Files/NASM/nasm.exe
+    command_checks:
+      - command: "nasm -v"
+        output_has: "NASM version"
