@@ -26,3 +26,6 @@ platforms:
   Windows:
     file_checks:
       - C:\/Program Files/CMake/bin/cmake.exe
+    command_checks:
+      - command: "cmake.exe --version"
+        output_has: "cmake version"

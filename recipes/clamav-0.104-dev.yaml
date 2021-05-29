@@ -88,10 +88,7 @@ platforms:
         - make
         - clang
         - pkgconfig
-        - automake
-        - autoconf
-        - m4
-        - libtool
+        - cmake
   Linux:
     host:
       build_script:
@@ -160,10 +157,7 @@ platforms:
         - gcc
         - patchelf
         - pkgconfig
-        - automake
-        - autoconf
-        - m4
-        - libtool
+        - cmake
   Windows:
     x64:
       build_script:
