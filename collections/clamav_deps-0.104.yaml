@@ -45,6 +45,29 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+  Darwin:
+    host:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2
+        - libcheck
+        - ncurses
+    host-static:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2
+        - libcheck
+        - ncurses
   Windows:
     x64:
       dependencies:

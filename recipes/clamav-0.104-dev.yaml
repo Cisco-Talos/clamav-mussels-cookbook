@@ -99,8 +99,7 @@ platforms:
             -D CMAKE_PREFIX_PATH={install}                            \
             -D CMAKE_INSTALL_PREFIX="{install}"                       \
             -D CMAKE_MODULE_PATH={install}/lib/cmake                  \
-            -D CMAKE_BUILD_TYPE=Debug                                 \
-            -D OPTIMIZE=OFF                                           \
+            -D CMAKE_BUILD_TYPE=Release                               \
             -D ENABLE_EXAMPLES=OFF                                    \
             -D JSONC_INCLUDE_DIR="{install}/include/json-c"           \
             -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
