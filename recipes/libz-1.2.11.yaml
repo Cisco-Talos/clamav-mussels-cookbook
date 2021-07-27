@@ -41,6 +41,28 @@ platforms:
         - cmake
         - make
         - clang
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          make install
+      dependencies: []
+      install_paths:
+        license/libz:
+          - README
+      required_tools:
+        - cmake
+        - make
+        - clang
   Linux:
     host:
       build_script:

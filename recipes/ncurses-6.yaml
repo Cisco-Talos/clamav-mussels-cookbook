@@ -34,6 +34,21 @@ platforms:
       required_tools:
         - make
         - clang
+    host-static:
+      build_script:
+        configure: |
+          ./configure --prefix={install}
+        make: |
+          make
+        install: |
+          make install
+      dependencies: []
+      install_paths:
+        license/libbz2:
+          - COPYING
+      required_tools:
+        - make
+        - clang
   FreeBSD:
     host:
       build_script:

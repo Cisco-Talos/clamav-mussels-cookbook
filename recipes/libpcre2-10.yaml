@@ -40,6 +40,25 @@ platforms:
       required_tools:
         - make
         - clang
+    host-static:
+      build_script:
+        configure: |
+          ./configure --prefix="{install}" \
+            --disable-dependency-tracking \
+            --disable-shared
+        make: |
+          make
+        install: |
+          make install
+      dependencies:
+        - libbz2
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - make
+        - clang
   Linux:
     host:
       build_script:

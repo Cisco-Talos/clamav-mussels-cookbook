@@ -40,6 +40,27 @@ platforms:
       required_tools:
         - make
         - clang
+    host-static:
+      build_script:
+        configure: |
+          ./config zlib \
+              --with-zlib-include="{includes}" \
+              --with-zlib-lib="{libs}" \
+              --prefix="{install}" \
+              no-shared \
+              no-zlib-dynamic
+        make: |
+          make
+        install: |
+          make install_sw
+      dependencies:
+        - libz
+      install_paths:
+        license/libopenssl:
+          - LICENSE
+      required_tools:
+        - make
+        - clang
   Linux:
     host:
       build_script:

@@ -14,7 +14,7 @@
 
 name: libbz2
 version: "1.1.0"
-url: https://gitlab.com/federicomenaquintero/bzip2/-/archive/master/bzip2-master.tar.gz
+url: https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:
@@ -39,6 +39,30 @@ platforms:
           - COPYING
       required_tools:
         - cmake
+        - clang
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX="{install}" \
+            -DENABLE_STATIC_LIB=ON \
+            -DENABLE_SHARED_LIB=OFF
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          make install
+      dependencies: []
+      install_paths:
+        license/libbz2:
+          - COPYING
+      required_tools:
+        - cmake
+        - make
         - clang
   FreeBSD:
     host:
