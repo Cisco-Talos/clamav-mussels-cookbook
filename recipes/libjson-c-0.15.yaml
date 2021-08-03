@@ -94,7 +94,8 @@ platforms:
             -D CMAKE_BUILD_TYPE=Release \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_STATIC_LIBS=ON \
-            -D BUILD_SHARED_LIBS=OFF
+            -D BUILD_SHARED_LIBS=OFF \
+            -D CMAKE_INSTALL_LIBDIR=lib
         make: |
           cd build
           cmake --build .

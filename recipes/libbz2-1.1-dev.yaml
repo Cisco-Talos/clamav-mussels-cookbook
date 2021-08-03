@@ -46,10 +46,10 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX="{install}" \
-            -DENABLE_STATIC_LIB=ON \
-            -DENABLE_SHARED_LIB=OFF
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D ENABLE_STATIC_LIB=ON \
+            -D ENABLE_SHARED_LIB=OFF
         make: |
           cd build
           cmake --build .
@@ -94,8 +94,8 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX="{install}"
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
           cd build
           cmake --build .
@@ -116,10 +116,11 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX="{install}" \
-            -DENABLE_STATIC_LIB=ON \
-            -DENABLE_SHARED_LIB=OFF
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D ENABLE_STATIC_LIB=ON \
+            -D ENABLE_SHARED_LIB=OFF \
+            -D CMAKE_INSTALL_LIBDIR=lib
         make: |
           cd build
           cmake --build .

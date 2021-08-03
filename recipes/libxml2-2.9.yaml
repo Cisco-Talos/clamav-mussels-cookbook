@@ -127,7 +127,8 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
-            -D LIBXML2_WITH_PYTHON=OFF
+            -D LIBXML2_WITH_PYTHON=OFF \
+            -D CMAKE_INSTALL_LIBDIR=lib
         make: |
           cd build
           cmake --build .

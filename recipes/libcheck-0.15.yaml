@@ -93,7 +93,8 @@ platforms:
           cd build
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
-            -D CMAKE_INSTALL_PREFIX={install}
+            -D CMAKE_INSTALL_PREFIX={install} \
+            -D CMAKE_INSTALL_LIBDIR=lib
         make: |
           cd build
           cmake --build .
