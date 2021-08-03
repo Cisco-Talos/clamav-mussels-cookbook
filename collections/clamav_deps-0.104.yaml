@@ -30,11 +30,14 @@ platforms:
     host-static:
       dependencies:
         - libz
+        - libcurl
         - libjson_c
         - libxml2
         - libopenssl
         - libpcre2
         - libbz2
+        - libcheck
+        - ncurses
   Unix:
     host:
       dependencies:

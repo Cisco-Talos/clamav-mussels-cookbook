@@ -134,6 +134,7 @@ platforms:
         install: |
           cd build
           make install
+          rm -rf {install}/lib/cmake/libxml2*
       dependencies:
         - libz
       install_paths:

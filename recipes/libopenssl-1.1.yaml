@@ -91,7 +91,8 @@ platforms:
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}" \
-              --static -static
+              no-shared \
+              no-zlib-dynamic
         make: |
           make
         install: |

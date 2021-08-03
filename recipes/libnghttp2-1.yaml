@@ -152,7 +152,8 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D ENABLE_LIB_ONLY=ON \
             -D ENABLE_STATIC_LIB=ON \
-            -D ENABLE_SHARED_LIB=OFF
+            -D ENABLE_SHARED_LIB=OFF \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON
         make: |
           cd build
           cmake --build .

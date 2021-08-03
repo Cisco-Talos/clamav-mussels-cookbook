@@ -86,6 +86,26 @@ platforms:
         - cmake
         - gcc
         - patchelf
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX={install}
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          cmake --build . --target install
+      install_paths:
+        license/libcheck:
+          - COPYING.LESSER
+      required_tools:
+        - cmake
+        - gcc
   Windows:
     x64:
       build_script:

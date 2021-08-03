@@ -145,7 +145,8 @@ platforms:
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D BUILD_TESTING=OFF
+            -D BUILD_TESTING=OFF \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON
         make: |
           cd build
           cmake --build .
