@@ -100,6 +100,47 @@ platforms:
       required_tools:
         - make
         - gcc
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          ./configure --prefix="{install}" \
+            --disable-dependency-tracking \
+            --disable-static
+        make: |
+          gmake
+        install: |
+          gmake install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libpcre2-8.so"
+      dependencies:
+        - libbz2<1.1.0
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - gmake
+        - clang
+        - patchelf
+    host-static:
+      build_script:
+        configure: |
+          CFLAGS="-fPIC" ./configure --prefix="{install}" \
+            --disable-dependency-tracking \
+            --disable-shared
+        make: |
+          gmake
+        install: |
+          gmake install
+      dependencies:
+        - libbz2
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - gmake
+        - clang
   Windows:
     x64:
       build_script:

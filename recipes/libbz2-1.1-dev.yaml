@@ -78,7 +78,7 @@ platforms:
           cmake --build .
         install: |
           cd build
-          make install
+          gmake install
       dependencies: []
       install_paths:
         license/libbz2:
@@ -86,7 +86,32 @@ platforms:
       required_tools:
         - cmake
         - gmake
-        - gcc
+        - clang
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D ENABLE_STATIC_LIB=ON \
+            -D ENABLE_SHARED_LIB=OFF \
+            -D CMAKE_INSTALL_LIBDIR=lib
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          gmake install
+      dependencies: []
+      install_paths:
+        license/libbz2:
+          - COPYING
+      required_tools:
+        - cmake
+        - gmake
+        - clang
   Linux:
     host:
       build_script:

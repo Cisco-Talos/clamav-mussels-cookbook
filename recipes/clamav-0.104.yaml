@@ -291,6 +291,142 @@ platforms:
         - patchelf
         - pkgconfig
         - cmake
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_INSTALL_PREFIX="{install}"                    \
+            -D CMAKE_MODULE_PATH={install}/lib/cmake               \
+            -D CMAKE_BUILD_TYPE=Release                            \
+            -D ENABLE_EXAMPLES=OFF                                 \
+            -D ENABLE_SYSTEMD=OFF                                  \
+            -D JSONC_INCLUDE_DIR="{install}/include/json-c"        \
+            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"           \
+            -D ENABLE_JSON_SHARED=OFF                              \
+            -D BZIP2_INCLUDE_DIR="{install}/include"               \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"      \
+            -D CURL_INCLUDE_DIR="{install}/include"                \
+            -D CURL_LIBRARY="{install}/lib/libcurl.so"             \
+            -D OPENSSL_ROOT_DIR="{install}"                        \
+            -D OPENSSL_INCLUDE_DIR="{install}/include"             \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.so" \
+            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.so"       \
+            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"     \
+            -D LIBXML2_LIBRARY="{install}/lib/libxml2.so"          \
+            -D PCRE2_INCLUDE_DIR="{install}/include"               \
+            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.so"         \
+            -D CURSES_INCLUDE_DIR="{install}/include"              \
+            -D CURSES_LIBRARY="{install}/lib/libncurses.a"         \
+            -D ZLIB_INCLUDE_DIR="{install}/include"                \
+            -D ZLIB_LIBRARY="{install}/lib/libz.so"                \
+            -D LIBCHECK_INCLUDE_DIR="{install}/include"            \
+            -D LIBCHECK_LIBRARY="{install}/lib/libcheck.so"
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          cmake --build . --target install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libclamunrar_iface.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libfreshclam.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libclamav.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clambc"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamconf"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamdscan"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamscan"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamsubmit"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/freshclam"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/sigtool"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/sbin/clamd"
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - libcheck
+        - ncurses
+      install_paths:
+        license/clamav:
+          - COPYING*
+      required_tools:
+        - gmake
+        - clang
+        - patchelf
+        - pkgconfig
+        - cmake
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE                  \
+            -D CMAKE_PREFIX_PATH={install}                            \
+            -D CMAKE_INSTALL_PREFIX="{install}"                       \
+            -D CMAKE_MODULE_PATH={install}/lib/cmake                  \
+            -D CMAKE_BUILD_TYPE=Release                               \
+            -D ENABLE_EXAMPLES=OFF                                    \
+            -D JSONC_INCLUDE_DIR="{install}/include/json-c"           \
+            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
+            -D ENABLE_JSON_SHARED=OFF                                 \
+            -D BZIP2_INCLUDE_DIR="{install}/include"                  \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2_static.a"  \
+            -D OPENSSL_ROOT_DIR="{install}"                           \
+            -D OPENSSL_INCLUDE_DIR="{install}/include"                \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a"     \
+            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.a"           \
+            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"        \
+            -D LIBXML2_LIBRARY="{install}/lib/libxml2.a"              \
+            -D PCRE2_INCLUDE_DIR="{install}/include"                  \
+            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.a"             \
+            -D CURSES_INCLUDE_DIR="{install}/include"                 \
+            -D CURSES_LIBRARY="{install}/lib/libncurses.a"            \
+            -D ZLIB_INCLUDE_DIR="{install}/include"                   \
+            -D ZLIB_LIBRARY="{install}/lib/libz.a"                    \
+            -D LIBCHECK_INCLUDE_DIR="{install}/include"               \
+            -D LIBCHECK_LIBRARY="{install}/lib/libcheck.a"
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          cmake --build . --target install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libclamunrar_iface.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libfreshclam.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libclamav.so"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clambc"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamconf"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamdscan"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamscan"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/clamsubmit"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/freshclam"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/bin/sigtool"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/sbin/clamd"
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2
+        - libcheck
+        - ncurses
+      install_paths:
+        license/clamav:
+          - COPYING*
+      required_tools:
+        - gmake
+        - clang
+        - patchelf
+        - pkgconfig
+        - cmake
   Windows:
     x64:
       build_script:

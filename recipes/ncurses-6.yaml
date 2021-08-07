@@ -64,7 +64,22 @@ platforms:
           - COPYING
       required_tools:
         - gmake
-        - gcc
+        - clang
+    host-static:
+      build_script:
+        configure: |
+          ./configure --prefix={install}
+        make: |
+          gmake
+        install: |
+          gmake install
+      dependencies: []
+      install_paths:
+        license/libbz2:
+          - COPYING
+      required_tools:
+        - gmake
+        - clang
   Linux:
     host:
       build_script:

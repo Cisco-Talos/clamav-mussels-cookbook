@@ -178,6 +178,89 @@ platforms:
       required_tools:
         - cmake
         - gcc
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CMAKE_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D OPENSSL_LIBRARIES="{libs}" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.so" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          gmake install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcurl.so"
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - gmake
+        - clang
+        - patchelf
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -D CMAKE_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D OPENSSL_LIBRARIES="{libs}" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.a" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.a" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/libnghttp2.a" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=OFF \
+            -D CMAKE_INSTALL_LIBDIR=lib
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          gmake install
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - gmake
+        - clang
   Windows:
     x64:
       build_script:

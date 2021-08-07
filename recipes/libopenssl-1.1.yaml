@@ -106,6 +106,51 @@ platforms:
       required_tools:
         - make
         - gcc
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          ./config zlib \
+              --with-zlib-include="{includes}" \
+              --with-zlib-lib="{libs}" \
+              --prefix="{install}"
+        make: |
+          gmake
+        install: |
+          gmake install_sw
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.1.1"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.1.1"
+      dependencies:
+        - libz
+      install_paths:
+        license/libopenssl:
+          - LICENSE
+      required_tools:
+        - gmake
+        - clang
+        - patchelf
+    host-static:
+      build_script:
+        configure: |
+          ./config zlib \
+              --with-zlib-include="{includes}" \
+              --with-zlib-lib="{libs}" \
+              --prefix="{install}" \
+              --libdir=lib \
+              no-shared \
+              no-zlib-dynamic
+        make: |
+          gmake
+        install: |
+          gmake install_sw
+      dependencies:
+        - libz
+      install_paths:
+        license/libopenssl:
+          - LICENSE
+      required_tools:
+        - gmake
+        - clang
   Windows:
     x64:
       build_script:

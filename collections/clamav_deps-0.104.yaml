@@ -38,7 +38,7 @@ platforms:
         - libbz2
         - libcheck
         - ncurses
-  Unix:
+  Freebsd:
     host:
       dependencies:
         - libz
@@ -48,6 +48,17 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+    host-static:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2
+        - libcheck
+        - ncurses
   Darwin:
     host:
       dependencies:

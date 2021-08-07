@@ -82,6 +82,69 @@ platforms:
         - cmake
         - make
         - clang
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          gmake install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libxml2.so"
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - gmake
+        - clang
+        - patchelf
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=OFF \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF \
+            -D CMAKE_INSTALL_LIBDIR=lib
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          gmake install
+          rm -rf {install}/lib/cmake/libxml2*
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - gmake
+        - clang
   Linux:
     host:
       build_script:

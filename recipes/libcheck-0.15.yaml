@@ -107,6 +107,52 @@ platforms:
       required_tools:
         - cmake
         - gcc
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX={install}
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          cmake --build . --target install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcheck.so"
+      install_paths:
+        license/libcheck:
+          - COPYING.LESSER
+      required_tools:
+        - cmake
+        - clang
+        - gmake
+        - patchelf
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX={install} \
+            -D CMAKE_INSTALL_LIBDIR=lib
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          cmake --build . --target install
+      install_paths:
+        license/libcheck:
+          - COPYING.LESSER
+      required_tools:
+        - cmake
+        - clang
+        - gmake
   Windows:
     x64:
       build_script:

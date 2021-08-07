@@ -119,6 +119,55 @@ platforms:
         - cmake
         - make
         - gcc
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          cd libmspack
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd libmspack
+          cd build
+          cmake --build .
+        install: |
+          cd libmspack
+          cd build
+          gmake install
+      install_paths:
+        license/libmspack:
+          - libmspack/COPYING.LIB
+      required_tools:
+        - cmake
+        - gmake
+        - clang
+    host-static:
+      build_script:
+        configure: |
+          cd libmspack
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd libmspack
+          cd build
+          cmake --build .
+        install: |
+          cd libmspack
+          cd build
+          gmake install
+      install_paths:
+        license/libmspack:
+          - libmspack/COPYING.LIB
+      required_tools:
+        - cmake
+        - gmake
+        - clang
   Windows:
     x64:
       build_script:

@@ -172,6 +172,83 @@ platforms:
         - cmake
         - make
         - gcc
+  Freebsd:
+    host:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIRS="{includes}" \
+            -D OPENSSL_LIBRARIES="{libs}" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
+            -D LIBXML2_INCLUDE_DIRS="{includes}" \
+            -D LIBXML2_LIBRARY="{libs}/libxml2.so" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/libz.a" \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          gmake install
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libnghttp2.so"
+      dependencies:
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
+        - libxml2>=2.9.9
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - gmake
+        - clang
+        - patchelf
+    host-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          cmake .. \
+            -D CMAKE_BUILD_TYPE=Release \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIRS="{includes}" \
+            -D OPENSSL_LIBRARIES="{libs}" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.a" \
+            -D LIBXML2_INCLUDE_DIRS="{includes}" \
+            -D LIBXML2_LIBRARY="{libs}/libxml2.a" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/libz.a" \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D ENABLE_LIB_ONLY=ON \
+            -D ENABLE_STATIC_LIB=ON \
+            -D ENABLE_SHARED_LIB=OFF \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -D CMAKE_INSTALL_LIBDIR=lib
+        make: |
+          cd build
+          cmake --build .
+        install: |
+          cd build
+          gmake install
+      dependencies:
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
+        - libxml2>=2.9.9
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - gmake
+        - clang
   Windows:
     x64:
       build_script:
