@@ -25,7 +25,8 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D BUILD_SHARED_LIBS=ON \
             -D CMAKE_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
@@ -42,10 +43,10 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcurl.dylib"
       dependencies:
         - libopenssl
@@ -57,6 +58,7 @@ platforms:
           - COPYING
       required_tools:
         - cmake
+        - xcode
         - clang
     host-static:
       build_script:
@@ -64,7 +66,8 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
             -D CMAKE_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
@@ -82,10 +85,10 @@ platforms:
             -D BUILD_SHARED_LIBS=OFF
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -96,6 +99,7 @@ platforms:
           - COPYING
       required_tools:
         - cmake
+        - xcode
         - clang
   Linux:
     host:

@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure \
+          CFLAGS="-arch x86_64 -arch arm64" ./configure \
             --prefix="{install}" \
             --disable-dependency-tracking \
             --disable-static
@@ -43,7 +43,7 @@ platforms:
     host-static:
       build_script:
         configure: |
-          ./configure --prefix="{install}" \
+          CFLAGS="-arch x86_64 -arch arm64" ./configure --prefix="{install}" \
             --disable-dependency-tracking \
             --disable-shared
         make: |

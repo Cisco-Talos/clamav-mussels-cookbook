@@ -29,22 +29,23 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
           cd libmspack
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd libmspack
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
       install_paths:
         license/libmspack:
           - libmspack/COPYING.LIB
       required_tools:
         - cmake
-        - make
+        - xcode
         - clang
     host-static:
       build_script:
@@ -53,22 +54,23 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
           cd libmspack
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd libmspack
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
       install_paths:
         license/libmspack:
           - libmspack/COPYING.LIB
       required_tools:
         - cmake
-        - make
+        - xcode
         - clang
   Linux:
     host:

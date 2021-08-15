@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./config zlib \
+          ./Configure darwin-i386-cc zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
@@ -43,16 +43,38 @@ platforms:
     host-static:
       build_script:
         configure: |
-          ./config zlib \
+          mkdir arm64
+          cp -r ./* ./arm64/.
+          cp -r ./arm64 ./x86_64
+          cd arm64
+          ./Configure darwin64-arm64-cc no-asm zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}" \
               no-shared \
               no-zlib-dynamic
+          cd ../x86_64
+          ./Configure darwin64-x86_64-cc zlib \
+              --with-zlib-include="{includes}" \
+              --with-zlib-lib="{libs}" \
+              --prefix="{install}" \
+              no-shared \
+              no-zlib-dynamic
+          cd ..
         make: |
+          cd arm64
           make
+          cd ../x86_64
+          make
+          cd ..
+          lipo -create arm64/libcrypto.a x86_64/libcrypto.a -output libcrypto.a
+          lipo -create arm64/libssl.a x86_64/libssl.a -output libssl.a
         install: |
-          make install_sw
+          cd arm64
+          make install
+          cd ..
+          cp libcrypto.a {install}/lib/libcrypto.a
+          cp libssl.a {install}/lib/libssl.a
       dependencies:
         - libz
       install_paths:

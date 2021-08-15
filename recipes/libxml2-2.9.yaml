@@ -28,7 +28,8 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
@@ -38,10 +39,10 @@ platforms:
             -D LIBXML2_WITH_PYTHON=OFF
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libxml2.dylib"
       dependencies:
         - libz
@@ -50,7 +51,7 @@ platforms:
           - Copyright
       required_tools:
         - cmake
-        - make
+        - xcode
         - clang
     host-static:
       build_script:
@@ -58,7 +59,8 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D BUILD_SHARED_LIBS=OFF \
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
@@ -68,10 +70,10 @@ platforms:
             -D LIBXML2_WITH_PYTHON=OFF
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
           rm -rf {install}/lib/cmake/libxml2*
       dependencies:
         - libz
@@ -80,7 +82,7 @@ platforms:
           - Copyright
       required_tools:
         - cmake
-        - make
+        - xcode
         - clang
   Freebsd:
     host:

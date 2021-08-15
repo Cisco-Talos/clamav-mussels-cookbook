@@ -28,7 +28,8 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode -T buildsystem=1 \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D BUILD_SHARED_LIBS=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
@@ -42,10 +43,10 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libnghttp2.dylib"
       dependencies:
         - libopenssl>=1.0.1
@@ -56,7 +57,7 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - make
+        - xcode
         - clang
     host-static:
       build_script:
@@ -64,7 +65,8 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode -T buildsystem=1 \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
@@ -80,10 +82,10 @@ platforms:
             -D ENABLE_SHARED_LIB=OFF
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
       dependencies:
         - libopenssl>=1.0.1
         - libz>=1.2.3
@@ -93,7 +95,7 @@ platforms:
           - COPYING
       required_tools:
         - cmake
-        - make
+        - xcode
         - clang
   Linux:
     host:

@@ -25,20 +25,22 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
       dependencies: []
       install_paths:
         license/libbz2:
           - COPYING
       required_tools:
         - cmake
+        - xcode
         - clang
     host-static:
       build_script:
@@ -46,23 +48,24 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_BUILD_TYPE=Release \
+            -G Xcode \
+            -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D ENABLE_STATIC_LIB=ON \
             -D ENABLE_SHARED_LIB=OFF
         make: |
           cd build
-          cmake --build .
+          cmake --build . --config RelWithDebInfo
         install: |
           cd build
-          make install
+          cmake --build . --config RelWithDebInfo --target install
       dependencies: []
       install_paths:
         license/libbz2:
           - COPYING
       required_tools:
         - cmake
-        - make
+        - xcode
         - clang
   FreeBSD:
     host:

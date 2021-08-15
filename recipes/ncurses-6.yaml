@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --prefix={install}
+          CFLAGS="-arch x86_64 -arch arm64" ./configure --prefix={install}
         make: |
           make
         install: |
@@ -37,7 +37,7 @@ platforms:
     host-static:
       build_script:
         configure: |
-          ./configure --prefix={install}
+          CFLAGS="-arch x86_64 -arch arm64" ./configure --prefix={install}
         make: |
           make
         install: |
