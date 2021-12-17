@@ -179,6 +179,28 @@ platforms:
       required_tools:
         - cmake
         - visualstudio>=2017
+    x64-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/zlib.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/zlib:
+          - README
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
@@ -192,7 +214,27 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/zlib.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/libz:
+          - README
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies: []
       install_paths:
         license/libz:

@@ -178,7 +178,47 @@ platforms:
       required_tools:
         - cmake
         - visualstudio>=2017
+    x64-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/checkDynamic.dll {install}/lib/
+      install_paths:
+        license/libcheck:
+          - COPYING.LESSER
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x86:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/checkDynamic.dll {install}/lib/
+      install_paths:
+        license/libcheck:
+          - COPYING.LESSER
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-static:
       build_script:
         configure: |
           mkdir build

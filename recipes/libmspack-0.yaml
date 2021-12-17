@@ -193,7 +193,51 @@ platforms:
       required_tools:
         - cmake
         - visualstudio>=2017
+    x64-static:
+      build_script:
+        configure: |
+          cd libmspack
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd libmspack
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd libmspack
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+      install_paths:
+        license/libmspack:
+          - libmspack/COPYING.LIB
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x86:
+      build_script:
+        configure: |
+          cd libmspack
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd libmspack
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd libmspack
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+      install_paths:
+        license/libmspack:
+          - libmspack/COPYING.LIB
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-static:
       build_script:
         configure: |
           cd libmspack
