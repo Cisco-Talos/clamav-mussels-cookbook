@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libcurl
-version: "7.79.1"
-url: https://curl.se/download/curl-7.79.1.zip
+version: "7.81.0"
+url: https://curl.se/download/curl-7.81.0.zip
 mussels_version: "0.3"
 type: recipe
 platforms:
@@ -28,7 +28,7 @@ platforms:
             -G Xcode \
             -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D BUILD_SHARED_LIBS=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
             -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.1.1.dylib" \
@@ -69,7 +69,7 @@ platforms:
             -G Xcode \
             -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
             -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
@@ -110,7 +110,7 @@ platforms:
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
             -D BUILD_SHARED_LIBS=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
             -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
@@ -150,7 +150,7 @@ platforms:
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
             -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
             -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
@@ -191,7 +191,7 @@ platforms:
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
             -D BUILD_SHARED_LIBS=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
             -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
@@ -232,7 +232,7 @@ platforms:
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
             -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
             -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.a" \
@@ -274,7 +274,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
@@ -311,7 +311,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
-            -D CMAKE_USE_OPENSSL=ON \
+            -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
