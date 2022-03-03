@@ -37,6 +37,23 @@ platforms:
       patches: pthreads-2.9.1-patches
       required_tools:
         - visualstudio>=2017
+    x64-static:
+      build_script:
+        make: |
+          CALL vcvarsall.bat amd64
+          CALL nmake realclean VC-static
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+        lib:
+          - pthreadVC2.lib
+        license/pthreads_win32:
+          - COPYING*
+      patches: pthreads-2.9.1-patches
+      required_tools:
+        - visualstudio>=2017
     x86:
       build_script:
         make: |
@@ -49,6 +66,23 @@ platforms:
           - sched.h
         lib:
           - pthreadVC2.dll
+          - pthreadVC2.lib
+        license/pthreads_win32:
+          - COPYING*
+      patches: pthreads-2.9.1-patches
+      required_tools:
+        - visualstudio>=2017
+    x86-static:
+      build_script:
+        make: |
+          CALL vcvarsall.bat x86
+          CALL nmake realclean VC-static
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+        lib:
           - pthreadVC2.lib
         license/pthreads_win32:
           - COPYING*

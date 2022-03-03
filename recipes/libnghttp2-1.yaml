@@ -259,7 +259,6 @@ platforms:
           cd build
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D BUILD_SHARED_LIBS=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -273,6 +272,38 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x64-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIRS="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibstatic.lib" \
+            -D ENABLE_LIB_ONLY=ON \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -D ENABLE_STATIC_LIB=ON \
+            -D ENABLE_SHARED_LIB=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies:
         - libopenssl>=1.0.1
         - libz>=1.2.3
@@ -303,6 +334,38 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=1.0.1
+        - libz>=1.2.3
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibstatic.lib" \
+            -D ENABLE_LIB_ONLY=ON \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -D ENABLE_STATIC_LIB=ON \
+            -D ENABLE_SHARED_LIB=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
       dependencies:
         - libopenssl>=1.0.1
         - libz>=1.2.3

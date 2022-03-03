@@ -271,6 +271,38 @@ platforms:
       required_tools:
         - cmake
         - visualstudio>=2017
+    x64-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=OFF \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+      dependencies:
+        - libopenssl>=1.1.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      patches: libssh2-1.9-patches
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
@@ -302,6 +334,38 @@ platforms:
       install_paths:
         license/libssh2:
           - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-static:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=OFF \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+      dependencies:
+        - libopenssl>=1.1.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      patches: libssh2-1.9-patches
       required_tools:
         - cmake
         - visualstudio>=2017

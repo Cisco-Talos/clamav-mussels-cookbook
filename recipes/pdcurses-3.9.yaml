@@ -37,6 +37,23 @@ platforms:
       patches: pdcurses-3.9-patches
       required_tools:
         - visualstudio
+    x64-static:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat amd64
+          CALL nmake -f Makefile.vc WIDE=Y DLL=N
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
     x86:
       build_script:
         make: |
@@ -49,6 +66,23 @@ platforms:
           - curses.h
         lib:
           - wincon/pdcurses.dll
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
+    x86-static:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat x86
+          CALL nmake -f Makefile.vc WIDE=Y DLL=N
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
           - wincon/pdcurses.lib
         license/pdcurses:
           - README.md

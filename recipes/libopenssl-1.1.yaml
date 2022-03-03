@@ -222,6 +222,30 @@ platforms:
         - nasm
         - perl
         - visualstudio>=2017
+    x64-static:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64
+          CALL perl Configure no-shared VC-WIN64A zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibstatic.lib"
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64
+          CALL nmake
+      dependencies:
+        - libz
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl.lib
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
     x86:
       build_script:
         configure: |
@@ -241,6 +265,30 @@ platforms:
           - libssl-1_1.dll
           - libssl.lib
           - libcrypto-1_1.dll
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
+    x86-static:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat x86
+          CALL perl Configure no-shared VC-WIN32 zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibstatic.lib"
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat x86
+          CALL nmake
+      dependencies:
+        - libz
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl.lib
           - libcrypto.lib
         license/libopenssl:
           - LICENSE
