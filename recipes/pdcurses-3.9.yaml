@@ -14,7 +14,10 @@
 
 name: pdcurses
 version: "3.9"
-url: https://versaweb.dl.sourceforge.net/project/pdcurses/pdcurses/3.9/PDCurses-3.9.tar.gz
+url: https://github.com/wmcbrine/PDCurses/archive/refs/tags/3.9.tar.gz
+archive_name_change:
+  - "3.9"
+  - "PDCurses-3.9"
 mussels_version: "0.2"
 type: recipe
 platforms:
