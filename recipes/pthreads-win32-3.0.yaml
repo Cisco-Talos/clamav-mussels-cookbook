@@ -13,8 +13,11 @@
 # limitations under the License.
 
 name: pthreads_win32
-version: "2.9.1"
-url: https://mirrors.kernel.org/sourceware/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
+version: "3.0.0"
+url: https://gigenet.dl.sourceforge.net/project/pthreads4w/pthreads4w-code-v3.0.0.zip
+archive_name_change:
+  - pthreads4w-code-v3.0.0
+  - pthreads4w-code-07053a521b0a9deb6db2a649cde1f828f2eb1f4f
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -30,11 +33,11 @@ platforms:
           - pthread.h
           - sched.h
         lib:
-          - pthreadVC2.dll
-          - pthreadVC2.lib
+          - pthreadVC3.dll
+          - pthreadVC3.lib
         license/pthreads_win32:
-          - COPYING*
-      patches: pthreads-2.9.1-patches
+          - LICENSE*
+      patches: pthreads-3.0-patches
       required_tools:
         - visualstudio>=2017
     x86:
@@ -48,10 +51,10 @@ platforms:
           - pthread.h
           - sched.h
         lib:
-          - pthreadVC2.dll
-          - pthreadVC2.lib
+          - pthreadVC3.dll
+          - pthreadVC3.lib
         license/pthreads_win32:
-          - COPYING*
-      patches: pthreads-2.9.1-patches
+          - LICENSE*
+      patches: pthreads-3.0-patches
       required_tools:
         - visualstudio>=2017
