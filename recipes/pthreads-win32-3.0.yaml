@@ -14,7 +14,7 @@
 
 name: pthreads_win32
 version: "3.0.0"
-url: https://gigenet.dl.sourceforge.net/project/pthreads4w/pthreads4w-code-v3.0.0.zip
+url: https://downloads.sourceforge.net/project/pthreads4w/pthreads4w-code-v3.0.0.zip
 archive_name_change:
   - pthreads4w-code-v3.0.0
   - pthreads4w-code-07053a521b0a9deb6db2a649cde1f828f2eb1f4f
