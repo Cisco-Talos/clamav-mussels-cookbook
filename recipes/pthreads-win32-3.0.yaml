@@ -51,6 +51,7 @@ platforms:
         include:
           - pthread.h
           - sched.h
+          - _ptw32.h
         lib:
           - pthreadVC3.dll
           - pthreadVC3.lib
