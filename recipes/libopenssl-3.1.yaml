@@ -26,12 +26,12 @@ platforms:
           cp -r ./* ./arm64/.
           cp -r ./arm64 ./x86_64
           cd arm64
-          ./Configure darwin64-arm64-cc no-asm zlib \
+          ./Configure --libdir=lib darwin64-arm64-cc no-asm zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
           cd ../x86_64
-          ./Configure darwin64-x86_64-cc zlib \
+          ./Configure --libdir=lib darwin64-x86_64-cc zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
@@ -42,18 +42,18 @@ platforms:
           cd ../x86_64
           make
           cd ..
-          lipo -create arm64/libcrypto.1.1.dylib x86_64/libcrypto.1.1.dylib -output libcrypto.1.1.dylib
-          lipo -create arm64/libssl.1.1.dylib x86_64/libssl.1.1.dylib -output libssl.1.1.dylib
+          lipo -create arm64/libcrypto.3.dylib x86_64/libcrypto.3.dylib -output libcrypto.3.dylib
+          lipo -create arm64/libssl.3.dylib x86_64/libssl.3.dylib -output libssl.3.dylib
         install: |
           cd arm64
           make install_sw
           cd ../x86_64
           make install_sw
           cd ..
-          cp libcrypto.1.1.dylib {install}/lib/libcrypto.1.1.dylib
-          cp libssl.1.1.dylib {install}/lib/libssl.1.1.dylib
-          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcrypto.1.1.dylib"
-          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libssl.1.1.dylib"
+          cp libcrypto.3.dylib {install}/lib/libcrypto.3.dylib
+          cp libssl.3.dylib {install}/lib/libssl.3.dylib
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcrypto.3.dylib"
+          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libssl.3.dylib"
       dependencies:
         - libz
       install_paths:
@@ -109,7 +109,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./config zlib \
+          ./config --libdir=lib zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
@@ -117,8 +117,8 @@ platforms:
           make
         install: |
           make install_sw
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.1.1"
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.1.1"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.3"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.3"
       dependencies:
         - libz
       install_paths:
@@ -154,7 +154,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./config zlib \
+          ./config --libdir=lib zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
@@ -162,8 +162,8 @@ platforms:
           gmake
         install: |
           gmake install_sw
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.1.1"
-          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.1.1"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.3"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.3"
       dependencies:
         - libz
       install_paths:
