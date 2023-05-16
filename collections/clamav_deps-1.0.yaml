@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: clamav_deps
-version: "1.0"
+version: "0.105"
 mussels_version: "0.2"
 type: collection
 platforms:
