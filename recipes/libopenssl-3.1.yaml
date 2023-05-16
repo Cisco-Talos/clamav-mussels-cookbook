@@ -212,9 +212,9 @@ platforms:
         include:
           - include/openssl
         lib:
-          - libssl-3-x64.dll
+          - libssl-1_1-x64.dll
           - libssl.lib
-          - libcrypto-3-x64.dll
+          - libcrypto-1_1-x64.dll
           - libcrypto.lib
         license/libopenssl:
           - LICENSE.txt
@@ -238,9 +238,9 @@ platforms:
         include:
           - include/openssl
         lib:
-          - libssl-3.dll
+          - libssl-1_1.dll
           - libssl.lib
-          - libcrypto-3.dll
+          - libcrypto-1_1.dll
           - libcrypto.lib
         license/libopenssl:
           - LICENSE.txt
