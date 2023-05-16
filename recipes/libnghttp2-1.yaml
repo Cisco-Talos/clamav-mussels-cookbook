@@ -34,8 +34,8 @@ platforms:
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
-            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.3.dylib" \
-            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.3.dylib" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.1.1.dylib" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.1.1.dylib" \
             -D LIBXML2_INCLUDE_DIRS="{includes}" \
             -D LIBXML2_LIBRARY="{libs}/libxml2.dylib" \
             -D ZLIB_ROOT="{includes}" \
@@ -49,7 +49,7 @@ platforms:
           cmake --build . --config RelWithDebInfo --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libnghttp2.dylib"
       dependencies:
-        - libopenssl>=3.0
+        - libopenssl>=1.0.1
         - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
@@ -109,8 +109,8 @@ platforms:
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
-            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.3" \
-            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.3" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
             -D LIBXML2_INCLUDE_DIRS="{includes}" \
             -D LIBXML2_LIBRARY="{libs}/libxml2.so" \
             -D ZLIB_ROOT="{includes}" \
@@ -124,7 +124,7 @@ platforms:
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libnghttp2.so"
       dependencies:
-        - libopenssl>=3.0
+        - libopenssl>=1.0.1
         - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
@@ -186,8 +186,8 @@ platforms:
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
-            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.3" \
-            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.3" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
             -D LIBXML2_INCLUDE_DIRS="{includes}" \
             -D LIBXML2_LIBRARY="{libs}/libxml2.so" \
             -D ZLIB_ROOT="{includes}" \
@@ -201,7 +201,7 @@ platforms:
           gmake install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libnghttp2.so"
       dependencies:
-        - libopenssl>=3.0
+        - libopenssl>=1.0.1
         - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
