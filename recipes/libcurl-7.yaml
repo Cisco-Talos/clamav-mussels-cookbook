@@ -31,8 +31,8 @@ platforms:
             -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
-            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.3.dylib" \
-            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.3.dylib" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.1.1.dylib" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.1.1.dylib" \
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
             -D LIBSSH2_INCLUDE_DIR="{includes}" \
@@ -50,7 +50,7 @@ platforms:
           cmake --build . --config RelWithDebInfo --target install
           install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libcurl.dylib"
       dependencies:
-        - libopenssl>=3.0
+        - libopenssl
         - libnghttp2>=1.0.0
         - libssh2
         - libz
@@ -115,8 +115,8 @@ platforms:
             -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
-            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.3" \
-            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.3" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
             -D LIBSSH2_INCLUDE_DIR="{includes}" \
@@ -134,7 +134,7 @@ platforms:
           make install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcurl.so"
       dependencies:
-        - libopenssl>=3.0
+        - libopenssl
         - libnghttp2>=1.0.0
         - libssh2
         - libz
@@ -198,8 +198,8 @@ platforms:
             -D CURL_USE_OPENSSL=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
-            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.3" \
-            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.3" \
+            -D OPENSSL_CRYPTO_LIBRARY="{libs}/libcrypto.so.1.1" \
+            -D OPENSSL_SSL_LIBRARY="{libs}/libssl.so.1.1" \
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
             -D LIBSSH2_INCLUDE_DIR="{includes}" \
@@ -217,7 +217,7 @@ platforms:
           gmake install
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcurl.so"
       dependencies:
-        - libopenssl>=3.0
+        - libopenssl
         - libnghttp2>=1.0.0
         - libssh2
         - libz
