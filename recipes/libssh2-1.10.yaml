@@ -247,8 +247,8 @@ platforms:
             -D CRYPTO_BACKEND=OpenSSL\
             -D BUILD_SHARED_LIBS=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
-            -D DLL_LIBEAY32="{libs}/libcrypto-3-x64.dll" \
-            -D DLL_SSLEAY32="{libs}/libssl-3-x64.dll" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-1_1-x64.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-1_1-x64.dll" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
@@ -281,8 +281,8 @@ platforms:
             -D CRYPTO_BACKEND=OpenSSL\
             -D BUILD_SHARED_LIBS=ON \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
-            -D DLL_LIBEAY32="{libs}/libcrypto-3.dll" \
-            -D DLL_SSLEAY32="{libs}/libssl-3.dll" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-1_1.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-1_1.dll" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
