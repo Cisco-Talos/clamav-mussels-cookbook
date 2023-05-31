@@ -14,11 +14,11 @@
 
 # TODO: Rewrite this to use the new CMake build system, when unit test support is complete.
 name: clamav
-version: "0.104.0"
-url: https://github.com/Cisco-Talos/clamav/archive/rel/0.105.zip
+version: "1.1.0"
+url: https://github.com/Cisco-Talos/clamav/archive/rel/1.1.zip
 archive_name_change:
-  - "0.105"
-  - clamav-rel-0.105
+  - "1.1.0"
+  - clamav-rel-1.1
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -105,7 +105,7 @@ platforms:
             -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
             -D ENABLE_JSON_SHARED=OFF                                 \
             -D BZIP2_INCLUDE_DIR="{install}/include"                  \
-            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2_static.a"  \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"  \
             -D OPENSSL_ROOT_DIR="{install}"                           \
             -D OPENSSL_INCLUDE_DIR="{install}/include"                \
             -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a"     \
@@ -240,7 +240,7 @@ platforms:
             -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
             -D ENABLE_JSON_SHARED=OFF                                 \
             -D BZIP2_INCLUDE_DIR="{install}/include"                  \
-            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2_static.a"  \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"  \
             -D OPENSSL_ROOT_DIR="{install}"                           \
             -D OPENSSL_INCLUDE_DIR="{install}/include"                \
             -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a"     \
@@ -376,7 +376,7 @@ platforms:
             -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
             -D ENABLE_JSON_SHARED=OFF                                 \
             -D BZIP2_INCLUDE_DIR="{install}/include"                  \
-            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2_static.a"  \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"  \
             -D OPENSSL_ROOT_DIR="{install}"                           \
             -D OPENSSL_INCLUDE_DIR="{install}/include"                \
             -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a"     \

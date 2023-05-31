@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2021 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: clamav_deps
-version: "0.104"
+name: libclamav_deps
+version: "1.1"
 mussels_version: "0.2"
 type: collection
 platforms:
@@ -21,7 +21,6 @@ platforms:
     host:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - libxml2
         - libopenssl
@@ -30,19 +29,15 @@ platforms:
     host-static:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
-        - libcheck
-        - ncurses
+        - libbz2<1.1.0
   Freebsd:
     host:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - libxml2
         - libopenssl
@@ -51,42 +46,32 @@ platforms:
     host-static:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
-        - libcheck
-        - ncurses
+        - libbz2<1.1.0
   Darwin:
     host:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
-        - libcheck
-        - ncurses
+        - libbz2<1.1.0
     host-static:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
-        - libcheck
-        - ncurses
+        - libbz2<1.1.0
   Windows:
     x64:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - pthreads_win32
         - libxml2
@@ -94,11 +79,9 @@ platforms:
         - libpcre2
         - libbz2<1.1.0
         - pdcurses
-        - libcheck
     x86:
       dependencies:
         - libz
-        - libcurl
         - libjson_c
         - pthreads_win32
         - libxml2
@@ -106,4 +89,3 @@ platforms:
         - libpcre2
         - libbz2<1.1.0
         - pdcurses
-        - libcheck

@@ -13,11 +13,11 @@
 # limitations under the License.
 
 name: clamav_deps
-version: "0.102"
+version: "1.2"
 mussels_version: "0.2"
 type: collection
 platforms:
-  Posix:
+  Linux:
     host:
       dependencies:
         - libz
@@ -27,6 +27,61 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+    host-static:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - libcheck
+        - ncurses
+  Freebsd:
+    host:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+    host-static:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - libcheck
+        - ncurses
+  Darwin:
+    host:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - libcheck
+        - ncurses
+    host-static:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - libcheck
+        - ncurses
   Windows:
     x64:
       dependencies:
@@ -38,6 +93,8 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
+        - libcheck
     x86:
       dependencies:
         - libz
@@ -48,3 +105,5 @@ platforms:
         - libopenssl
         - libpcre2
         - libbz2<1.1.0
+        - pdcurses
+        - libcheck
