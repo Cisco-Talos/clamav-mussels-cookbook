@@ -33,7 +33,7 @@ platforms:
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
+        - libbz2<1.1.0
   Freebsd:
     host:
       dependencies:
@@ -50,7 +50,7 @@ platforms:
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
+        - libbz2<1.1.0
   Darwin:
     host:
       dependencies:
@@ -59,7 +59,7 @@ platforms:
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
+        - libbz2<1.1.0
     host-static:
       dependencies:
         - libz
@@ -67,7 +67,7 @@ platforms:
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
+        - libbz2<1.1.0
   Windows:
     x64:
       dependencies:
