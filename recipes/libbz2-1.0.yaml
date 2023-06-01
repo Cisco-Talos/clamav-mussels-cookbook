@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         make: |
-          make CFLAGS="-fPIC"
+          make CFLAGS="-fPIC -arch x86_64 -arch arm64"
         install: |
           make install PREFIX={install}
       dependencies: []
@@ -35,7 +35,7 @@ platforms:
     host-static:
       build_script:
         make: |
-          make CFLAGS="-fPIC"
+          make CFLAGS="-fPIC -arch x86_64 -arch arm64"
         install: |
           make install PREFIX={install}
       dependencies: []
