@@ -22,32 +22,32 @@ platforms:
     host:
       build_script:
         configure: |
-          mkdir arm64
-          cp -r ./* ./arm64/.
-          cp -r ./arm64 ./x86_64
-          cd arm64
+          mkdir ../openssl-3.1-arm64
+          cp -r ./* ../openssl-3.1-arm64/.
+          cp -r ../openssl-3.1-arm64 ../openssl-3.1-x86_64
+          cd ../openssl-3.1-arm64
           ./Configure --libdir=lib darwin64-arm64-cc no-asm zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
-          cd ../x86_64
+          cd ../openssl-3.1-x86_64
           ./Configure --libdir=lib darwin64-x86_64-cc zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
           cd ..
         make: |
-          cd arm64
+          cd ../openssl-3.1-arm64
           make
-          cd ../x86_64
+          cd ../openssl-3.1-x86_64
           make
           cd ..
-          lipo -create arm64/libcrypto.3.dylib x86_64/libcrypto.3.dylib -output libcrypto.3.dylib
-          lipo -create arm64/libssl.3.dylib x86_64/libssl.3.dylib -output libssl.3.dylib
+          lipo -create openssl-3.1-arm64/libcrypto.3.dylib openssl-3.1-x86_64/libcrypto.3.dylib -output libcrypto.3.dylib
+          lipo -create openssl-3.1-arm64/libssl.3.dylib openssl-3.1-x86_64/libssl.3.dylib -output libssl.3.dylib
         install: |
-          cd arm64
+          cd ../openssl-3.1-arm64
           make install_sw
-          cd ../x86_64
+          cd ../openssl-3.1-x86_64
           make install_sw
           cd ..
           cp libcrypto.3.dylib {install}/lib/libcrypto.3.dylib
@@ -65,17 +65,17 @@ platforms:
     host-static:
       build_script:
         configure: |
-          mkdir arm64
-          cp -r ./* ./arm64/.
-          cp -r ./arm64 ./x86_64
-          cd arm64
+          mkdir ../openssl-3.1-arm64
+          cp -r ./* ../openssl-3.1-arm64/.
+          cp -r ../openssl-3.1-arm64 ../openssl-3.1-x86_64
+          cd ../openssl-3.1-arm64
           ./Configure darwin64-arm64-cc no-asm zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}" \
               no-shared \
               no-zlib-dynamic
-          cd ../x86_64
+          cd ../openssl-3.1-x86_64
           ./Configure darwin64-x86_64-cc zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
@@ -84,15 +84,15 @@ platforms:
               no-zlib-dynamic
           cd ..
         make: |
-          cd arm64
+          cd ../openssl-3.1-arm64
           make
-          cd ../x86_64
+          cd ../openssl-3.1-x86_64
           make
           cd ..
-          lipo -create arm64/libcrypto.a x86_64/libcrypto.a -output libcrypto.a
-          lipo -create arm64/libssl.a x86_64/libssl.a -output libssl.a
+          lipo -create openssl-3.1-arm64/libcrypto.a openssl-3.1-x86_64/libcrypto.a -output libcrypto.a
+          lipo -create openssl-3.1-arm64/libssl.a openssl-3.1-x86_64/libssl.a -output libssl.a
         install: |
-          cd arm64
+          cd ../openssl-3.1-arm64
           make install
           cd ..
           cp libcrypto.a {install}/lib/libcrypto.a
