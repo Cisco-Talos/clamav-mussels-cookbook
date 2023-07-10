@@ -98,7 +98,8 @@ platforms:
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
             -D CMAKE_INSTALL_PREFIX={install} \
-            -D CMAKE_INSTALL_LIBDIR=lib
+            -D CMAKE_INSTALL_LIBDIR=lib \
+            -D CMAKE_POSITION_INDEPENDENT_CODE=ON
         make: |
           cd build
           cmake --build .
