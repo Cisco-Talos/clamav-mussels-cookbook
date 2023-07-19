@@ -116,7 +116,7 @@ platforms:
         install: |
           cd build
           gmake install
-          install_name_tool -add_rpath @executable_path/../lib "{install}/lib/libssh2.dylib"
+          patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssh2.so"
       dependencies:
         - libopenssl>=3.0
         - libz

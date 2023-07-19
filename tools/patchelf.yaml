@@ -28,3 +28,14 @@ platforms:
         - /usr/local/bin/patchelf
       usr:
         - /usr/bin/patchelf
+  Freebsd:
+    path_checks:
+      - patchelf
+    command_checks:
+      - command: "patchelf --version"
+        output_has: "patchelf"
+    file_checks:
+      local:
+        - /usr/local/bin/patchelf
+      usr:
+        - /usr/bin/patchelf
