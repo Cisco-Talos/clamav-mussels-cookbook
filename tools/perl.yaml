@@ -28,4 +28,3 @@ platforms:
       - perl.exe
     file_checks:
       - C:\/Perl64/bin/perl.exe
-      - C:\/Users\/micah\/AppData\/Local\/activestate\/cache\/bin\/perl.exe
