@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libxml2
-version: "2.11.4"
-url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.11.4/libxml2-v2.11.4.tar.gz
+version: "2.11.5"
+url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.11.5/libxml2-v2.11.5.tar.gz
 #url: http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz
 # 2.9.12 build broken on Windows due to packaging issue, fixed by this commit:
 #   https://gitlab.gnome.org/GNOME/libxml2/-/commit/7d4060d252354a8d650a3c50256fe3679a40691d
