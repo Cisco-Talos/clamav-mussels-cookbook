@@ -37,7 +37,8 @@ platforms:
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D BUILD_TESTING=OFF
+            -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF
         make: |
           cd build
           cmake --build . --config RelWithDebInfo
@@ -74,7 +75,8 @@ platforms:
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D BUILD_TESTING=OFF
+            -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF
         make: |
           cd build
           cmake --build . --config RelWithDebInfo
@@ -109,7 +111,8 @@ platforms:
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D BUILD_TESTING=OFF
+            -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF
         make: |
           cd build
           cmake --build .
@@ -147,6 +150,7 @@ platforms:
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF \
             -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
             -D CMAKE_INSTALL_LIBDIR=lib
         make: |
@@ -183,7 +187,8 @@ platforms:
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D BUILD_TESTING=OFF
+            -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF
         make: |
           cd build
           cmake --build .
@@ -221,6 +226,7 @@ platforms:
             -D ZLIB_LIBRARY_RELEASE="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF \
             -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
             -D CMAKE_INSTALL_LIBDIR=lib
         make: |
@@ -257,7 +263,8 @@ platforms:
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
-            -D BUILD_TESTING=OFF
+            -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF
         make: |
           cd build
           CALL cmake.exe --build . --config Release
@@ -291,7 +298,8 @@ platforms:
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
             -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
-            -D BUILD_TESTING=OFF
+            -D BUILD_TESTING=OFF \
+            -D BUILD_EXAMPLES=OFF
         make: |
           cd build
           CALL cmake.exe --build . --config Release
