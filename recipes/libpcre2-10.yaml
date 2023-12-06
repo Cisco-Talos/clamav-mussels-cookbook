@@ -142,6 +142,62 @@ platforms:
         - gmake
         - clang
   Windows:
+    arm:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/pcre2-8.dll {install}/lib/
+      dependencies:
+        - libbz2<1.1.0
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/pcre2-8.dll {install}/lib/
+      dependencies:
+        - libbz2<1.1.0
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
@@ -189,6 +245,118 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/bin/pcre2-8.dll {install}/lib/
+      dependencies:
+        - libbz2<1.1.0
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/pcre2-8d.dll {install}/lib/
+      dependencies:
+        - libbz2<1.1.0
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/pcre2-8d.dll {install}/lib/
+      dependencies:
+        - libbz2<1.1.0
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/pcre2-8d.dll {install}/lib/
+      dependencies:
+        - libbz2<1.1.0
+        - libz
+      install_paths:
+        license/libpcre2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BZIP2_INCLUDE_DIR="{includes}" \
+            -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/pcre2-8d.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz

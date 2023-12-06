@@ -211,6 +211,64 @@ platforms:
         - make
         - gcc
   Windows:
+    arm:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/include/libxml2/libxml {install}/include/libxml
+          mv {install}/bin/libxml2.dll {install}/lib/
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/include/libxml2/libxml {install}/include/libxml
+          mv {install}/bin/libxml2.dll {install}/lib/
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
@@ -261,6 +319,126 @@ platforms:
           CALL cmake.exe --build . --config Release --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
           mv {install}/bin/libxml2.dll {install}/lib/
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/include/libxml2/libxml {install}/include/libxml
+          mv {install}/bin/libxml2d.dll {install}/lib/
+          mv {install}/bin/libxml2d.pdb {install}/lib/
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/include/libxml2/libxml {install}/include/libxml
+          mv {install}/bin/libxml2d.dll {install}/lib/
+          mv {install}/bin/libxml2d.pdb {install}/lib/
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/include/libxml2/libxml {install}/include/libxml
+          mv {install}/bin/libxml2d.dll {install}/lib/
+          mv {install}/bin/libxml2d.pdb {install}/lib/
+      dependencies:
+        - libz
+      install_paths:
+        license/libxml2:
+          - Copyright
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBXML2_WITH_LZMA=OFF \
+            -D LIBXML2_WITH_ICONV=OFF \
+            -D LIBXML2_WITH_PYTHON=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/include/libxml2/libxml {install}/include/libxml
+          mv {install}/bin/libxml2d.dll {install}/lib/
+          mv {install}/bin/libxml2d.pdb {install}/lib/
       dependencies:
         - libz
       install_paths:

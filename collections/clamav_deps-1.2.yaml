@@ -83,6 +83,30 @@ platforms:
         - libcheck
         - ncurses
   Windows:
+    arm:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - pdcurses
+        - libcheck
+    arm64:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - pdcurses
+        - libcheck
     x64:
       dependencies:
         - libz
@@ -96,6 +120,54 @@ platforms:
         - pdcurses
         - libcheck
     x86:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - pdcurses
+        - libcheck
+    arm-debug:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - pdcurses
+        - libcheck
+    arm64-debug:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - pdcurses
+        - libcheck
+    x64-debug:
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - pdcurses
+        - libcheck
+    x86-debug:
       dependencies:
         - libz
         - libcurl

@@ -22,6 +22,42 @@ mussels_version: "0.2"
 type: recipe
 platforms:
   Windows:
+    arm:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat amd64_arm
+          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
+          - wincon/pdcurses.dll
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
+    arm64:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat amd64_arm64
+          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM64
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
+          - wincon/pdcurses.dll
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
     x64:
       build_script:
         make: |
@@ -46,6 +82,78 @@ platforms:
           CD wincon
           CALL vcvarsall.bat x86
           CALL nmake -f Makefile.vc WIDE=Y DLL=Y
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
+          - wincon/pdcurses.dll
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
+    arm-debug:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat amd64_arm
+          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM DEBUG=Y
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
+          - wincon/pdcurses.dll
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
+    arm64-debug:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat amd64_arm64
+          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM64 DEBUG=Y
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
+          - wincon/pdcurses.dll
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
+    x64-debug:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat amd64
+          CALL nmake -f Makefile.vc WIDE=Y DLL=Y DEBUG=Y
+      dependencies: []
+      install_paths:
+        include:
+          - curses.h
+        lib:
+          - wincon/pdcurses.dll
+          - wincon/pdcurses.lib
+        license/pdcurses:
+          - README.md
+      patches: pdcurses-3.9-patches
+      required_tools:
+        - visualstudio
+    x86-debug:
+      build_script:
+        make: |
+          CD wincon
+          CALL vcvarsall.bat x86
+          CALL nmake -f Makefile.vc WIDE=Y DLL=Y DEBUG=Y
       dependencies: []
       install_paths:
         include:

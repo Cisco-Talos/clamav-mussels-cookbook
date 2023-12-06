@@ -160,6 +160,48 @@ platforms:
         - gmake
         - clang
   Windows:
+    arm:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/json-c.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/libjson_c:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/json-c.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/libjson_c:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
@@ -194,6 +236,90 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/json-c.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/libjson_c:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/json-c.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/libjson_c:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/json-c.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/libjson_c:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/json-c.dll {install}/lib/
+      dependencies: []
+      install_paths:
+        license/libjson_c:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
           mv {install}/bin/json-c.dll {install}/lib/
       dependencies: []
       install_paths:

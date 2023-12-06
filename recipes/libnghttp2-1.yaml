@@ -87,7 +87,7 @@ platforms:
           cd build
           cmake --build . --config RelWithDebInfo --target install
       dependencies:
-        - libopenssl>=1.0.1
+        - libopenssl>=3.0
         - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
@@ -164,7 +164,7 @@ platforms:
           cd build
           make install
       dependencies:
-        - libopenssl>=1.0.1
+        - libopenssl>=3.0
         - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
@@ -241,7 +241,7 @@ platforms:
           cd build
           gmake install
       dependencies:
-        - libopenssl>=1.0.1
+        - libopenssl>=3.0
         - libz>=1.2.3
         - libxml2>=2.9.9
       install_paths:
@@ -252,6 +252,66 @@ platforms:
         - gmake
         - clang
   Windows:
+    arm:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibstatic.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz>=1.2.13
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIRS="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibstatic.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz>=1.2.13
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
@@ -274,8 +334,8 @@ platforms:
           CALL cmake.exe --build . --config Release --target install
           mv {install}/bin/nghttp2.dll {install}/lib/
       dependencies:
-        - libopenssl>=1.0.1
-        - libz>=1.2.3
+        - libopenssl>=3.0
+        - libz>=1.2.13
       install_paths:
         license/libnghttp2:
           - COPYING
@@ -304,8 +364,128 @@ platforms:
           CALL cmake.exe --build . --config Release --target install
           mv {install}/bin/nghttp2.dll {install}/lib/
       dependencies:
-        - libopenssl>=1.0.1
-        - libz>=1.2.3
+        - libopenssl>=3.0
+        - libz>=1.2.13
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibd.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz>=1.2.13
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIRS="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibd.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz>=1.2.13
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIRS="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibd.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz>=1.2.13
+      install_paths:
+        license/libnghttp2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_ROOT_DIR="{install}" \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_ROOT="{includes}" \
+            -D ZLIB_LIBRARY="{libs}/zlibd.lib"
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/nghttp2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz>=1.2.13
       install_paths:
         license/libnghttp2:
           - COPYING
