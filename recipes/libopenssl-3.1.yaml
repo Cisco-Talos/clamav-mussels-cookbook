@@ -196,6 +196,60 @@ platforms:
         - gmake
         - clang
   Windows:
+    arm:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm
+          CALL perl Configure VC-WIN32-ARM
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm
+          CALL nmake
+      dependencies: []
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl-3-arm.dll
+          - libssl-3-arm.pdb
+          - libssl.lib
+          - libcrypto-3-arm.dll
+          - libcrypto-3-arm.pdb
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE.txt
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm64
+          CALL perl Configure VC-WIN64-ARM
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm64
+          CALL nmake
+      dependencies: []
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl-3-arm64.dll
+          - libssl-3-arm64.pdb
+          - libssl.lib
+          - libcrypto-3-arm64.dll
+          - libcrypto-3-arm64.pdb
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE.txt
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
@@ -213,8 +267,10 @@ platforms:
           - include/openssl
         lib:
           - libssl-3-x64.dll
+          - libssl-3-x64.pdb
           - libssl.lib
           - libcrypto-3-x64.dll
+          - libcrypto-3-x64.pdb
           - libcrypto.lib
         license/libopenssl:
           - LICENSE.txt
@@ -239,8 +295,120 @@ platforms:
           - include/openssl
         lib:
           - libssl-3.dll
+          - libssl-3.pdb
           - libssl.lib
           - libcrypto-3.dll
+          - libcrypto-3.pdb
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE.txt
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm
+          CALL perl Configure debug-VC-WIN32-ARM
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm
+          CALL nmake
+      dependencies: []
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl-3-arm.dll
+          - libssl-3-arm.pdb
+          - libssl.lib
+          - libcrypto-3-arm.dll
+          - libcrypto-3-arm.pdb
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE.txt
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm64
+          CALL perl Configure debug-VC-WIN64-ARM
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64_arm64
+          CALL nmake
+      dependencies: []
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl-3-arm64.dll
+          - libssl-3-arm64.pdb
+          - libssl.lib
+          - libcrypto-3-arm64.dll
+          - libcrypto-3-arm64.pdb
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE.txt
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64
+          CALL perl Configure debug-VC-WIN64A zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibd.lib"
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat amd64
+          CALL nmake
+      dependencies:
+        - libz
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl-3-x64.dll
+          - libssl-3-x64.pdb
+          - libssl.lib
+          - libcrypto-3-x64.dll
+          - libcrypto-3-x64.pdb
+          - libcrypto.lib
+        license/libopenssl:
+          - LICENSE.txt
+      required_tools:
+        - nasm
+        - perl
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        configure: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat x86
+          CALL perl Configure debug-VC-WIN32 zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibd.lib"
+        make: |
+          CALL set PATH={libs};%PATH%
+          CALL vcvarsall.bat x86
+          CALL nmake
+      dependencies:
+        - libz
+      install_paths:
+        include:
+          - include/openssl
+        lib:
+          - libssl-3.dll
+          - libssl-3.pdb
+          - libssl.lib
+          - libcrypto-3.dll
+          - libcrypto-3.pdb
           - libcrypto.lib
         license/libopenssl:
           - LICENSE.txt

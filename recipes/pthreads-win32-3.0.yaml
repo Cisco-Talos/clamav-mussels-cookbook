@@ -22,6 +22,44 @@ mussels_version: "0.2"
 type: recipe
 platforms:
   Windows:
+    arm:
+      build_script:
+        make: |
+          CALL vcvarsall.bat amd64_arm
+          CALL nmake realclean VC
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+          - _ptw32.h
+        lib:
+          - pthreadVC3.dll
+          - pthreadVC3.lib
+        license/pthreads_win32:
+          - LICENSE*
+      patches: pthreads-3.0-patches
+      required_tools:
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        make: |
+          CALL vcvarsall.bat amd64_arm64
+          CALL nmake realclean VC
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+          - _ptw32.h
+        lib:
+          - pthreadVC3.dll
+          - pthreadVC3.lib
+        license/pthreads_win32:
+          - LICENSE*
+      patches: pthreads-3.0-patches
+      required_tools:
+        - visualstudio>=2017
     x64:
       build_script:
         make: |
@@ -55,6 +93,82 @@ platforms:
         lib:
           - pthreadVC3.dll
           - pthreadVC3.lib
+        license/pthreads_win32:
+          - LICENSE*
+      patches: pthreads-3.0-patches
+      required_tools:
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        make: |
+          CALL vcvarsall.bat amd64_arm
+          CALL nmake realclean VC-debug
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+          - _ptw32.h
+        lib:
+          - pthreadVC3d.dll
+          - pthreadVC3d.lib
+        license/pthreads_win32:
+          - LICENSE*
+      patches: pthreads-3.0-patches
+      required_tools:
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        make: |
+          CALL vcvarsall.bat amd64_arm64
+          CALL nmake realclean VC-debug
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+          - _ptw32.h
+        lib:
+          - pthreadVC3d.dll
+          - pthreadVC3d.lib
+        license/pthreads_win32:
+          - LICENSE*
+      patches: pthreads-3.0-patches
+      required_tools:
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        make: |
+          CALL vcvarsall.bat amd64
+          CALL nmake realclean VC-debug
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+          - _ptw32.h
+        lib:
+          - pthreadVC3d.dll
+          - pthreadVC3d.lib
+        license/pthreads_win32:
+          - LICENSE*
+      patches: pthreads-3.0-patches
+      required_tools:
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        make: |
+          CALL vcvarsall.bat x86
+          CALL nmake realclean VC-debug
+      dependencies: []
+      install_paths:
+        include:
+          - pthread.h
+          - sched.h
+          - _ptw32.h
+        lib:
+          - pthreadVC3d.dll
+          - pthreadVC3d.lib
         license/pthreads_win32:
           - LICENSE*
       patches: pthreads-3.0-patches

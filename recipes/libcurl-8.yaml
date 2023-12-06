@@ -272,6 +272,82 @@ platforms:
         - gmake
         - clang
   Windows:
+    arm:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CURL_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
+            -D BUILD_CURL_EXE=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/libcurl.dll {install}/lib/
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CURL_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
+            -D BUILD_CURL_EXE=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/libcurl.dll {install}/lib/
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
@@ -337,6 +413,158 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/bin/libcurl.dll {install}/lib/
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CURL_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
+            -D BUILD_CURL_EXE=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/libcurl-d.dll {install}/lib/
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CURL_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
+            -D BUILD_CURL_EXE=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/libcurl-d.dll {install}/lib/
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CURL_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
+            -D BUILD_CURL_EXE=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/libcurl-d.dll {install}/lib/
+      dependencies:
+        - libopenssl
+        - libnghttp2>=1.0.0
+        - libssh2
+        - libz
+      install_paths:
+        license/libcurl:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON \
+            -D CURL_USE_OPENSSL=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D LIBSSH2_INCLUDE_DIR="{includes}" \
+            -D LIBSSH2_LIBRARY="{libs}/libssh2.lib" \
+            -D USE_NGHTTP2=ON \
+            -D NGHTTP2_INCLUDE_DIR="{includes}" \
+            -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
+            -D BUILD_CURL_EXE=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0

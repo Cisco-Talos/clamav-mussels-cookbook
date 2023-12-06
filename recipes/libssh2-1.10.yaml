@@ -240,6 +240,74 @@ platforms:
         - make
         - gcc
   Windows:
+    arm:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-3-x64.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-3-x64.dll" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/libssh2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-3-x64.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-3-x64.dll" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Release
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/libssh2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
@@ -298,6 +366,142 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
+          mv {install}/bin/libssh2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-3-x64.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-3-x64.dll" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/libssh2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    arm64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-3-x64.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-3-x64.dll" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/libssh2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x64-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-3-x64.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-3-x64.dll" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
+          mv {install}/bin/libssh2.dll {install}/lib/
+      dependencies:
+        - libopenssl>=3.0
+        - libz
+      install_paths:
+        license/libssh2:
+          - COPYING
+      required_tools:
+        - cmake
+        - visualstudio>=2017
+    x86-debug:
+      build_script:
+        configure: |
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D CRYPTO_BACKEND=OpenSSL\
+            -D BUILD_SHARED_LIBS=ON \
+            -D OPENSSL_INCLUDE_DIR="{includes}" \
+            -D DLL_LIBEAY32="{libs}/libcrypto-3.dll" \
+            -D DLL_SSLEAY32="{libs}/libssl-3.dll" \
+            -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
+            -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
+            -D ENABLE_ZLIB_COMPRESSION=ON \
+            -D ZLIB_INCLUDE_DIR="{includes}" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D BUILD_TESTING=OFF
+        make: |
+          cd build
+          CALL cmake.exe --build . --config Debug
+        install: |
+          cd build
+          CALL cmake.exe --build . --config Debug --target install
           mv {install}/bin/libssh2.dll {install}/lib/
       dependencies:
         - libopenssl>=3.0
