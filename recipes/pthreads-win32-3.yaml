@@ -13,11 +13,11 @@
 # limitations under the License.
 
 name: pthreads_win32
-version: "3.0.0"
-url: https://downloads.sourceforge.net/project/pthreads4w/pthreads4w-code-v3.0.0.zip
+version: "3.1.0"
+url: https://github.com/GerHobbelt/pthread-win32/archive/refs/tags/version-3.1.0-release.tar.gz
 archive_name_change:
-  - pthreads4w-code-v3.0.0
-  - pthreads4w-code-07053a521b0a9deb6db2a649cde1f828f2eb1f4f
+  - version-3.1.0-release
+  - pthread-win32-version-3.1.0-release
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -38,7 +38,7 @@ platforms:
           - pthreadVC3.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
     arm64:
@@ -57,7 +57,7 @@ platforms:
           - pthreadVC3.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
     x64:
@@ -76,7 +76,7 @@ platforms:
           - pthreadVC3.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
     x86:
@@ -95,7 +95,7 @@ platforms:
           - pthreadVC3.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
     arm-debug:
@@ -114,7 +114,7 @@ platforms:
           - pthreadVC3d.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
     arm64-debug:
@@ -133,7 +133,7 @@ platforms:
           - pthreadVC3d.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
     x64-debug:
@@ -152,7 +152,7 @@ platforms:
           - pthreadVC3d.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
     x86-debug:
@@ -171,6 +171,6 @@ platforms:
           - pthreadVC3d.lib
         license/pthreads_win32:
           - LICENSE*
-      patches: pthreads-3.0-patches
+      patches: pthreads-3-patches
       required_tools:
         - visualstudio>=2017
