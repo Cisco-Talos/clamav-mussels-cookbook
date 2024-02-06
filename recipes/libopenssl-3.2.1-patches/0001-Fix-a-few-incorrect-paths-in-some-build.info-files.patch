@@ -1,0 +1,81 @@
+From 4bd2f856e7dc7db7099d4d5c055932f8425326ad Mon Sep 17 00:00:00 2001
+From: Richard Levitte <levitte@openssl.org>
+Date: Thu, 1 Feb 2024 10:57:51 +0100
+Subject: [PATCH] Fix a few incorrect paths in some build.info files
+
+The following files referred to ../liblegacy.a when they should have
+referred to ../../liblegacy.a.  This cause the creation of a mysterious
+directory 'crypto/providers', and because of an increased strictness
+with regards to where directories are created, configuration failure
+on some platforms.
+
+Fixes #23436
+
+Reviewed-by: Matt Caswell <matt@openssl.org>
+Reviewed-by: Tomas Mraz <tomas@openssl.org>
+Reviewed-by: Tom Cosgrove <tom.cosgrove@arm.com>
+(Merged from https://github.com/openssl/openssl/pull/23452)
+
+(cherry picked from commit 667b45454a47959ce2934b74c899662e686993de)
+---
+ crypto/aes/build.info | 2 +-
+ crypto/ec/build.info  | 2 +-
+ crypto/sha/build.info | 2 +-
+ crypto/sm4/build.info | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/crypto/aes/build.info b/crypto/aes/build.info
+index c4e7e87de9..b6af6595e2 100644
+--- a/crypto/aes/build.info
++++ b/crypto/aes/build.info
+@@ -87,7 +87,7 @@ DEFINE[../../providers/libdefault.a]=$AESDEF
+ # already gets everything that the static libcrypto.a has, and doesn't need it
+ # added again.
+ IF[{- !$disabled{module} && !$disabled{shared} -}]
+-  DEFINE[../providers/liblegacy.a]=$AESDEF
++  DEFINE[../../providers/liblegacy.a]=$AESDEF
+ ENDIF
+ 
+ GENERATE[aes-ia64.s]=asm/aes-ia64.S
+diff --git a/crypto/ec/build.info b/crypto/ec/build.info
+index 2f376a39c6..dbe69578ef 100644
+--- a/crypto/ec/build.info
++++ b/crypto/ec/build.info
+@@ -103,7 +103,7 @@ DEFINE[../../providers/libdefault.a]=$ECDEF
+ # Otherwise, it already gets everything that the static libcrypto.a
+ # has, and doesn't need it added again.
+ IF[{- !$disabled{module} && !$disabled{shared} -}]
+-  DEFINE[../providers/liblegacy.a]=$ECDEF
++  DEFINE[../../providers/liblegacy.a]=$ECDEF
+ ENDIF
+ 
+ GENERATE[ecp_nistz256-x86.S]=asm/ecp_nistz256-x86.pl
+diff --git a/crypto/sha/build.info b/crypto/sha/build.info
+index 556a658d8b..deb7b1530d 100644
+--- a/crypto/sha/build.info
++++ b/crypto/sha/build.info
+@@ -88,7 +88,7 @@ DEFINE[../../providers/libdefault.a]=$SHA1DEF $KECCAK1600DEF
+ # linked with libcrypto.  Otherwise, it already gets everything that
+ # the static libcrypto.a has, and doesn't need it added again.
+ IF[{- !$disabled{module} && !$disabled{shared} -}]
+-  DEFINE[../providers/liblegacy.a]=$SHA1DEF $KECCAK1600DEF
++  DEFINE[../../providers/liblegacy.a]=$SHA1DEF $KECCAK1600DEF
+ ENDIF
+ 
+ GENERATE[sha1-586.S]=asm/sha1-586.pl
+diff --git a/crypto/sm4/build.info b/crypto/sm4/build.info
+index 73ffe5ea09..700d75b1f9 100644
+--- a/crypto/sm4/build.info
++++ b/crypto/sm4/build.info
+@@ -25,7 +25,7 @@ DEFINE[../../providers/libdefault.a]=$SM4DEF
+ # already gets everything that the static libcrypto.a has, and doesn't need it
+ # added again.
+ IF[{- !$disabled{module} && !$disabled{shared} -}]
+-  DEFINE[../providers/liblegacy.a]=$SM4DEF
++  DEFINE[../../providers/liblegacy.a]=$SM4DEF
+ ENDIF
+ 
+ GENERATE[sm4-armv8.S]=asm/sm4-armv8.pl
+-- 
+2.25.1
+
