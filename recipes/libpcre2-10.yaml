@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libpcre2
-version: "10.42"
-url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.gz
+version: "10.43"
+url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.43/pcre2-10.43.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:
