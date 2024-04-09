@@ -47,8 +47,10 @@ platforms:
         install: |
           cd ../openssl-3.1-arm64
           make install_sw
+          rm -r ./test
           cd ../openssl-3.1-x86_64
           make install_sw
+          rm -r ./test
           cd ..
           cp libcrypto.3.dylib {install}/lib/libcrypto.3.dylib
           cp libssl.3.dylib {install}/lib/libssl.3.dylib
@@ -88,12 +90,14 @@ platforms:
           make
           cd ../openssl-3.1-x86_64
           make
+          rm -r ./test
           cd ..
           lipo -create openssl-3.1-arm64/libcrypto.a openssl-3.1-x86_64/libcrypto.a -output libcrypto.a
           lipo -create openssl-3.1-arm64/libssl.a openssl-3.1-x86_64/libssl.a -output libssl.a
         install: |
           cd ../openssl-3.1-arm64
           make install
+          rm -r ./test
           cd ..
           cp libcrypto.a {install}/lib/libcrypto.a
           cp libssl.a {install}/lib/libssl.a
@@ -117,6 +121,7 @@ platforms:
           make
         install: |
           make install_sw
+          rm -r ./test
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.3"
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.3"
       dependencies:
@@ -142,6 +147,7 @@ platforms:
           make
         install: |
           make install_sw
+          rm -r ./test
       dependencies:
         - libz
       install_paths:
@@ -162,6 +168,7 @@ platforms:
           gmake
         install: |
           gmake install_sw
+          rm -r ./test
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libcrypto.so.3"
           patchelf --set-rpath '$ORIGIN/../lib' "{install}/lib/libssl.so.3"
       dependencies:
@@ -187,6 +194,7 @@ platforms:
           gmake
         install: |
           gmake install_sw
+          rm -r ./test
       dependencies:
         - libz
       install_paths:
@@ -207,6 +215,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64_arm
           CALL nmake
+          CALL rm -r ./test
       dependencies: []
       install_paths:
         include:
@@ -235,6 +244,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64_arm64
           CALL nmake
+          CALL rm -r ./test
       dependencies: []
       install_paths:
         include:
@@ -263,6 +273,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64
           CALL nmake
+          CALL rm -r ./test
       dependencies:
         - libz
       install_paths:
@@ -292,6 +303,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat x86
           CALL nmake
+          CALL rm -r ./test
       dependencies:
         - libz
       install_paths:
@@ -321,6 +333,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64_arm
           CALL nmake
+          CALL rm -r ./test
       dependencies: []
       install_paths:
         include:
@@ -349,6 +362,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64_arm64
           CALL nmake
+          CALL rm -r ./test
       dependencies: []
       install_paths:
         include:
@@ -377,6 +391,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64
           CALL nmake
+          CALL rm -r ./test
       dependencies:
         - libz
       install_paths:
@@ -406,6 +421,7 @@ platforms:
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat x86
           CALL nmake
+          CALL rm -r ./test
       dependencies:
         - libz
       install_paths:
