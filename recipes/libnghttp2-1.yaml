@@ -30,7 +30,6 @@ platforms:
           cmake .. \
             -G Xcode -T buildsystem=1 \
             -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
-            -D BUILD_SHARED_LIBS=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
@@ -40,7 +39,9 @@ platforms:
             -D LIBXML2_LIBRARY="{libs}/libxml2.dylib" \
             -D ZLIB_ROOT="{includes}" \
             -D ZLIB_LIBRARY="{libs}/libz.a" \
-            -D CMAKE_INSTALL_PREFIX="{install}"
+            -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D BUILD_SHARED_LIBS=ON -D BUILD_STATIC_LIBS=OFF \
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF
         make: |
           cd build
           cmake --build . --config RelWithDebInfo
@@ -77,9 +78,8 @@ platforms:
             -D ZLIB_ROOT="{includes}" \
             -D ZLIB_LIBRARY="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D ENABLE_LIB_ONLY=ON \
-            -D ENABLE_STATIC_LIB=ON \
-            -D ENABLE_SHARED_LIB=OFF
+            -D BUILD_SHARED_LIBS=OFF -D BUILD_STATIC_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF
         make: |
           cd build
           cmake --build . --config RelWithDebInfo
