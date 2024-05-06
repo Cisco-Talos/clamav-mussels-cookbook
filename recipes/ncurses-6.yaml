@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: ncurses
-version: "6.4"
-url: https://invisible-mirror.net/archives/ncurses/ncurses-6.4.tar.gz
+version: "6.5"
+url: https://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:
