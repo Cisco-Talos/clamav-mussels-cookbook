@@ -15,9 +15,6 @@
 name: libxml2
 version: "2.12.6"
 url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.12.6/libxml2-v2.12.6.tar.gz
-#url: http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz
-# 2.9.12 build broken on Windows due to packaging issue, fixed by this commit:
-#   https://gitlab.gnome.org/GNOME/libxml2/-/commit/7d4060d252354a8d650a3c50256fe3679a40691d
 mussels_version: "0.3"
 type: recipe
 platforms:
