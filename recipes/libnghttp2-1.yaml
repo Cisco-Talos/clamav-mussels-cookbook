@@ -142,6 +142,9 @@ platforms:
           cd build
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
+            -D BUILD_SHARED_LIBS=OFF \
+            -D BUILD_STATIC_LIBS=ON \
+            -D BUILD_TESTING=OFF \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
