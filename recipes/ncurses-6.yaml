@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         configure: |
-          CFLAGS="-arch x86_64 -arch arm64" ./configure --with-termlib --prefix={install}
+          CFLAGS="-arch x86_64 -arch arm64" ./configure --with-termlib --disable-widec --prefix={install}
         make: |
           make
         install: |
@@ -37,7 +37,7 @@ platforms:
     host-static:
       build_script:
         configure: |
-          CFLAGS="-arch x86_64 -arch arm64" ./configure --with-termlib --prefix={install}
+          CFLAGS="-arch x86_64 -arch arm64" ./configure --with-termlib --disable-widec --prefix={install}
         make: |
           make
         install: |
@@ -53,7 +53,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --with-termlib --prefix={install}
+          ./configure --with-termlib --disable-widec --prefix={install}
         make: |
           gmake
         install: |
@@ -68,7 +68,7 @@ platforms:
     host-static:
       build_script:
         configure: |
-          ./configure --with-termlib --prefix={install}
+          ./configure --with-termlib --disable-widec --prefix={install}
         make: |
           gmake
         install: |
@@ -84,7 +84,7 @@ platforms:
     host:
       build_script:
         configure: |
-          ./configure --with-termlib --prefix={install}
+          ./configure --with-termlib --disable-widec --prefix={install}
         make: |
           make
         install: |
@@ -99,7 +99,7 @@ platforms:
     host-static:
       build_script:
         configure: |
-          ./configure --with-termlib --prefix={install}
+          ./configure --with-termlib --disable-widec --prefix={install}
         make: |
           make
         install: |
