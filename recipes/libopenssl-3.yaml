@@ -205,7 +205,6 @@ platforms:
         - clang
   Windows:
     arm:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -234,7 +233,6 @@ platforms:
         - perl
         - visualstudio>=2017
     arm64:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -263,7 +261,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x64:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -293,7 +290,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x86:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -323,7 +319,6 @@ platforms:
         - perl
         - visualstudio>=2017
     arm-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -352,7 +347,6 @@ platforms:
         - perl
         - visualstudio>=2017
     arm64-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -381,7 +375,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x64-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -411,7 +404,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x86-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
