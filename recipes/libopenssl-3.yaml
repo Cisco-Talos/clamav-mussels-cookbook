@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libopenssl
-version: "3.2.1"
-url: https://www.openssl.org/source/openssl-3.2.1.tar.gz
+version: "3.3.1"
+url: https://www.openssl.org/source/openssl-3.3.1.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -22,33 +22,33 @@ platforms:
     host:
       build_script:
         configure: |
-          mkdir ../openssl-3.1-arm64
-          cp -r ./* ../openssl-3.1-arm64/.
-          cp -r ../openssl-3.1-arm64 ../openssl-3.1-x86_64
-          cd ../openssl-3.1-arm64
+          mkdir ../openssl-3-arm64
+          cp -r ./* ../openssl-3-arm64/.
+          cp -r ../openssl-3-arm64 ../openssl-3-x86_64
+          cd ../openssl-3-arm64
           ./Configure --libdir=lib darwin64-arm64-cc no-asm zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
-          cd ../openssl-3.1-x86_64
+          cd ../openssl-3-x86_64
           ./Configure --libdir=lib darwin64-x86_64-cc zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}"
           cd ..
         make: |
-          cd ../openssl-3.1-arm64
+          cd ../openssl-3-arm64
           make
-          cd ../openssl-3.1-x86_64
+          cd ../openssl-3-x86_64
           make
           cd ..
-          lipo -create openssl-3.1-arm64/libcrypto.3.dylib openssl-3.1-x86_64/libcrypto.3.dylib -output libcrypto.3.dylib
-          lipo -create openssl-3.1-arm64/libssl.3.dylib openssl-3.1-x86_64/libssl.3.dylib -output libssl.3.dylib
+          lipo -create openssl-3-arm64/libcrypto.3.dylib openssl-3-x86_64/libcrypto.3.dylib -output libcrypto.3.dylib
+          lipo -create openssl-3-arm64/libssl.3.dylib openssl-3-x86_64/libssl.3.dylib -output libssl.3.dylib
         install: |
-          cd ../openssl-3.1-arm64
+          cd ../openssl-3-arm64
           make install_sw
           rm -r ./test
-          cd ../openssl-3.1-x86_64
+          cd ../openssl-3-x86_64
           make install_sw
           rm -r ./test
           cd ..
@@ -67,17 +67,17 @@ platforms:
     host-static:
       build_script:
         configure: |
-          mkdir ../openssl-3.1-arm64
-          cp -r ./* ../openssl-3.1-arm64/.
-          cp -r ../openssl-3.1-arm64 ../openssl-3.1-x86_64
-          cd ../openssl-3.1-arm64
+          mkdir ../openssl-3-arm64
+          cp -r ./* ../openssl-3-arm64/.
+          cp -r ../openssl-3-arm64 ../openssl-3-x86_64
+          cd ../openssl-3-arm64
           ./Configure darwin64-arm64-cc no-asm zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
               --prefix="{install}" \
               no-shared \
               no-zlib-dynamic
-          cd ../openssl-3.1-x86_64
+          cd ../openssl-3-x86_64
           ./Configure darwin64-x86_64-cc zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
@@ -86,16 +86,16 @@ platforms:
               no-zlib-dynamic
           cd ..
         make: |
-          cd ../openssl-3.1-arm64
+          cd ../openssl-3-arm64
           make
-          cd ../openssl-3.1-x86_64
+          cd ../openssl-3-x86_64
           make
           rm -r ./test
           cd ..
-          lipo -create openssl-3.1-arm64/libcrypto.a openssl-3.1-x86_64/libcrypto.a -output libcrypto.a
-          lipo -create openssl-3.1-arm64/libssl.a openssl-3.1-x86_64/libssl.a -output libssl.a
+          lipo -create openssl-3-arm64/libcrypto.a openssl-3-x86_64/libcrypto.a -output libcrypto.a
+          lipo -create openssl-3-arm64/libssl.a openssl-3-x86_64/libssl.a -output libssl.a
         install: |
-          cd ../openssl-3.1-arm64
+          cd ../openssl-3-arm64
           make install
           rm -r ./test
           cd ..
@@ -205,7 +205,6 @@ platforms:
         - clang
   Windows:
     arm:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -234,7 +233,6 @@ platforms:
         - perl
         - visualstudio>=2017
     arm64:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -263,7 +261,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x64:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -293,7 +290,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x86:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -323,7 +319,6 @@ platforms:
         - perl
         - visualstudio>=2017
     arm-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -352,7 +347,6 @@ platforms:
         - perl
         - visualstudio>=2017
     arm64-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -381,7 +375,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x64-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
@@ -411,7 +404,6 @@ platforms:
         - perl
         - visualstudio>=2017
     x86-debug:
-      patches: libopenssl-3.2.1-patches
       build_script:
         configure: |
           CALL set PATH={libs};%PATH%
