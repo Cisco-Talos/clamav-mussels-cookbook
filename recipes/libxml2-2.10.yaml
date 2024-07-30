@@ -13,8 +13,11 @@
 # limitations under the License.
 
 name: libxml2
-version: "2.12.6"
-url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.12.6/libxml2-v2.12.6.tar.gz
+version: "2.13.3"
+url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.13.3/libxml2-v2.13.3.tar.gz
+archive_name_change:
+  - libxml2-v2.13.0-cdd2575f7fbab1d8162600f4048bc37503c80e28
+  - libxml2-v2.13.3
 mussels_version: "0.3"
 type: recipe
 platforms:
