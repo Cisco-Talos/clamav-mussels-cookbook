@@ -49,29 +49,29 @@ platforms:
     host:
       build_script:
         make: |
-          gmake CFLAGS="-fPIC"
+          CC=clang gmake CFLAGS="-fPIC"
         install: |
-          gmake install PREFIX={install}
+          CC=clang gmake install PREFIX={install}
       dependencies: []
       install_paths:
         license/libbz2:
           - LICENSE
       required_tools:
         - gmake
-        - gcc
+        - clang
     host-static:
       build_script:
         make: |
-          gmake CFLAGS="-fPIC"
+          CC=clang gmake CFLAGS="-fPIC"
         install: |
-          gmake install PREFIX={install}
+          CC=clang gmake install PREFIX={install}
       dependencies: []
       install_paths:
         license/libbz2:
           - LICENSE
       required_tools:
         - gmake
-        - gcc
+        - clang
   Linux:
     host:
       build_script:
