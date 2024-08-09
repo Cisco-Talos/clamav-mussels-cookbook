@@ -298,7 +298,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
@@ -337,7 +339,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
@@ -376,7 +380,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
@@ -415,7 +421,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
@@ -454,7 +462,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
@@ -493,7 +503,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
@@ -532,7 +544,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
@@ -571,7 +585,9 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
