@@ -14,11 +14,11 @@
 
 # TODO: Rewrite this to use the new CMake build system, when unit test support is complete.
 name: clamav
-version: "1.1.0"
-url: https://github.com/Cisco-Talos/clamav/archive/rel/1.1.zip
+version: "1.5.0"
+url: https://github.com/Cisco-Talos/clamav/archive/main.zip
 archive_name_change:
-  - "1.1.0"
-  - clamav-rel-1.1
+  - "main"
+  - clamav-main
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -33,6 +33,7 @@ platforms:
             -D CMAKE_MODULE_PATH={install}/lib/cmake                  \
             -D CMAKE_BUILD_TYPE=Release                               \
             -D ENABLE_EXAMPLES=OFF                                    \
+            -D ENABLE_MILTER=OFF                                      \
             -D JSONC_INCLUDE_DIR="{install}/include/json-c"           \
             -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
             -D ENABLE_JSON_SHARED=OFF                                 \
@@ -95,30 +96,31 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE                  \
-            -D CMAKE_PREFIX_PATH={install}                            \
-            -D CMAKE_INSTALL_PREFIX="{install}"                       \
-            -D CMAKE_MODULE_PATH={install}/lib/cmake                  \
-            -D CMAKE_BUILD_TYPE=Release                               \
-            -D ENABLE_EXAMPLES=OFF                                    \
-            -D JSONC_INCLUDE_DIR="{install}/include/json-c"           \
-            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
-            -D ENABLE_JSON_SHARED=OFF                                 \
-            -D BZIP2_INCLUDE_DIR="{install}/include"                  \
-            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"  \
-            -D OPENSSL_ROOT_DIR="{install}"                           \
-            -D OPENSSL_INCLUDE_DIR="{install}/include"                \
-            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a"     \
-            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.a"           \
-            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"        \
-            -D LIBXML2_LIBRARY="{install}/lib/libxml2.a"              \
-            -D PCRE2_INCLUDE_DIR="{install}/include"                  \
-            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.a"             \
-            -D CURSES_INCLUDE_DIR="{install}/include"                 \
-            -D CURSES_LIBRARY="{install}/lib/libncurses.a"            \
-            -D ZLIB_INCLUDE_DIR="{install}/include"                   \
-            -D ZLIB_LIBRARY="{install}/lib/libz.a"                    \
-            -D LIBCHECK_INCLUDE_DIR="{install}/include"               \
+            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE              \
+            -D CMAKE_PREFIX_PATH={install}                        \
+            -D CMAKE_INSTALL_PREFIX="{install}"                   \
+            -D CMAKE_MODULE_PATH={install}/lib/cmake              \
+            -D CMAKE_BUILD_TYPE=Release                           \
+            -D ENABLE_EXAMPLES=OFF                                \
+            -D ENABLE_MILTER=OFF                                  \
+            -D JSONC_INCLUDE_DIR="{install}/include/json-c"       \
+            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"          \
+            -D ENABLE_JSON_SHARED=OFF                             \
+            -D BZIP2_INCLUDE_DIR="{install}/include"              \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"     \
+            -D OPENSSL_ROOT_DIR="{install}"                       \
+            -D OPENSSL_INCLUDE_DIR="{install}/include"            \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a" \
+            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.a"       \
+            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"    \
+            -D LIBXML2_LIBRARY="{install}/lib/libxml2.a"          \
+            -D PCRE2_INCLUDE_DIR="{install}/include"              \
+            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.a"         \
+            -D CURSES_INCLUDE_DIR="{install}/include"             \
+            -D CURSES_LIBRARY="{install}/lib/libncurses.a"        \
+            -D ZLIB_INCLUDE_DIR="{install}/include"               \
+            -D ZLIB_LIBRARY="{install}/lib/libz.a"                \
+            -D LIBCHECK_INCLUDE_DIR="{install}/include"           \
             -D LIBCHECK_LIBRARY="{install}/lib/libcheck.a"
         make: |
           cd build
@@ -144,7 +146,7 @@ platforms:
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
+        - libbz2<1.1.0
         - libcheck
         - ncurses
       install_paths:
@@ -166,6 +168,7 @@ platforms:
             -D CMAKE_MODULE_PATH={install}/lib/cmake               \
             -D CMAKE_BUILD_TYPE=Release                            \
             -D ENABLE_EXAMPLES=OFF                                 \
+            -D ENABLE_MILTER=OFF                                   \
             -D ENABLE_SYSTEMD=OFF                                  \
             -D JSONC_INCLUDE_DIR="{install}/include/json-c"        \
             -D JSONC_LIBRARY="{install}/lib/libjson-c.a"           \
@@ -230,30 +233,31 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE                  \
-            -D CMAKE_PREFIX_PATH={install}                            \
-            -D CMAKE_INSTALL_PREFIX="{install}"                       \
-            -D CMAKE_MODULE_PATH={install}/lib/cmake                  \
-            -D CMAKE_BUILD_TYPE=Release                               \
-            -D ENABLE_EXAMPLES=OFF                                    \
-            -D JSONC_INCLUDE_DIR="{install}/include/json-c"           \
-            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
-            -D ENABLE_JSON_SHARED=OFF                                 \
-            -D BZIP2_INCLUDE_DIR="{install}/include"                  \
-            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"  \
-            -D OPENSSL_ROOT_DIR="{install}"                           \
-            -D OPENSSL_INCLUDE_DIR="{install}/include"                \
-            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a"     \
-            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.a"           \
-            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"        \
-            -D LIBXML2_LIBRARY="{install}/lib/libxml2.a"              \
-            -D PCRE2_INCLUDE_DIR="{install}/include"                  \
-            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.a"             \
-            -D CURSES_INCLUDE_DIR="{install}/include"                 \
-            -D CURSES_LIBRARY="{install}/lib/libncurses.a"            \
-            -D ZLIB_INCLUDE_DIR="{install}/include"                   \
-            -D ZLIB_LIBRARY="{install}/lib/libz.a"                    \
-            -D LIBCHECK_INCLUDE_DIR="{install}/include"               \
+            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE              \
+            -D CMAKE_PREFIX_PATH={install}                        \
+            -D CMAKE_INSTALL_PREFIX="{install}"                   \
+            -D CMAKE_MODULE_PATH={install}/lib/cmake              \
+            -D CMAKE_BUILD_TYPE=Release                           \
+            -D ENABLE_EXAMPLES=OFF                                \
+            -D ENABLE_MILTER=OFF                                  \
+            -D JSONC_INCLUDE_DIR="{install}/include/json-c"       \
+            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"          \
+            -D ENABLE_JSON_SHARED=OFF                             \
+            -D BZIP2_INCLUDE_DIR="{install}/include"              \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"     \
+            -D OPENSSL_ROOT_DIR="{install}"                       \
+            -D OPENSSL_INCLUDE_DIR="{install}/include"            \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a" \
+            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.a"       \
+            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"    \
+            -D LIBXML2_LIBRARY="{install}/lib/libxml2.a"          \
+            -D PCRE2_INCLUDE_DIR="{install}/include"              \
+            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.a"         \
+            -D CURSES_INCLUDE_DIR="{install}/include"             \
+            -D CURSES_LIBRARY="{install}/lib/libncurses.a"        \
+            -D ZLIB_INCLUDE_DIR="{install}/include"               \
+            -D ZLIB_LIBRARY="{install}/lib/libz.a"                \
+            -D LIBCHECK_INCLUDE_DIR="{install}/include"           \
             -D LIBCHECK_LIBRARY="{install}/lib/libcheck.a"
         make: |
           cd build
@@ -279,7 +283,7 @@ platforms:
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
+        - libbz2<1.1.0
         - libcheck
         - ncurses
       install_paths:
@@ -302,6 +306,7 @@ platforms:
             -D CMAKE_MODULE_PATH={install}/lib/cmake               \
             -D CMAKE_BUILD_TYPE=Release                            \
             -D ENABLE_EXAMPLES=OFF                                 \
+            -D ENABLE_MILTER=OFF                                   \
             -D ENABLE_SYSTEMD=OFF                                  \
             -D JSONC_INCLUDE_DIR="{install}/include/json-c"        \
             -D JSONC_LIBRARY="{install}/lib/libjson-c.a"           \
@@ -366,30 +371,31 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE                  \
-            -D CMAKE_PREFIX_PATH={install}                            \
-            -D CMAKE_INSTALL_PREFIX="{install}"                       \
-            -D CMAKE_MODULE_PATH={install}/lib/cmake                  \
-            -D CMAKE_BUILD_TYPE=Release                               \
-            -D ENABLE_EXAMPLES=OFF                                    \
-            -D JSONC_INCLUDE_DIR="{install}/include/json-c"           \
-            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"              \
-            -D ENABLE_JSON_SHARED=OFF                                 \
-            -D BZIP2_INCLUDE_DIR="{install}/include"                  \
-            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"  \
-            -D OPENSSL_ROOT_DIR="{install}"                           \
-            -D OPENSSL_INCLUDE_DIR="{install}/include"                \
-            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a"     \
-            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.a"           \
-            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"        \
-            -D LIBXML2_LIBRARY="{install}/lib/libxml2.a"              \
-            -D PCRE2_INCLUDE_DIR="{install}/include"                  \
-            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.a"             \
-            -D CURSES_INCLUDE_DIR="{install}/include"                 \
-            -D CURSES_LIBRARY="{install}/lib/libncurses.a"            \
-            -D ZLIB_INCLUDE_DIR="{install}/include"                   \
-            -D ZLIB_LIBRARY="{install}/lib/libz.a"                    \
-            -D LIBCHECK_INCLUDE_DIR="{install}/include"               \
+            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE              \
+            -D CMAKE_PREFIX_PATH={install}                        \
+            -D CMAKE_INSTALL_PREFIX="{install}"                   \
+            -D CMAKE_MODULE_PATH={install}/lib/cmake              \
+            -D CMAKE_BUILD_TYPE=Release                           \
+            -D ENABLE_EXAMPLES=OFF                                \
+            -D ENABLE_MILTER=OFF                                  \
+            -D JSONC_INCLUDE_DIR="{install}/include/json-c"       \
+            -D JSONC_LIBRARY="{install}/lib/libjson-c.a"          \
+            -D ENABLE_JSON_SHARED=OFF                             \
+            -D BZIP2_INCLUDE_DIR="{install}/include"              \
+            -D BZIP2_LIBRARY_RELEASE="{install}/lib/libbz2.a"     \
+            -D OPENSSL_ROOT_DIR="{install}"                       \
+            -D OPENSSL_INCLUDE_DIR="{install}/include"            \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}/lib/libcrypto.a" \
+            -D OPENSSL_SSL_LIBRARY="{install}/lib/libssl.a"       \
+            -D LIBXML2_INCLUDE_DIR="{install}/include/libxml2"    \
+            -D LIBXML2_LIBRARY="{install}/lib/libxml2.a"          \
+            -D PCRE2_INCLUDE_DIR="{install}/include"              \
+            -D PCRE2_LIBRARY="{install}/lib/libpcre2-8.a"         \
+            -D CURSES_INCLUDE_DIR="{install}/include"             \
+            -D CURSES_LIBRARY="{install}/lib/libncurses.a"        \
+            -D ZLIB_INCLUDE_DIR="{install}/include"               \
+            -D ZLIB_LIBRARY="{install}/lib/libz.a"                \
+            -D LIBCHECK_INCLUDE_DIR="{install}/include"           \
             -D LIBCHECK_LIBRARY="{install}/lib/libcheck.a"
         make: |
           cd build
@@ -415,7 +421,7 @@ platforms:
         - libxml2
         - libopenssl
         - libpcre2
-        - libbz2
+        - libbz2<1.1.0
         - libcheck
         - ncurses
       install_paths:
@@ -428,36 +434,99 @@ platforms:
         - pkgconfig
         - cmake
   Windows:
+    arm64:
+      build_script:
+        configure: |
+          >CMAKE_TOOLCHAIN_ARM64.cmake  echo set(CMAKE_SYSTEM_NAME       Windows)
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(CMAKE_SYSTEM_PROCESSOR  arm64)
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(RUST_COMPILER_TARGET    "aarch64-pc-windows-msvc")
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(HAVE_PRAGMA_PACK        1)
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(HAVE_SAR                1)
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(MMAP_FOR_CROSSCOMPILING OFF)
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(ENABLE_SYSTEMD          OFF)
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(test_run_result "PLEASE_FILL_OUT-FAILED_TO_RUN" CACHE STRING "Result from try_run" FORCE)
+          >>CMAKE_TOOLCHAIN_ARM64.cmake echo set(test_run_result__TRYRUN_OUTPUT "PLEASE_FILL_OUT-NOTFOUND" CACHE STRING "Output from try_run" FORCE)
+          mkdir build
+          cd build
+          CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A arm64 \
+            -D CMAKE_INSTALL_PREFIX="{install}"                          \
+            -D ENABLE_EXAMPLES=OFF                                       \
+            -D JSONC_INCLUDE_DIR="{install}\include\json-c"              \
+            -D JSONC_LIBRARY="{install}\lib\json-c.lib"                  \
+            -D ENABLE_JSON_SHARED=OFF                                    \
+            -D BZIP2_INCLUDE_DIR="{install}\include"                     \
+            -D BZIP2_LIBRARY_RELEASE="{install}\lib\libbz2.lib"          \
+            -D CURL_INCLUDE_DIR="{install}\include"                      \
+            -D CURL_LIBRARY="{install}\lib\libcurl_imp.lib"              \
+            -D OPENSSL_ROOT_DIR="{install}"                              \
+            -D OPENSSL_INCLUDE_DIR="{install}\include"                   \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib"      \
+            -D OPENSSL_SSL_LIBRARY="{install}\lib\libssl.lib"            \
+            -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"           \
+            -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"               \
+            -D PCRE2_INCLUDE_DIR="{install}\include"                     \
+            -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"                 \
+            -D CURSES_INCLUDE_DIR="{install}\include"                    \
+            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"               \
+            -D PThreadW32_INCLUDE_DIR="{install}\include"                \
+            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"         \
+            -D ZLIB_INCLUDE_DIR="{install}\include"                      \
+            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"               \
+            -D LIBCHECK_INCLUDE_DIR="{install}\include"                  \
+            -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"         \
+            -D CMAKE_TOOLCHAIN_FILE="..\CMAKE_TOOLCHAIN_ARM64.cmake"     \
+            -D HAVE_PRAGMA_PACK=1                                        \
+            -D HAVE_SAR=1
+        make: |
+          cd build
+          cmake --build . --config Release
+        install: |
+          cd build
+          cmake --build . --config Release --target install
+      dependencies:
+        - libz
+        - libcurl
+        - libjson_c
+        - pthreads_win32
+        - libxml2
+        - libopenssl
+        - libpcre2
+        - libbz2<1.1.0
+        - pdcurses
+        - libcheck
+      required_tools:
+        - cmake
+        - visualstudio>=2017
     x64:
       build_script:
         configure: |
           mkdir build
           cd build
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
-            -D CMAKE_INSTALL_PREFIX="{install}"                     \
-            -D ENABLE_EXAMPLES=OFF                                  \
-            -D JSONC_INCLUDE_DIR="{install}\include\json-c"         \
-            -D JSONC_LIBRARY="{install}\lib\json-c.lib"             \
-            -D ENABLE_JSON_SHARED=OFF                               \
-            -D BZIP2_INCLUDE_DIR="{install}\include"                \
-            -D BZIP2_LIBRARY_RELEASE="{install}\lib\libbz2.lib"     \
-            -D CURL_INCLUDE_DIR="{install}\include"                 \
-            -D CURL_LIBRARY="{install}\lib\libcurl_imp.lib"         \
-            -D OPENSSL_ROOT_DIR="{install}"                         \
-            -D OPENSSL_INCLUDE_DIR="{install}\include"              \
-            -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib" \
-            -D OPENSSL_SSL_LIBRARY="{install}\lib\libssl.lib"       \
-            -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"      \
-            -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"          \
-            -D PCRE2_INCLUDE_DIR="{install}\include"                \
-            -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"            \
-            -D CURSES_INCLUDE_DIR="{install}\include"               \
-            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"          \
-            -D PThreadW32_INCLUDE_DIR="{install}\include"           \
-            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"    \
-            -D ZLIB_INCLUDE_DIR="{install}\include"                 \
-            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"          \
-            -D LIBCHECK_INCLUDE_DIR="{install}\include"             \
+            -D CMAKE_INSTALL_PREFIX="{install}"                        \
+            -D ENABLE_EXAMPLES=OFF                                     \
+            -D JSONC_INCLUDE_DIR="{install}\include\json-c"            \
+            -D JSONC_LIBRARY="{install}\lib\json-c.lib"                \
+            -D ENABLE_JSON_SHARED=OFF                                  \
+            -D BZIP2_INCLUDE_DIR="{install}\include"                   \
+            -D BZIP2_LIBRARY_RELEASE="{install}\lib\libbz2.lib"        \
+            -D CURL_INCLUDE_DIR="{install}\include"                    \
+            -D CURL_LIBRARY="{install}\lib\libcurl_imp.lib"            \
+            -D OPENSSL_ROOT_DIR="{install}"                            \
+            -D OPENSSL_INCLUDE_DIR="{install}\include"                 \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib"    \
+            -D OPENSSL_SSL_LIBRARY="{install}\lib\libssl.lib"          \
+            -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"         \
+            -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"             \
+            -D PCRE2_INCLUDE_DIR="{install}\include"                   \
+            -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"               \
+            -D CURSES_INCLUDE_DIR="{install}\include"                  \
+            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"             \
+            -D PThreadW32_INCLUDE_DIR="{install}\include"              \
+            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"       \
+            -D ZLIB_INCLUDE_DIR="{install}\include"                    \
+            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"             \
+            -D LIBCHECK_INCLUDE_DIR="{install}\include"                \
             -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"
         make: |
           cd build
@@ -485,30 +554,30 @@ platforms:
           mkdir build
           cd build
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
-            -D CMAKE_INSTALL_PREFIX="{install}"                     \
-            -D ENABLE_EXAMPLES=OFF                                  \
-            -D JSONC_INCLUDE_DIR="{install}\include\json-c"         \
-            -D JSONC_LIBRARY="{install}\lib\json-c.lib"             \
-            -D ENABLE_JSON_SHARED=OFF                               \
-            -D BZIP2_INCLUDE_DIR="{install}\include"                \
-            -D BZIP2_LIBRARY_RELEASE="{install}\lib\libbz2.lib"     \
-            -D CURL_INCLUDE_DIR="{install}\include"                 \
-            -D CURL_LIBRARY="{install}\lib\libcurl_imp.lib"         \
-            -D OPENSSL_ROOT_DIR="{install}"                         \
-            -D OPENSSL_INCLUDE_DIR="{install}\include"              \
-            -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib" \
-            -D OPENSSL_SSL_LIBRARY="{install}\lib\libssl.lib"       \
-            -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"      \
-            -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"          \
-            -D PCRE2_INCLUDE_DIR="{install}\include"                \
-            -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"            \
-            -D CURSES_INCLUDE_DIR="{install}\include"               \
-            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"          \
-            -D PThreadW32_INCLUDE_DIR="{install}\include"           \
-            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC2.lib"    \
-            -D ZLIB_INCLUDE_DIR="{install}\include"                 \
-            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"          \
-            -D LIBCHECK_INCLUDE_DIR="{install}\include"             \
+            -D CMAKE_INSTALL_PREFIX="{install}"                          \
+            -D ENABLE_EXAMPLES=OFF                                       \
+            -D JSONC_INCLUDE_DIR="{install}\include\json-c"              \
+            -D JSONC_LIBRARY="{install}\lib\json-c.lib"                  \
+            -D ENABLE_JSON_SHARED=OFF                                    \
+            -D BZIP2_INCLUDE_DIR="{install}\include"                     \
+            -D BZIP2_LIBRARY_RELEASE="{install}\lib\libbz2.lib"          \
+            -D CURL_INCLUDE_DIR="{install}\include"                      \
+            -D CURL_LIBRARY="{install}\lib\libcurl_imp.lib"              \
+            -D OPENSSL_ROOT_DIR="{install}"                              \
+            -D OPENSSL_INCLUDE_DIR="{install}\include"                   \
+            -D OPENSSL_CRYPTO_LIBRARY="{install}\lib\libcrypto.lib"      \
+            -D OPENSSL_SSL_LIBRARY="{install}\lib\libssl.lib"            \
+            -D LIBXML2_INCLUDE_DIR="{install}\include\libxml2"           \
+            -D LIBXML2_LIBRARY="{install}\lib\libxml2.lib"               \
+            -D PCRE2_INCLUDE_DIR="{install}\include"                     \
+            -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"                 \
+            -D CURSES_INCLUDE_DIR="{install}\include"                    \
+            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"               \
+            -D PThreadW32_INCLUDE_DIR="{install}\include"                \
+            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"         \
+            -D ZLIB_INCLUDE_DIR="{install}\include"                      \
+            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"               \
+            -D LIBCHECK_INCLUDE_DIR="{install}\include"                  \
             -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"
         make: |
           cd build

@@ -505,7 +505,7 @@ platforms:
             -D CURSES_INCLUDE_DIR="{install}\include"               \
             -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"          \
             -D PThreadW32_INCLUDE_DIR="{install}\include"           \
-            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC2.lib"    \
+            -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"    \
             -D ZLIB_INCLUDE_DIR="{install}\include"                 \
             -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"          \
             -D LIBCHECK_INCLUDE_DIR="{install}\include"             \
