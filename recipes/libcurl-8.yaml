@@ -42,6 +42,7 @@ platforms:
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.dylib" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -86,6 +87,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -128,6 +130,7 @@ platforms:
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -172,6 +175,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF \
             -D CMAKE_INSTALL_LIBDIR=lib \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -213,6 +217,7 @@ platforms:
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -258,6 +263,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF \
             -D CMAKE_INSTALL_LIBDIR=lib \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
