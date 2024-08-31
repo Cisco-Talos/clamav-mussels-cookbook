@@ -307,7 +307,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -348,7 +348,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -389,7 +389,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -430,7 +430,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -471,7 +471,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -512,7 +512,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -553,7 +553,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -594,7 +594,7 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
