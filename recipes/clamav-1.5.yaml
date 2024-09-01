@@ -467,7 +467,7 @@ platforms:
             -D PCRE2_INCLUDE_DIR="{install}\include"                     \
             -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"                 \
             -D PDCURSES_INCLUDE_DIR="{install}\include"                  \
-            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"               \
+            -D CURSES_LIBRARIES="{install}\lib\pdcurses.lib"               \
             -D PThreadW32_INCLUDE_DIR="{install}\include"                \
             -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"         \
             -D ZLIB_INCLUDE_DIR="{install}\include"                      \
@@ -521,7 +521,7 @@ platforms:
             -D PCRE2_INCLUDE_DIR="{install}\include"                   \
             -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"               \
             -D PDCURSES_INCLUDE_DIR="{install}\include"                \
-            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"             \
+            -D CURSES_LIBRARIES="{install}\lib\pdcurses.lib"             \
             -D PThreadW32_INCLUDE_DIR="{install}\include"              \
             -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"       \
             -D ZLIB_INCLUDE_DIR="{install}\include"                    \
@@ -572,7 +572,7 @@ platforms:
             -D PCRE2_INCLUDE_DIR="{install}\include"                     \
             -D PCRE2_LIBRARY="{install}\lib\pcre2-8.lib"                 \
             -D PDCURSES_INCLUDE_DIR="{install}\include"                  \
-            -D CURSES_LIBRARY="{install}\lib\pdcurses.lib"               \
+            -D CURSES_LIBRARIES="{install}\lib\pdcurses.lib"               \
             -D PThreadW32_INCLUDE_DIR="{install}\include"                \
             -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"         \
             -D ZLIB_INCLUDE_DIR="{install}\include"                      \
