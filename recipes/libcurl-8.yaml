@@ -42,6 +42,7 @@ platforms:
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.dylib" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -86,6 +87,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -128,6 +130,7 @@ platforms:
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -172,6 +175,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF \
             -D CMAKE_INSTALL_LIBDIR=lib \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -213,6 +217,7 @@ platforms:
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -258,6 +263,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF \
             -D CMAKE_INSTALL_LIBDIR=lib \
+            -D USE_LIBIDN2=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -298,14 +304,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -337,14 +345,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -376,14 +386,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -415,14 +427,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Release
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/libcurl.dll {install}/lib/
+          cp {install}/bin/libcurl.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -454,14 +468,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -493,14 +509,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -532,14 +550,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0
@@ -571,14 +591,16 @@ platforms:
             -D USE_NGHTTP2=ON \
             -D NGHTTP2_INCLUDE_DIR="{includes}" \
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
-            -D BUILD_CURL_EXE=OFF
+            -D BUILD_CURL_EXE=OFF \
+            -D USE_LIBIDN2=OFF \
+            -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
           CALL cmake.exe --build . --config Debug
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/libcurl-d.dll {install}/lib/
+          cp {install}/bin/libcurl-d.dll {install}/lib/
       dependencies:
         - libopenssl
         - libnghttp2>=1.0.0

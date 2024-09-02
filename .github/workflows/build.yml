@@ -1,0 +1,177 @@
+name: ClamAV Build Test
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-windows-x64:
+    runs-on: windows-2019
+
+    steps:
+      - name: Remove link.exe to avoid conflict with Visual Studio linker
+        run: rm /usr/bin/link.exe
+        shell: bash
+
+      - uses: actions/checkout@v4
+
+      - name: Install Choco Things
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: install nasm
+
+      - name: Install Python Things
+        run: python3 -m pip install pytest mussels
+
+      - name: Install Rust for cross-compiling to arm64
+        run: rustup target add aarch64-pc-windows-msvc
+
+      - uses: lukka/get-cmake@v3.30.3
+
+      - name: Build for x64
+        run: msl build -r clamav -t x64
+
+        # TODO: add test step that clones clamav, sets environment variables, and runs tests
+
+  build-windows-x86:
+    runs-on: windows-2019
+
+    steps:
+      - name: Remove link.exe to avoid conflict with Visual Studio linker
+        run: rm /usr/bin/link.exe
+        shell: bash
+
+      - uses: actions/checkout@v4
+
+      - name: Install Choco Things
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: install nasm
+
+      - name: Install Python Things
+        run: python3 -m pip install pytest mussels
+
+      - name: Install Rust for cross-compiling to arm64
+        run: rustup target add aarch64-pc-windows-msvc
+
+      - uses: lukka/get-cmake@v3.30.3
+
+      - name: Build for x86
+        run: msl build -r clamav -t x86
+
+        # TODO: add test step that clones clamav, sets environment variables, and runs tests
+
+  build-windows-arm64:
+    runs-on: windows-2019
+
+    steps:
+      - name: Remove link.exe to avoid conflict with Visual Studio linker
+        run: rm /usr/bin/link.exe
+        shell: bash
+
+      - uses: actions/checkout@v4
+
+      - name: Install Choco Things
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: install nasm
+
+      - name: Install Python Things
+        run: python3 -m pip install pytest mussels
+
+      - name: Install Rust for cross-compiling to arm64
+        run: rustup target add aarch64-pc-windows-msvc
+
+      - uses: lukka/get-cmake@v3.30.3
+
+      - name: Build for arm64
+        run: msl build -r clamav -t arm64
+
+        # TODO: add test step that clones clamav, sets environment variables, and runs tests
+
+  build-macos-dynamic:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Brew Things
+        run: brew install bison flex
+
+      - name: Install Python Things
+        run: python3 -m pip install mussels pytest setuptools --break-system-packages
+
+      - uses: lukka/get-cmake@v3.30.3
+
+      - name: Build for using dynamic libraries for host platform
+        shell: bash
+        run: msl build -r clamav -t host
+
+        # TODO: add test step that clones clamav, sets environment variables, and runs tests
+
+  build-macos-static:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Brew Things
+        run: brew install bison flex
+
+      - name: Install Python Things
+        run: python3 -m pip install mussels pytest setuptools --break-system-packages
+
+      - uses: lukka/get-cmake@v3.30.3
+
+      - name: Build for using static libraries for host platform
+        shell: bash
+        run: msl build -r clamav -t host-static
+
+        # TODO: add test step that clones clamav, sets environment variables, and runs tests
+
+  build-ubuntu-dynamic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update package listings
+        run: sudo apt-get update
+
+      - name: Install Apt-get Things
+        run: sudo apt-get install -y bison flex valgrind pipx
+
+      - name: Install Python Things
+        run: pipx install pytest mussels
+
+      - uses: lukka/get-cmake@v3.30.3
+
+      - name: Build for using dynamic libraries for host platform
+        shell: bash
+        run: msl build -r clamav -t host
+
+        # TODO: add test step that clones clamav, sets environment variables, and runs tests
+
+  build-ubuntu-static:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update package listings
+        run: sudo apt-get update
+
+      - name: Install Apt-get Things
+        run: sudo apt-get install -y bison flex valgrind pipx
+
+      - name: Install Python Things
+        run: pipx install pytest mussels
+
+      - uses: lukka/get-cmake@v3.30.3
+
+      - name: Build for using static libraries for host platform
+        shell: bash
+        run: msl build -r clamav -t host-static
+
+        # TODO: add test step that clones clamav, sets environment variables, and runs tests

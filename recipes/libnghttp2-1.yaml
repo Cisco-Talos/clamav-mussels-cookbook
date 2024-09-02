@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libnghttp2
-version: "1.62.1"
-url: https://github.com/nghttp2/nghttp2/archive/refs/tags/v1.62.1.zip
+version: "1.63.0"
+url: https://github.com/nghttp2/nghttp2/archive/refs/tags/v1.63.0.zip
 archive_name_change:
   - v
   - nghttp2-
@@ -28,7 +28,7 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -G Xcode -T buildsystem=1 \
+            -G Xcode \
             -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
@@ -41,7 +41,7 @@ platforms:
             -D ZLIB_LIBRARY="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON -D BUILD_STATIC_LIBS=OFF \
-            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF -D ENABLE_DOC=OFF
         make: |
           cd build
           cmake --build . --config RelWithDebInfo
@@ -66,7 +66,7 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -G Xcode -T buildsystem=1 \
+            -G Xcode \
             -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
@@ -79,7 +79,7 @@ platforms:
             -D ZLIB_LIBRARY="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF -D BUILD_STATIC_LIBS=ON \
-            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF -D ENABLE_DOC=OFF
         make: |
           cd build
           cmake --build . --config RelWithDebInfo
@@ -106,6 +106,7 @@ platforms:
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF -D ENABLE_DOC=OFF \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
@@ -144,7 +145,7 @@ platforms:
             -D CMAKE_BUILD_TYPE=Release \
             -D BUILD_SHARED_LIBS=OFF \
             -D BUILD_STATIC_LIBS=ON \
-            -D BUILD_TESTING=OFF \
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF -D ENABLE_DOC=OFF \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
@@ -186,6 +187,7 @@ platforms:
           cmake .. \
             -D CMAKE_BUILD_TYPE=Release \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF -D ENABLE_DOC=OFF \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D OPENSSL_LIBRARIES="{libs}" \
@@ -232,7 +234,7 @@ platforms:
             -D ZLIB_ROOT="{includes}" \
             -D ZLIB_LIBRARY="{libs}/libz.a" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
-            -D ENABLE_LIB_ONLY=ON \
+            -D ENABLE_LIB_ONLY=ON -D BUILD_TESTING=OFF -D ENABLE_DOC=OFF \
             -D ENABLE_STATIC_LIB=ON \
             -D ENABLE_SHARED_LIB=OFF \
             -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
@@ -263,6 +265,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -293,6 +296,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -323,6 +327,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -353,6 +358,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -383,6 +389,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -413,6 +420,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A ARM64 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -443,6 +451,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A x64 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIRS="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
@@ -473,6 +482,7 @@ platforms:
           CALL cmake.exe .. -G "{visualstudio.cmake_generator}" -A Win32 \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
+            -D ENABLE_LIB_ONLY=ON \
             -D OPENSSL_ROOT_DIR="{install}" \
             -D OPENSSL_INCLUDE_DIR="{includes}" \
             -D LIB_EAY_RELEASE="{libs}/libcrypto.lib" \
