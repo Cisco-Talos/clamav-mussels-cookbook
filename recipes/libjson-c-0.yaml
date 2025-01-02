@@ -27,6 +27,7 @@ platforms:
           cmake .. \
             -G Xcode \
             -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+            -D DISABLE_WERROR=ON \
             -D CMAKE_INSTALL_PREFIX="{install}"
         make: |
           cd build
@@ -50,6 +51,7 @@ platforms:
           cmake .. \
             -G Xcode \
             -D CMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+            -D DISABLE_WERROR=ON \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_STATIC_LIBS=ON \
             -D BUILD_SHARED_LIBS=OFF
