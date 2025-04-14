@@ -89,6 +89,7 @@ platforms:
         - clang
         - pkgconfig
         - cmake
+        - rust
     host-static:
       build_script:
         configure: |
@@ -155,6 +156,7 @@ platforms:
         - clang
         - pkgconfig
         - cmake
+        - rust
   Linux:
     host:
       build_script:
@@ -224,6 +226,7 @@ platforms:
         - patchelf
         - pkgconfig
         - cmake
+        - rust
     host-static:
       build_script:
         configure: |
@@ -291,6 +294,7 @@ platforms:
         - patchelf
         - pkgconfig
         - cmake
+        - rust
   Freebsd:
     host:
       build_script:
@@ -360,6 +364,7 @@ platforms:
         - patchelf
         - pkgconfig
         - cmake
+        - rust
     host-static:
       build_script:
         configure: |
@@ -427,6 +432,7 @@ platforms:
         - patchelf
         - pkgconfig
         - cmake
+        - rust
   Windows:
     x64:
       build_script:
@@ -479,6 +485,7 @@ platforms:
       required_tools:
         - cmake
         - visualstudio>=2017
+        - rust
     x86:
       build_script:
         configure: |
@@ -530,3 +537,4 @@ platforms:
       required_tools:
         - cmake
         - visualstudio>=2017
+        - rust
