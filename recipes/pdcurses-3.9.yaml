@@ -27,7 +27,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat amd64_arm
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y PLATFORM=ARM
       dependencies: []
       install_paths:
         include:
@@ -45,7 +45,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat amd64_arm64
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM64
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y PLATFORM=ARM64
       dependencies: []
       install_paths:
         include:
@@ -63,7 +63,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat amd64
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y
       dependencies: []
       install_paths:
         include:
@@ -81,7 +81,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat x86
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y
       dependencies: []
       install_paths:
         include:
@@ -99,7 +99,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat amd64_arm
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM DEBUG=Y
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y PLATFORM=ARM DEBUG=Y
       dependencies: []
       install_paths:
         include:
@@ -117,7 +117,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat amd64_arm64
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y PLATFORM=ARM64 DEBUG=Y
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y PLATFORM=ARM64 DEBUG=Y
       dependencies: []
       install_paths:
         include:
@@ -135,7 +135,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat amd64
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y DEBUG=Y
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y DEBUG=Y
       dependencies: []
       install_paths:
         include:
@@ -153,7 +153,7 @@ platforms:
         make: |
           CD wincon
           CALL vcvarsall.bat x86
-          CALL nmake -f Makefile.vc WIDE=Y DLL=Y DEBUG=Y
+          CALL nmake -f Makefile.vc WIDE=Y UTF8=Y DLL=Y DEBUG=Y
       dependencies: []
       install_paths:
         include:

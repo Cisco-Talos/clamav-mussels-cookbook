@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libcurl
-version: "8.11.1"
-url: https://curl.se/download/curl-8.11.1.zip
+version: "8.14.1"
+url: https://curl.se/download/curl-8.14.1.zip
 mussels_version: "0.3"
 type: recipe
 platforms:
@@ -43,6 +43,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.dylib" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -88,6 +89,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -131,6 +133,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -176,6 +179,7 @@ platforms:
             -D BUILD_SHARED_LIBS=OFF \
             -D CMAKE_INSTALL_LIBDIR=lib \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -218,6 +222,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/libnghttp2.so" \
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -264,6 +269,7 @@ platforms:
             -D BUILD_SHARED_LIBS=OFF \
             -D CMAKE_INSTALL_LIBDIR=lib \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D BUILD_CURL_EXE=OFF
         make: |
           cd build
@@ -306,6 +312,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
@@ -347,6 +354,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
@@ -388,6 +396,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
@@ -429,6 +438,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
@@ -470,6 +480,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
@@ -511,6 +522,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
@@ -552,6 +564,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build
@@ -593,6 +606,7 @@ platforms:
             -D NGHTTP2_LIBRARY="{libs}/nghttp2.lib" \
             -D BUILD_CURL_EXE=OFF \
             -D USE_LIBIDN2=OFF \
+            -D CURL_USE_LIBPSL=OFF -D CURL_BROTLI=OFF -D CURL_ZSTD=OFF \
             -D PKG_CONFIG_EXECUTABLE=none
         make: |
           cd build

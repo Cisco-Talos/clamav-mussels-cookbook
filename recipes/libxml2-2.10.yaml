@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libxml2
-version: "2.13.5"
-url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.13.5/libxml2-v2.13.5.tar.gz
+version: "2.14.4"
+url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.14.4/libxml2-v2.14.4.tar.gz
 # archive_name_change:
 #   - libxml2-v2.13.5-cdd2575f7fbab1d8162600f4048bc37503c80e28
 #   - libxml2-v2.13.5

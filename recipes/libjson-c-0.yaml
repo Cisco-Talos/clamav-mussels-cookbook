@@ -39,6 +39,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - make
         - xcode
@@ -65,6 +66,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - make
         - xcode
@@ -88,6 +90,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - make
         - gcc
@@ -112,6 +115,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - make
         - gcc
@@ -134,6 +138,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - gmake
         - clang
@@ -158,6 +163,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - gmake
         - clang
@@ -180,6 +186,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - cmake
         - visualstudio>=2017
@@ -222,6 +229,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - cmake
         - visualstudio>=2017
@@ -243,6 +251,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - cmake
         - visualstudio>=2017
@@ -264,6 +273,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - cmake
         - visualstudio>=2017
@@ -285,6 +295,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - cmake
         - visualstudio>=2017
@@ -306,6 +317,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - cmake
         - visualstudio>=2017
@@ -327,6 +339,7 @@ platforms:
       install_paths:
         license/libjson_c:
           - COPYING
+      patches: json-c-patches
       required_tools:
         - cmake
         - visualstudio>=2017
