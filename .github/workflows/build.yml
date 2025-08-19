@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-windows-x64:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
       - name: Remove link.exe to avoid conflict with Visual Studio linker
@@ -35,7 +35,7 @@ jobs:
         # TODO: add test step that clones clamav, sets environment variables, and runs tests
 
   build-windows-x86:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
       - name: Remove link.exe to avoid conflict with Visual Studio linker
@@ -63,7 +63,7 @@ jobs:
         # TODO: add test step that clones clamav, sets environment variables, and runs tests
 
   build-windows-arm64:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
       - name: Remove link.exe to avoid conflict with Visual Studio linker
