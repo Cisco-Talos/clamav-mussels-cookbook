@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libcurl
-version: "8.15.0"
-url: https://curl.se/download/curl-8.15.0.zip
+version: "8.16.0"
+url: https://curl.se/download/curl-8.16.0.zip
 mussels_version: "0.3"
 type: recipe
 platforms:
