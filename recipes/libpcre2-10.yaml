@@ -22,7 +22,7 @@ platforms:
     host:
       build_script:
         configure: |
-          CFLAGS="-arch x86_64 -arch arm64" ./configure \
+          CFLAGS="-arch x86_64 -arch arm64" LDFLAGS="-Wl,-headerpad_max_install_names" ./configure \
             --prefix="{install}" \
             --disable-dependency-tracking \
             --disable-static
