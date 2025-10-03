@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libopenssl
-version: "3.2.5"
-url: https://www.openssl.org/source/openssl-3.2.5.tar.gz
+version: "3.2.6"
+url: https://www.openssl.org/source/openssl-3.2.6.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -29,12 +29,14 @@ platforms:
           ./Configure --libdir=lib darwin64-arm64-cc no-asm zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
-              --prefix="{install}"
+              --prefix="{install}" \
+              '-Wl,-headerpad_max_install_names'
           cd ../openssl-3-x86_64
           ./Configure --libdir=lib darwin64-x86_64-cc zlib \
               --with-zlib-include="{includes}" \
               --with-zlib-lib="{libs}" \
-              --prefix="{install}"
+              --prefix="{install}" \
+              '-Wl,-headerpad_max_install_names'
           cd ..
         make: |
           cd ../openssl-3-arm64
