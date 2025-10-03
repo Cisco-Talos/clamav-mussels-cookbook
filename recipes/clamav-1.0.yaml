@@ -17,7 +17,7 @@ name: clamav
 version: "1.0"
 url: https://github.com/Cisco-Talos/clamav/archive/rel/1.0.zip
 archive_name_change:
-  - "1.0.0"
+  - "1.0"
   - clamav-rel-1.0
 mussels_version: "0.2"
 type: recipe
