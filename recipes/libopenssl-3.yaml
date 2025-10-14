@@ -99,6 +99,7 @@ platforms:
         install: |
           cd ../openssl-3-arm64
           make install
+          rm -rf {install}/lib/cmake/OpenSSL
           rm -r ./test
           cd ..
           cp libcrypto.a {install}/lib/libcrypto.a
@@ -149,6 +150,7 @@ platforms:
           make
         install: |
           make install_sw
+          rm -rf {install}/lib/cmake/OpenSSL
           rm -r ./test
       dependencies:
         - libz
@@ -196,6 +198,7 @@ platforms:
           gmake
         install: |
           gmake install_sw
+          rm -rf {install}/lib/cmake/OpenSSL
           rm -r ./test
       dependencies:
         - libz
