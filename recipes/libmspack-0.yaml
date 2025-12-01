@@ -40,6 +40,11 @@ platforms:
           cd libmspack
           cd build
           cmake --build . --config RelWithDebInfo --target install
+          # Fix the missing real dylib
+          cd "{install}/lib"
+          if [ ! -f "libmspack.1.0.1.dylib" ] && [ -f "libmspack.1.dylib" ]; then
+            cp libmspack.1.dylib libmspack.1.0.1.dylib
+          fi
       install_paths:
         license/libmspack:
           - libmspack/COPYING.LIB
