@@ -14,7 +14,8 @@
 
 name: libz
 version: "1.3.2"
-url: https://github.com/madler/zlib/releases/download/v1.3.2/zlib-1.3.2.tar.gz
+source:
+  uri: https://github.com/madler/zlib/releases/download/v1.3.2/zlib-1.3.2.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:

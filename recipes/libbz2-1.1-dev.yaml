@@ -14,7 +14,8 @@
 
 name: libbz2
 version: "1.1.0"
-url: https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.tar.gz
+source:
+  uri: https://gitlab.com/bzip2/bzip2/-/archive/master/bzip2-master.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:
