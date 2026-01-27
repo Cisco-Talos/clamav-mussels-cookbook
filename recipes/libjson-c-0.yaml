@@ -14,7 +14,8 @@
 
 name: libjson_c
 version: "0.18.0"
-url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.18.tar.gz
+source:
+  uri: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.18.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:

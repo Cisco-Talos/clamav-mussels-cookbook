@@ -14,7 +14,8 @@
 
 name: libopenssl
 version: "3.5.4"
-url: https://www.openssl.org/source/openssl-3.5.4.tar.gz
+source:
+  uri: https://www.openssl.org/source/openssl-3.5.4.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:

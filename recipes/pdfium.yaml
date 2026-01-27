@@ -1,0 +1,111 @@
+# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: pdfium
+version: "f5c376f93d33709ecd6b0dc8147b14a651ddbfeb"
+source:
+  none: true
+mussels_version: "0.3"
+type: recipe
+platforms:
+  Darwin:
+    host:
+      build_script:
+        configure: |
+          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          gclient sync --revision {version} --no-history --nohooks
+          cd pdfium
+          gn gen --args="clang_use_chrome_plugins=false" {install}
+        make: |
+          ninja -C {install} pdfium
+      dependencies: []
+      required_tools:
+        - make
+        - clang
+        - depot_tools
+    host-static:
+      build_script:
+        configure: |
+          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          gclient sync --revision {version} --no-history --nohooks
+          cd pdfium
+          gn gen --args="clang_use_chrome_plugins=false target_cpu=\"x64\"" out/x64
+          gn gen --args="clang_use_chrome_plugins=false target_cpu=\"arm64\"" out/arm64
+        make: |
+          ninja -C out/x64 pdfium
+          ninja -C out/arm64 pdfium
+          lipo -create out/x64/libpdfium.a out/arm64/libpdfium.a -output {install}/libpdfium.a
+      dependencies: []
+      required_tools:
+        - make
+        - clang
+        - depot_tools
+  FreeBSD:
+    host:
+      build_script:
+        configure: |
+          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          gclient sync --revision {version} --no-history --nohooks
+          cd pdfium
+          gn gen --args="clang_use_chrome_plugins=false" {install}
+        make: |
+          ninja -C {install} pdfium
+      dependencies: []
+      required_tools:
+        - gmake
+        - clang
+        - depot_tools
+    host-static:
+      build_script:
+        configure: |
+          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          gclient sync --revision {version} --no-history --nohooks
+          cd pdfium
+          gn gen --args="clang_use_chrome_plugins=false" {install}
+        make: |
+          ninja -C {install} pdfium
+      dependencies: []
+      required_tools:
+        - gmake
+        - clang
+        - depot_tools
+  Linux:
+    host:
+      build_script:
+        configure: |
+          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          gclient sync --revision {version} --no-history --nohooks
+          cd pdfium
+          gn gen --args="clang_use_chrome_plugins=false" {install}
+        make: |
+          ninja -C {install} pdfium
+      dependencies: []
+      required_tools:
+        - make
+        - gcc
+        - depot_tools
+    host-static:
+      build_script:
+        configure: |
+          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          gclient sync --revision {version} --no-history --nohooks
+          cd pdfium
+          gn gen --args="clang_use_chrome_plugins=false" {install}
+        make: |
+          ninja -C {install} pdfium
+      dependencies: []
+      required_tools:
+        - make
+        - gcc
+        - depot_tools

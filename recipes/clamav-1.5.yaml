@@ -15,7 +15,8 @@
 # TODO: Rewrite this to use the new CMake build system, when unit test support is complete.
 name: clamav
 version: "1.5"
-url: https://github.com/Cisco-Talos/clamav/archive/rel/1.5.zip
+source:
+  uri: https://github.com/Cisco-Talos/clamav/archive/rel/1.5.zip
 archive_name_change:
   - "1.5"
   - clamav-rel-1.5
