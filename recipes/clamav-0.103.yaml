@@ -14,7 +14,8 @@
 
 name: clamav
 version: "0.103.0"
-url: https://www.clamav.net/downloads/production/clamav-0.103.0.tar.gz
+source:
+  uri: https://www.clamav.net/downloads/production/clamav-0.103.0.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:

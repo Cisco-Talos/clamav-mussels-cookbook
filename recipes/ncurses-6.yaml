@@ -14,7 +14,8 @@
 
 name: ncurses
 version: "6.5"
-url: https://invisible-mirror.net/archives/ncurses/ncurses-6.5.tar.gz
+source:
+  uri: https://invisible-mirror.net/archives/ncurses/ncurses-6.5.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:

@@ -14,7 +14,8 @@
 
 name: pthreads_win32
 version: "3.1.0"
-url: https://github.com/GerHobbelt/pthread-win32/archive/refs/tags/version-3.1.0-release.tar.gz
+source:
+  uri: https://github.com/GerHobbelt/pthread-win32/archive/refs/tags/version-3.1.0-release.tar.gz
 archive_name_change:
   - version-3.1.0-release
   - pthread-win32-version-3.1.0-release

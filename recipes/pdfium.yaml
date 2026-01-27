@@ -14,7 +14,8 @@
 
 name: pdfium
 version: "f5c376f93d33709ecd6b0dc8147b14a651ddbfeb"
-url: "NOOP"
+source:
+  none: true
 mussels_version: "0.3"
 type: recipe
 platforms:

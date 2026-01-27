@@ -14,7 +14,8 @@
 
 name: libxml2
 version: "2.15.0"
-url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.15.0/libxml2-v2.15.0.tar.gz
+source:
+  uri: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.15.0/libxml2-v2.15.0.tar.gz
 # archive_name_change:
 #   - libxml2-v2.13.5-cdd2575f7fbab1d8162600f4048bc37503c80e28
 #   - libxml2-v2.13.5

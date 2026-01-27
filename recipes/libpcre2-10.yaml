@@ -14,7 +14,8 @@
 
 name: libpcre2
 version: "10.46"
-url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.46/pcre2-10.46.tar.gz
+source:
+  uri: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.46/pcre2-10.46.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:

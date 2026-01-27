@@ -14,7 +14,8 @@
 
 name: pdcurses
 version: "3.9"
-url: https://github.com/wmcbrine/PDCurses/archive/refs/tags/3.9.tar.gz
+source:
+  uri: https://github.com/wmcbrine/PDCurses/archive/refs/tags/3.9.tar.gz
 archive_name_change:
   - "3.9"
   - "PDCurses-3.9"
