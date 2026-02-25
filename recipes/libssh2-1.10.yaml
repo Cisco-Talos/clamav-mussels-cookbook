@@ -83,6 +83,7 @@ platforms:
         install: |
           cd build
           cmake --build . --config RelWithDebInfo --target install
+          rm -rf {install}/lib/cmake/libssh2
       dependencies:
         - libopenssl>=3.0
         - libz
@@ -159,6 +160,7 @@ platforms:
         install: |
           cd build
           make install
+          rm -rf {install}/lib/cmake/libssh2
       dependencies:
         - libopenssl>=3.0
         - libz
@@ -235,6 +237,7 @@ platforms:
         install: |
           cd build
           make install
+          rm -rf {install}/lib/cmake/libssh2
       dependencies:
         - libopenssl>=3.0
         - libz
@@ -262,7 +265,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF
         make: |
           cd build
@@ -296,7 +299,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF
         make: |
           cd build
@@ -330,7 +333,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF \
             -D BUILD_EXAMPLES=OFF
         make: |
@@ -365,7 +368,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF \
             -D BUILD_EXAMPLES=OFF
         make: |
@@ -400,7 +403,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF
         make: |
           cd build
@@ -434,7 +437,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF
         make: |
           cd build
@@ -468,7 +471,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF
         make: |
           cd build
@@ -502,7 +505,7 @@ platforms:
             -D SSL_EAY_RELEASE="{libs}/libssl.lib" \
             -D ENABLE_ZLIB_COMPRESSION=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BUILD_TESTING=OFF
         make: |
           cd build

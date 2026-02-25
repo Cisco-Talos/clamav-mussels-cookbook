@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libxml2
-version: "2.15.0"
-url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.15.0/libxml2-v2.15.0.tar.gz
+version: "2.15.1"
+url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.15.1/libxml2-v2.15.1.tar.gz
 # archive_name_change:
 #   - libxml2-v2.13.5-cdd2575f7fbab1d8162600f4048bc37503c80e28
 #   - libxml2-v2.13.5
@@ -220,7 +220,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF
@@ -249,7 +249,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF
@@ -278,7 +278,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF
@@ -307,7 +307,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF
@@ -336,7 +336,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF
@@ -366,7 +366,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF
@@ -396,7 +396,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF
@@ -426,7 +426,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D LIBXML2_WITH_LZMA=OFF \
             -D LIBXML2_WITH_ICONV=OFF \
             -D LIBXML2_WITH_PYTHON=OFF

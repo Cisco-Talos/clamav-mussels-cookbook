@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libopenssl
-version: "3.5.4"
-url: https://www.openssl.org/source/openssl-3.5.4.tar.gz
+version: "3.5.5"
+url: https://www.openssl.org/source/openssl-3.5.5.tar.gz
 mussels_version: "0.2"
 type: recipe
 platforms:
@@ -270,7 +270,7 @@ platforms:
         configure: |
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64
-          CALL perl Configure VC-WIN64A zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibstatic.lib"
+          CALL perl Configure VC-WIN64A zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zs.lib"
         make: |
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat amd64
@@ -299,7 +299,7 @@ platforms:
         configure: |
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat x86
-          CALL perl Configure VC-WIN32 zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zlibstatic.lib"
+          CALL perl Configure VC-WIN32 zlib --with-zlib-include="{includes}" --with-zlib-lib="{libs}/zs.lib"
         make: |
           CALL set PATH={libs};%PATH%
           CALL vcvarsall.bat x86
