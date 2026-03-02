@@ -97,7 +97,7 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE              \
+            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=FALSE             \
             -D CMAKE_PREFIX_PATH={install}                        \
             -D CMAKE_INSTALL_PREFIX="{install}"                   \
             -D CMAKE_MODULE_PATH={install}/lib/cmake              \
@@ -236,7 +236,7 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE              \
+            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=FALSE             \
             -D CMAKE_PREFIX_PATH={install}                        \
             -D CMAKE_INSTALL_PREFIX="{install}"                   \
             -D CMAKE_MODULE_PATH={install}/lib/cmake              \
@@ -376,7 +376,7 @@ platforms:
           mkdir build
           cd build
           cmake .. \
-            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=TRUE              \
+            -D CMAKE_FIND_PACKAGE_PREFER_CONFIG=FALSE             \
             -D CMAKE_PREFIX_PATH={install}                        \
             -D CMAKE_INSTALL_PREFIX="{install}"                   \
             -D CMAKE_MODULE_PATH={install}/lib/cmake              \
@@ -477,7 +477,7 @@ platforms:
             -D PThreadW32_INCLUDE_DIR="{install}\include"                \
             -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"         \
             -D ZLIB_INCLUDE_DIR="{install}\include"                      \
-            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"               \
+            -D ZLIB_LIBRARY="{install}\lib\zs.lib"               \
             -D LIBCHECK_INCLUDE_DIR="{install}\include"                  \
             -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"         \
             -D CMAKE_TOOLCHAIN_FILE="..\CMAKE_TOOLCHAIN_ARM64.cmake"     \
@@ -532,7 +532,7 @@ platforms:
             -D PThreadW32_INCLUDE_DIR="{install}\include"              \
             -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"       \
             -D ZLIB_INCLUDE_DIR="{install}\include"                    \
-            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"             \
+            -D ZLIB_LIBRARY="{install}\lib\zs.lib"             \
             -D LIBCHECK_INCLUDE_DIR="{install}\include"                \
             -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"
         make: |
@@ -584,7 +584,7 @@ platforms:
             -D PThreadW32_INCLUDE_DIR="{install}\include"                \
             -D PThreadW32_LIBRARY="{install}\lib\pthreadVC3.lib"         \
             -D ZLIB_INCLUDE_DIR="{install}\include"                      \
-            -D ZLIB_LIBRARY="{install}\lib\zlibstatic.lib"               \
+            -D ZLIB_LIBRARY="{install}\lib\zs.lib"               \
             -D LIBCHECK_INCLUDE_DIR="{install}\include"                  \
             -D LIBCHECK_LIBRARY="{install}\lib\checkDynamic.lib"
         make: |

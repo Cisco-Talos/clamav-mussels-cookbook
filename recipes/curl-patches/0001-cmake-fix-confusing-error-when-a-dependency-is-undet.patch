@@ -1,0 +1,53 @@
+From 29124d00bb7d5a3271553d13c8f361a223349cae Mon Sep 17 00:00:00 2001
+From: Viktor Szakats <commit@vsz.me>
+Date: Thu, 26 Feb 2026 12:35:51 +0100
+Subject: [PATCH] cmake: fix confusing error when a dependency is undetected in
+ `curl-config.cmake`
+
+Fixing:
+```
+CMake Error at /path/to/CURL/CURLConfig.cmake:190 (get_target_property):
+  get_target_property() called with non-existent target "CURL::libssh2".
+```
+and replacing it with the clearer message:
+```
+CMake Error at /path/to/CURL/CURLTargets.cmake:61 (set_target_properties):
+  The link interface of target "CURL::libcurl_static" contains:
+
+    CURL::libssh2
+
+  but the target was not found.  Possible reasons include:
+[...]
+```
+
+Reported-by: Val S.
+Ref: #20729
+Follow-up to 16f073ef49f94412000218c9f6ad04e3fd7e4d01 #16973
+
+Closes #20737
+---
+ CMake/curl-config.in.cmake | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/CMake/curl-config.in.cmake b/CMake/curl-config.in.cmake
+index 7f346c832c..62bba057ed 100644
+--- a/CMake/curl-config.in.cmake
++++ b/CMake/curl-config.in.cmake
+@@ -163,9 +163,11 @@ if(TARGET @PROJECT_NAME@::@LIB_STATIC@)
+   if(NOT _has_CMP0099 AND CMAKE_VERSION VERSION_GREATER_EQUAL 3.13 AND _curl_libs)
+     set(_curl_libdirs "")
+     foreach(_curl_lib IN LISTS _curl_libs)
+-      get_target_property(_curl_libdir "${_curl_lib}" INTERFACE_LINK_DIRECTORIES)
+-      if(_curl_libdir)
+-        list(APPEND _curl_libdirs "${_curl_libdir}")
++      if(TARGET "${_curl_lib}")
++        get_target_property(_curl_libdir "${_curl_lib}" INTERFACE_LINK_DIRECTORIES)
++        if(_curl_libdir)
++          list(APPEND _curl_libdirs "${_curl_libdir}")
++        endif()
+       endif()
+     endforeach()
+     if(_curl_libdirs)
+-- 
+2.50.1 (Apple Git-155)
+

@@ -13,8 +13,8 @@
 # limitations under the License.
 
 name: libpcre2
-version: "10.46"
-url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.46/pcre2-10.46.tar.gz
+version: "10.47"
+url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.gz
 mussels_version: "0.3"
 type: recipe
 platforms:
@@ -151,7 +151,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
@@ -179,7 +179,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
@@ -207,7 +207,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
@@ -235,7 +235,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
@@ -263,7 +263,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
@@ -291,7 +291,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
@@ -319,7 +319,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |
@@ -347,7 +347,7 @@ platforms:
             -D CMAKE_INSTALL_PREFIX="{install}" \
             -D BUILD_SHARED_LIBS=ON \
             -D ZLIB_INCLUDE_DIR="{includes}" \
-            -D ZLIB_LIBRARY_RELEASE="{libs}/zlibstatic.lib" \
+            -D ZLIB_LIBRARY_RELEASE="{libs}/zs.lib" \
             -D BZIP2_INCLUDE_DIR="{includes}" \
             -D BZIP2_LIBRARY_RELEASE="{libs}/libbz2.lib"
         make: |

@@ -172,7 +172,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
@@ -192,7 +191,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
@@ -212,7 +210,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
@@ -232,7 +229,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
@@ -252,7 +248,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
@@ -272,7 +267,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
@@ -292,7 +286,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
@@ -312,7 +305,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv "{install}/bin/checkDynamic.dll" "{install}/lib/"
       install_paths:
         license/libcheck:
           - COPYING.LESSER
