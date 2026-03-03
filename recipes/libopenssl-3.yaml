@@ -66,6 +66,7 @@ platforms:
       required_tools:
         - make
         - clang
+        - perl
     host-static:
       build_script:
         configure: |
@@ -112,6 +113,7 @@ platforms:
       required_tools:
         - make
         - clang
+        - perl
   Linux:
     host:
       build_script:
@@ -135,6 +137,7 @@ platforms:
       required_tools:
         - make
         - gcc
+        - perl
         - patchelf
     host-static:
       build_script:
@@ -160,6 +163,7 @@ platforms:
       required_tools:
         - make
         - gcc
+        - perl
   Freebsd:
     host:
       build_script:
@@ -183,6 +187,7 @@ platforms:
       required_tools:
         - gmake
         - clang
+        - perl
         - patchelf
     host-static:
       build_script:
@@ -208,6 +213,7 @@ platforms:
       required_tools:
         - gmake
         - clang
+        - perl
   Windows:
     arm:
       build_script:
