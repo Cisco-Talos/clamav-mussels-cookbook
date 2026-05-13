@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: pdfium
-version: "f5c376f93d33709ecd6b0dc8147b14a651ddbfeb"
+version: "ab5a98e4b1d6885b896b12996bf2b37630505ad0"
 source:
   none: true
 mussels_version: "0.3"
@@ -24,11 +24,22 @@ platforms:
       build_script:
         configure: |
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-          gclient sync --revision {version} --no-history --nohooks
+          gclient sync --revision {version} --no-history --shallow
           cd pdfium
-          gn gen --args="clang_use_chrome_plugins=false" {install}
+          mkdir -p out/Shared
+          gn gen --args="\
+          clang_use_chrome_plugins=false \
+          is_debug=true \
+          pdf_is_standalone=true \
+          pdf_use_partition_alloc=false \
+          treat_warnings_as_errors=false \
+          is_component_build=false \
+          is_official_build=false \
+          pdf_enable_v8=false \
+          pdf_enable_xfa=false \
+          " out/Shared
         make: |
-          ninja -C {install} pdfium
+          ninja -C out/Shared pdfium
       dependencies: []
       required_tools:
         - make
@@ -38,14 +49,29 @@ platforms:
       build_script:
         configure: |
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-          gclient sync --revision {version} --no-history --nohooks
+          gclient sync --revision {version} --no-history --shallow
+          gclient runhooks
           cd pdfium
-          gn gen --args="clang_use_chrome_plugins=false target_cpu=\"x64\"" out/x64
-          gn gen --args="clang_use_chrome_plugins=false target_cpu=\"arm64\"" out/arm64
+          mkdir -p out/Static
+          gn gen --args="\
+          clang_use_chrome_plugins=false \
+          is_component_build=false \
+          is_debug=false \
+          use_custom_libcxx=false \
+          pdf_enable_v8=false \
+          pdf_enable_xfa=false \
+          pdf_is_standalone=true \
+          pdf_is_complete_lib=true \
+          pdf_use_partition_alloc=false \
+          target_cpu=\"arm64\" \
+          target_os=\"mac\" \
+          treat_warnings_as_errors=false \
+          use_thin_archives=false" \
+          out/Static
         make: |
-          ninja -C out/x64 pdfium
-          ninja -C out/arm64 pdfium
-          lipo -create out/x64/libpdfium.a out/arm64/libpdfium.a -output {install}/libpdfium.a
+          cd pdfium
+          ninja -C out/Static pdfium
+          cp out/Static/obj/libpdfium.a {install}/lib/libpdfium.a
       dependencies: []
       required_tools:
         - make
@@ -58,9 +84,9 @@ platforms:
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
           gclient sync --revision {version} --no-history --nohooks
           cd pdfium
-          gn gen --args="clang_use_chrome_plugins=false" {install}
+          gn gen --args="clang_use_chrome_plugins=false" {install}/lib
         make: |
-          ninja -C {install} pdfium
+          ninja -C {install}/lib pdfium
       dependencies: []
       required_tools:
         - gmake
@@ -69,12 +95,13 @@ platforms:
     host-static:
       build_script:
         configure: |
+          echo "WARNING: static was specified, but static pdfium builds are experimental and not working; building dynamic pdfium instead."
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
           gclient sync --revision {version} --no-history --nohooks
           cd pdfium
-          gn gen --args="clang_use_chrome_plugins=false" {install}
+          gn gen --args="clang_use_chrome_plugins=false" {install}/lib
         make: |
-          ninja -C {install} pdfium
+          ninja -C {install}/lib pdfium
       dependencies: []
       required_tools:
         - gmake
@@ -85,11 +112,67 @@ platforms:
       build_script:
         configure: |
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-          gclient sync --revision {version} --no-history --nohooks
+          # Creates pdfium/DEPS, but skips the failing CIPD packages.
+          gclient sync --revision {version} --no-history --shallow --nohooks --ignore-dep-type=cipd
+
+          # Patch DEPS after it exists to remove unneeded 'reclient' chromium dependency not available for all architectures on Linux
+          if ! sed -n "/'buildtools\/reclient': {{/,/^  }},/p" pdfium/DEPS | grep -q "'condition': 'False'"; then
+            sed -i "/'buildtools\/reclient': {{/,/^  }},/s/    'dep_type': 'cipd',/    'dep_type': 'cipd',\n    'condition': 'False',/" pdfium/DEPS
+          fi
+
+          # Now install GN and the other CIPD deps, with reclient disabled.
+          gclient sync --no-history --shallow --nohooks
+          gclient runhooks
+
           cd pdfium
-          gn gen --args="clang_use_chrome_plugins=false" {install}
+          mkdir -p out/Shared
+          if [ "$(uname -m)" = "aarch64" ] || [ "$(uname -m)" = "arm64" ]; then
+            export AR=ar
+            export CC=gcc
+            export CXX=g++
+            export NM=nm
+            export RANLIB=ranlib
+
+            gn gen --args="\
+            clang_use_chrome_plugins=false \
+            is_debug=true \
+            pdf_is_standalone=true \
+            pdf_use_partition_alloc=false \
+            treat_warnings_as_errors=false \
+            is_component_build=false \
+            is_official_build=false \
+            pdf_enable_v8=false \
+            pdf_enable_xfa=false \
+            use_dbus=false \
+            use_gio=false \
+            use_glib=false \
+            use_udev=false \
+            custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+            host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+            host_cpu=\"arm64\" \
+            is_clang=false \
+            target_cpu=\"arm64\" \
+            use_clang_modules=false \
+            use_custom_libcxx=false \
+            use_lld=false \
+            use_sysroot=false \
+            " out/Shared
+          else
+            gn gen --args="\
+            clang_use_chrome_plugins=false \
+            is_debug=true \
+            pdf_is_standalone=true \
+            pdf_use_partition_alloc=false \
+            treat_warnings_as_errors=false \
+            is_component_build=false \
+            is_official_build=false \
+            pdf_enable_v8=false \
+            pdf_enable_xfa=false \
+            " out/Shared
+          fi
         make: |
-          ninja -C {install} pdfium
+          cd pdfium
+          ninja -C out/Shared pdfium
       dependencies: []
       required_tools:
         - make
@@ -99,11 +182,73 @@ platforms:
       build_script:
         configure: |
           gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-          gclient sync --revision {version} --no-history --nohooks
+          # Creates pdfium/DEPS, but skips the failing CIPD packages.
+          gclient sync --revision {version} --no-history --shallow --nohooks --ignore-dep-type=cipd
+
+          # Patch DEPS after it exists to remove unneeded 'reclient' chromium dependency not available for all architectures on Linux
+          if ! sed -n "/'buildtools\/reclient': {{/,/^  }},/p" pdfium/DEPS | grep -q "'condition': 'False'"; then
+            sed -i "/'buildtools\/reclient': {{/,/^  }},/s/    'dep_type': 'cipd',/    'dep_type': 'cipd',\n    'condition': 'False',/" pdfium/DEPS
+          fi
+
+          # Now install GN and the other CIPD deps, with reclient disabled.
+          gclient sync --no-history --shallow --nohooks
+          gclient runhooks
+
           cd pdfium
-          gn gen --args="clang_use_chrome_plugins=false" {install}
+          mkdir -p out/Static
+          if [ "$(uname -m)" = "aarch64" ] || [ "$(uname -m)" = "arm64" ]; then
+            export AR=ar
+            export CC=gcc
+            export CXX=g++
+            export NM=nm
+            export RANLIB=ranlib
+
+            gn gen --args="\
+            clang_use_chrome_plugins=false \
+            is_component_build=false \
+            is_debug=false \
+            use_custom_libcxx=false \
+            pdf_enable_v8=false \
+            pdf_enable_xfa=false \
+            pdf_is_standalone=true \
+            pdf_is_complete_lib=true \
+            pdf_use_partition_alloc=false \
+            target_os=\"linux\" \
+            treat_warnings_as_errors=false \
+            use_dbus=false \
+            use_gio=false \
+            use_glib=false \
+            use_udev=false \
+            custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+            host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+            host_cpu=\"arm64\" \
+            is_clang=false \
+            target_cpu=\"arm64\" \
+            use_clang_modules=false \
+            use_lld=false \
+            use_sysroot=false \
+            use_thin_archives=false" \
+            out/Static
+          else
+            gn gen --args="\
+            clang_use_chrome_plugins=false \
+            is_component_build=false \
+            is_debug=false \
+            use_custom_libcxx=false \
+            pdf_enable_v8=false \
+            pdf_enable_xfa=false \
+            pdf_is_standalone=true \
+            pdf_is_complete_lib=true \
+            pdf_use_partition_alloc=false \
+            target_os=\"linux\" \
+            treat_warnings_as_errors=false \
+            use_thin_archives=false" \
+            out/Static
+          fi
         make: |
-          ninja -C {install} pdfium
+          cd pdfium
+          ninja -C out/Static pdfium
+          cp out/Static/obj/libpdfium.a {install}/lib/libpdfium.a
       dependencies: []
       required_tools:
         - make
