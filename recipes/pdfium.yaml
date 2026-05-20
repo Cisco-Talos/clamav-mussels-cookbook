@@ -255,42 +255,255 @@ platforms:
         - gcc
         - depot_tools
   Windows:
+    arm64:
+      build_script:
+        configure: |
+          set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+          CALL vcvarsall.bat amd64_arm64
+          set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
+          set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\shared\winapifamily.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\Windows.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UM headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\corecrt.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UCRT headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\arm64\ws2_32.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% ARM64 UM libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\arm64\libucrt.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% ARM64 UCRT libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Debuggers\arm64\dbghelp.dll" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% ARM64 Debugging Tools under "%PDFIUM_WINSDK_ROOT%\Debuggers".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          set "WINDOWSSDKDIR=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSdkDir=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSDKVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "WindowsSDKLibVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "LIB=%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\arm64;%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\arm64;%LIB%"
+          set CIPD_CACHE_DIR=%USERPROFILE%\.mussels\cache\cipd
+          if not exist "%CIPD_CACHE_DIR%" mkdir "%CIPD_CACHE_DIR%"
+          CALL gclient.bat config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          CALL gclient.bat sync --revision {version} --no-history --shallow
+          if exist .cipd attrib -R -S -H .cipd\* /S /D
+          if exist pdfium\.git attrib -R -S -H pdfium\.git\* /S /D
+          cd pdfium
+          mkdir out\Static
+          gn gen --args="\
+          clang_use_chrome_plugins=false \
+          is_component_build=false \
+          is_debug=false \
+          pdf_enable_v8=false \
+          pdf_enable_xfa=false \
+          pdf_is_complete_lib=true \
+          pdf_is_standalone=true \
+          pdf_use_partition_alloc=false \
+          target_os=\"win\" \
+          target_cpu=\"arm64\" \
+          treat_warnings_as_errors=false \
+          use_clang_modules=false \
+          use_custom_libcxx=false \
+          use_custom_libcxx_for_host=false \
+          use_thin_archives=false \
+          " out\Static
+        make: |
+          set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+          CALL vcvarsall.bat amd64_arm64
+          set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
+          set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\shared\winapifamily.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\Windows.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UM headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\corecrt.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UCRT headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\arm64\ws2_32.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% ARM64 UM libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\arm64\libucrt.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% ARM64 UCRT libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Debuggers\arm64\dbghelp.dll" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% ARM64 Debugging Tools under "%PDFIUM_WINSDK_ROOT%\Debuggers".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          set "WINDOWSSDKDIR=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSdkDir=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSDKVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "WindowsSDKLibVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "LIB=%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\arm64;%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\arm64;%LIB%"
+          cd pdfium
+          if exist ..\.cipd attrib -R -S -H ..\.cipd\* /S /D
+          if exist .git attrib -R -S -H .git\* /S /D
+          ninja -C out\Static pdfium
+        install: |
+          mkdir "{install}\lib"
+          mkdir "{install}\include"
+          if exist pdfium\out\Static\obj\pdfium.lib copy /Y pdfium\out\Static\obj\pdfium.lib "{install}\lib\pdfium.lib"
+          if not exist "{install}\lib\pdfium.lib" exit /b 1
+          xcopy /E /I /Y pdfium\public "{install}\include"
+      dependencies: []
+      required_tools:
+        - visualstudio>=2019
+        - depot_tools
+        - windows_sdk_arm64_debugging_tools
+        - windows_sdk_arm64_libraries>=10.0.26100.0
+        - windows_sdk_headers>=10.0.26100.0
     x64:
       build_script:
         configure: |
           set DEPOT_TOOLS_WIN_TOOLCHAIN=0
           CALL vcvarsall.bat amd64
-          gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-          gclient sync --revision {version} --no-history --shallow
+          set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
+          set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\shared\winapifamily.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\Windows.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UM headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\corecrt.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UCRT headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\x64\ws2_32.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% x64 UM libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\x64\libucrt.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% x64 UCRT libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Debuggers\x64\dbghelp.dll" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% x64 Debugging Tools under "%PDFIUM_WINSDK_ROOT%\Debuggers".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          set "WINDOWSSDKDIR=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSdkDir=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSDKVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "WindowsSDKLibVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "LIB=%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\x64;%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\x64;%LIB%"
+          set CIPD_CACHE_DIR=%USERPROFILE%\.mussels\cache\cipd
+          if not exist "%CIPD_CACHE_DIR%" mkdir "%CIPD_CACHE_DIR%"
+          CALL gclient.bat config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          CALL gclient.bat sync --revision {version} --no-history --shallow
+          if exist .cipd attrib -R -S -H .cipd\* /S /D
+          if exist pdfium\.git attrib -R -S -H pdfium\.git\* /S /D
           cd pdfium
-          mkdir out\Shared
+          mkdir out\Static
           gn gen --args="\
           clang_use_chrome_plugins=false \
+          is_component_build=false \
           is_debug=false \
-          pdf_is_standalone=true \
-          pdf_use_partition_alloc=false \
-          treat_warnings_as_errors=false \
-          is_component_build=true \
-          is_official_build=false \
           pdf_enable_v8=false \
           pdf_enable_xfa=false \
+          pdf_is_complete_lib=true \
+          pdf_is_standalone=true \
+          pdf_use_partition_alloc=false \
           target_os=\"win\" \
           target_cpu=\"x64\" \
-          " out/Shared
+          treat_warnings_as_errors=false \
+          use_clang_modules=false \
+          use_custom_libcxx=false \
+          use_custom_libcxx_for_host=false \
+          use_thin_archives=false \
+          " out\Static
         make: |
           set DEPOT_TOOLS_WIN_TOOLCHAIN=0
           CALL vcvarsall.bat amd64
+          set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
+          set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\shared\winapifamily.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\Windows.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UM headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Include\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\corecrt.h" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% UCRT headers under "%PDFIUM_WINSDK_ROOT%\Include".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\x64\ws2_32.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% x64 UM libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\x64\libucrt.lib" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% x64 UCRT libraries under "%PDFIUM_WINSDK_ROOT%\Lib".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          if not exist "%PDFIUM_WINSDK_ROOT%\Debuggers\x64\dbghelp.dll" (
+            echo ERROR: PDFium requires Windows SDK %PDFIUM_REQUIRED_WINSDK_VERSION% x64 Debugging Tools under "%PDFIUM_WINSDK_ROOT%\Debuggers".
+            echo ERROR: Install Windows 10 SDK %PDFIUM_REQUIRED_WINSDK_VERSION% with C++ headers/libraries and Debugging Tools.
+            exit /b 1
+          )
+          set "WINDOWSSDKDIR=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSdkDir=%PDFIUM_WINSDK_ROOT%"
+          set "WindowsSDKVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "WindowsSDKLibVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
+          set "LIB=%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\x64;%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\x64;%LIB%"
           cd pdfium
-          ninja -C out/Shared pdfium
+          if exist ..\.cipd attrib -R -S -H ..\.cipd\* /S /D
+          if exist .git attrib -R -S -H .git\* /S /D
+          ninja -C out\Static pdfium
         install: |
           mkdir "{install}\lib"
           mkdir "{install}\include"
-          copy /Y pdfium\out\Shared\pdfium.dll "{install}\lib\pdfium.dll"
-          if exist pdfium\out\Shared\pdfium.dll.lib copy /Y pdfium\out\Shared\pdfium.dll.lib "{install}\lib\pdfium.lib"
-          if exist pdfium\out\Shared\pdfium.lib copy /Y pdfium\out\Shared\pdfium.lib "{install}\lib\pdfium.lib"
+          if exist pdfium\out\Static\obj\pdfium.lib copy /Y pdfium\out\Static\obj\pdfium.lib "{install}\lib\pdfium.lib"
+          if not exist "{install}\lib\pdfium.lib" exit /b 1
           xcopy /E /I /Y pdfium\public "{install}\include"
       dependencies: []
       required_tools:
-        - visualstudio>=2017
+        - visualstudio>=2019
         - depot_tools
-
+        - windows_sdk_debugging_tools
+        - windows_sdk_libraries>=10.0.26100.0
+        - windows_sdk_headers>=10.0.26100.0

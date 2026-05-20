@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
+# Copyright (C) 2026 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,20 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: depot_tools
-version: ""
+name: windows_sdk_arm64_libraries
+version: "10.0.26100.0"
 mussels_version: "0.1"
 type: tool
 platforms:
-  Posix:
-    path_checks:
-      - gclient
-    command_checks:
-      - command: "gclient config --version"
-        output_has: "gclient"
   Windows:
-    path_checks:
-      - gclient.bat
-    command_checks:
-      - command: "gclient.bat --version"
-        output_has: "gclient"
+    file_checks:
+      - C:\/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/um/arm64/ws2_32.lib
+      - C:\/Program Files/Windows Kits/10/Lib/10.0.26100.0/um/arm64/ws2_32.lib
