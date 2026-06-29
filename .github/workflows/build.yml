@@ -27,7 +27,7 @@ jobs:
       - name: Install Rust for cross-compiling to arm64
         run: rustup target add aarch64-pc-windows-msvc
 
-      - uses: lukka/get-cmake@v3.30.3
+      - uses: lukka/get-cmake@v4.3.4
 
       - name: Build for x64
         run: msl build -r clamav -t x64
@@ -55,7 +55,7 @@ jobs:
       - name: Install Rust for cross-compiling to arm64
         run: rustup target add aarch64-pc-windows-msvc
 
-      - uses: lukka/get-cmake@v3.30.3
+      - uses: lukka/get-cmake@v4.3.4
 
       - name: Build for x86
         run: msl build -r clamav -t x86
@@ -83,7 +83,7 @@ jobs:
       - name: Install Rust for cross-compiling to arm64
         run: rustup target add aarch64-pc-windows-msvc
 
-      - uses: lukka/get-cmake@v3.30.3
+      - uses: lukka/get-cmake@v4.3.4
 
       - name: Build for arm64
         run: msl build -r clamav -t arm64
