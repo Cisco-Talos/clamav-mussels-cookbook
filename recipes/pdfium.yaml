@@ -260,6 +260,7 @@ platforms:
         configure: |
           set DEPOT_TOOLS_WIN_TOOLCHAIN=0
           CALL vcvarsall.bat amd64_arm64
+          if errorlevel 1 exit /b %errorlevel%
           set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
           set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
           if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
@@ -298,10 +299,16 @@ platforms:
           set "WindowsSDKVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
           set "WindowsSDKLibVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
           set "LIB=%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\arm64;%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\arm64;%LIB%"
-          set CIPD_CACHE_DIR=%USERPROFILE%\.mussels\cache\cipd
+          set "CIPD_CACHE_DIR=%USERPROFILE%\.mussels\cache\cipd"
+          set "DEPOT_TOOLS_GSUTIL_BIN_DIR=%USERPROFILE%\.mussels\cache\gsutil"
           if not exist "%CIPD_CACHE_DIR%" mkdir "%CIPD_CACHE_DIR%"
+          if errorlevel 1 exit /b %errorlevel%
+          if not exist "%DEPOT_TOOLS_GSUTIL_BIN_DIR%" mkdir "%DEPOT_TOOLS_GSUTIL_BIN_DIR%"
+          if errorlevel 1 exit /b %errorlevel%
           CALL gclient.bat config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          if errorlevel 1 exit /b %errorlevel%
           CALL gclient.bat sync --revision {version} --no-history --shallow
+          if errorlevel 1 exit /b %errorlevel%
           if exist .cipd attrib -R -S -H .cipd\* /S /D
           if exist pdfium\.git attrib -R -S -H pdfium\.git\* /S /D
           cd pdfium
@@ -326,6 +333,7 @@ platforms:
         make: |
           set DEPOT_TOOLS_WIN_TOOLCHAIN=0
           CALL vcvarsall.bat amd64_arm64
+          if errorlevel 1 exit /b %errorlevel%
           set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
           set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
           if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
@@ -386,6 +394,7 @@ platforms:
         configure: |
           set DEPOT_TOOLS_WIN_TOOLCHAIN=0
           CALL vcvarsall.bat amd64
+          if errorlevel 1 exit /b %errorlevel%
           set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
           set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
           if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
@@ -424,10 +433,16 @@ platforms:
           set "WindowsSDKVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
           set "WindowsSDKLibVersion=%PDFIUM_REQUIRED_WINSDK_VERSION%\"
           set "LIB=%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\um\x64;%PDFIUM_WINSDK_ROOT%\Lib\%PDFIUM_REQUIRED_WINSDK_VERSION%\ucrt\x64;%LIB%"
-          set CIPD_CACHE_DIR=%USERPROFILE%\.mussels\cache\cipd
+          set "CIPD_CACHE_DIR=%USERPROFILE%\.mussels\cache\cipd"
+          set "DEPOT_TOOLS_GSUTIL_BIN_DIR=%USERPROFILE%\.mussels\cache\gsutil"
           if not exist "%CIPD_CACHE_DIR%" mkdir "%CIPD_CACHE_DIR%"
+          if errorlevel 1 exit /b %errorlevel%
+          if not exist "%DEPOT_TOOLS_GSUTIL_BIN_DIR%" mkdir "%DEPOT_TOOLS_GSUTIL_BIN_DIR%"
+          if errorlevel 1 exit /b %errorlevel%
           CALL gclient.bat config --unmanaged https://pdfium.googlesource.com/pdfium.git
+          if errorlevel 1 exit /b %errorlevel%
           CALL gclient.bat sync --revision {version} --no-history --shallow
+          if errorlevel 1 exit /b %errorlevel%
           if exist .cipd attrib -R -S -H .cipd\* /S /D
           if exist pdfium\.git attrib -R -S -H pdfium\.git\* /S /D
           cd pdfium
@@ -452,6 +467,7 @@ platforms:
         make: |
           set DEPOT_TOOLS_WIN_TOOLCHAIN=0
           CALL vcvarsall.bat amd64
+          if errorlevel 1 exit /b %errorlevel%
           set "PDFIUM_REQUIRED_WINSDK_VERSION=10.0.26100.0"
           set "PDFIUM_WINSDK_ROOT=C:\Program Files (x86)\Windows Kits\10"
           if not exist "%PDFIUM_WINSDK_ROOT%\Lib" set "PDFIUM_WINSDK_ROOT=C:\Program Files\Windows Kits\10"
