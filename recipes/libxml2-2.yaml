@@ -231,7 +231,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2.dll {install}/lib/
       dependencies:
         - libz
       install_paths:
@@ -260,7 +259,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2.dll {install}/lib/
       dependencies:
         - libz
       install_paths:
@@ -289,7 +287,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2.dll {install}/lib/
       dependencies:
         - libz
       install_paths:
@@ -318,7 +315,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Release --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2.dll {install}/lib/
       dependencies:
         - libz
       install_paths:
@@ -347,7 +343,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Debug --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2d.dll {install}/lib/
           mv {install}/bin/libxml2d.pdb {install}/lib/
       dependencies:
         - libz
@@ -377,7 +372,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Debug --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2d.dll {install}/lib/
           mv {install}/bin/libxml2d.pdb {install}/lib/
       dependencies:
         - libz
@@ -407,7 +401,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Debug --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2d.dll {install}/lib/
           mv {install}/bin/libxml2d.pdb {install}/lib/
       dependencies:
         - libz
@@ -437,7 +430,6 @@ platforms:
           cd build
           CALL cmake.exe --build . --config Debug --target install
           mv {install}/include/libxml2/libxml {install}/include/libxml
-          mv {install}/bin/libxml2d.dll {install}/lib/
           mv {install}/bin/libxml2d.pdb {install}/lib/
       dependencies:
         - libz

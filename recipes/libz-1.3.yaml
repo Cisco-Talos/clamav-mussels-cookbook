@@ -179,7 +179,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/zlib:
@@ -200,7 +199,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/zlib:
@@ -221,7 +219,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/zlib:
@@ -242,7 +239,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/libz:
@@ -263,7 +259,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/zlib:
@@ -284,7 +279,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/zlib:
@@ -305,7 +299,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/zlib:
@@ -326,7 +319,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/z.dll {install}/lib/
       dependencies: []
       install_paths:
         license/libz:
