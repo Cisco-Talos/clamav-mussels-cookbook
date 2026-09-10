@@ -14,7 +14,8 @@
 
 name: libmspack
 version: "0.10.1"
-url: https://github.com/micahsnyder/libmspack/archive/refs/heads/cmake-tooling.zip
+source:
+  uri: https://github.com/micahsnyder/libmspack/archive/refs/heads/cmake-tooling.zip
 archive_name_change:
   - cmake-tooling
   - libmspack-cmake-tooling

@@ -14,7 +14,8 @@
 
 name: libcheck
 version: "0.15.2"
-url: https://github.com/libcheck/check/archive/0.15.2.tar.gz
+source:
+  uri: https://github.com/libcheck/check/archive/0.15.2.tar.gz
 archive_name_change:
   - 0.15.2
   - check-0.15.2
