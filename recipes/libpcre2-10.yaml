@@ -160,7 +160,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/pcre2-8.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -188,7 +187,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/pcre2-8.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -216,7 +214,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/pcre2-8.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -244,7 +241,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Release --target install
-          mv {install}/bin/pcre2-8.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -272,7 +268,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/pcre2-8d.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -300,7 +295,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/pcre2-8d.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -328,7 +322,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/pcre2-8d.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
@@ -356,7 +349,6 @@ platforms:
         install: |
           cd build
           CALL cmake.exe --build . --config Debug --target install
-          mv {install}/bin/pcre2-8d.dll {install}/lib/
       dependencies:
         - libbz2<1.1.0
         - libz
